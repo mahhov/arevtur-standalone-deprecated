@@ -91,6 +91,26 @@ const SORT = {
 	price: {price: 'asc'},
 };
 
+// todo update per poe.ninja
+const CURRENCIES = {
+	exalted: {id: "exa", chaos: 130},
+	divine: {id: "divine", chaos: 12},
+	vaal: {id: "vaal", chaos: 2},
+	regal: {id: "regal", chaos: 1},
+	chaos: {id: "chaos", chaos: 1},
+	gemcuttersPrism: {id: "gcp", chaos: 1},
+	regret: {id: "regret", chaos: 1},
+	fusing: {id: "fusing", chaos: 1 / 2},
+	alchemy: {id: "alch", chaos: 1 / 2},
+	scouring: {id: "scour", chaos: 1 / 2},
+	cartographersChisel: {id: "chisel", chaos: 1 / 2},
+	blessed: {id: "blessed", chaos: 1 / 2},
+	jewellers: {id: "jew", chaos: 1 / 6},
+	chromatic: {id: "chrom", chaos: 1 / 8},
+	alteration: {id: "alt", chaos: 1 / 8},
+	chance: {id: "chance", chaos: 1 / 8},
+};
+
 let formQuery = (type, weightValues,
                  minValue = 200, maxPrice = 20,
                  sort = SORT.value, online = true) => {
@@ -137,7 +157,7 @@ let formQuery = (type, weightValues,
 	}
 };
 
-let start = async query => {
+let getItems = async query => {
 	try {
 		let api = 'https://www.pathofexile.com/api/trade';
 		let data = await post(`${api}/search/Metamorph`, query);
@@ -166,35 +186,43 @@ let start = async query => {
 					itemLevel: item.item.ilvl,
 					explicitMods: item.item.explicitMods,
 					pseudoMods: pseudoMods,
-					value: pseudoMods && pseudoMods.find(mod => mod.startsWith('Sum: ')),
 					account: `${item.listing.account.name} > ${item.listing.account.lastCharacterName}`,
 					whisper: item.listing.whisper,
 					note: item.item.note,
 					price: item.listing.price,
+					evalValue: pseudoMods ? evalValue(pseudoMods) : 0,
+					evalPrice: evalPrice(item.listing.price),
 				};
 			});
 		});
 		let items = (await Promise.all(promises)).flat();
 
-		for (let i = 0; i < 3; i++)
-			console.log(JSON.stringify(items[parseInt(Math.random() * i)], null, 2));
-		// console.log(JSON.stringify(items.find(item => item.pseudoMods), null, 2));
-		console.log('total items', items.length);
-
 		return {
 			total: data.total,
+			retrieved: items.length,
+			items,
 		}
 	} catch (e) {
 		console.log('ERROR', e);
 	}
 };
 
+let evalValue = pseudoMods =>
+	parseFloat(
+		pseudoMods.find(mod => mod.startsWith('Sum: '))
+			.substring(5));
+
+let evalPrice = ({currency, amount}) =>
+	CURRENCIES.find()
+
 let weights = {
 	[PROPERTIES.flatLife]: 2,
-	[PROPERTIES.totalEleRes]: 5,
+	[PROPERTIES.totalEleRes]: 1,
 };
-let query = formQuery(TYPES.boots, weights, 500, 2, SORT.value);
-start(query);
+let query = formQuery(TYPES.boots, weights, 0, 2, SORT.price);
+getItems(query).then(x => {
+	console.log(x.items[0]);
+});
 
 
 // ui to form and persist query
@@ -202,3 +230,5 @@ start(query);
 // parse query results into items, values, and prices
 // display parsed results and graph value v price
 // filter top value/price items
+// ignore accounts
+// multi-filter (e.g. & 30 movespeed; & not can't use body)
