@@ -175,28 +175,7 @@ let getItems = async query => {
 			};
 			let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
 			let data2 = await get(endpoint2, queryParams);
-			return data2.result.map(item => {
-				let sockets = (item.item.sockets || []).reduce((a, v) => {
-					a[v.group] = a[v.group] || [];
-					a[v.group].push(v.sColour);
-					return a;
-				}, []);
-				let pseudoMods = item.item.pseudoMods || [];
-				return {
-					name: item.item.name,
-					sockets,
-					itemLevel: item.item.ilvl,
-					implicitMods: item.item.implicitMods || [],
-					explicitMods: item.item.explicitMods || [],
-					pseudoMods: pseudoMods,
-					account: `${item.listing.account.name} > ${item.listing.account.lastCharacterName}`,
-					whisper: item.listing.whisper,
-					note: item.item.note,
-					price: item.listing.price,
-					evalValue: evalValue(pseudoMods),
-					evalPrice: evalPrice(item.listing.price),
-				};
-			});
+			return data2.result.map(parseItem);
 		});
 		let items = (await Promise.all(promises)).flat();
 		// low to high prices, high to low values
@@ -206,11 +185,34 @@ let getItems = async query => {
 			total: data.total,
 			retrieved: items.length,
 			items,
-			borderlineItems: getBorderItems(items),
+			borderlineItems: getBorderlineItems(items),
 		}
 	} catch (e) {
 		console.log('ERROR', e);
 	}
+};
+
+let parseItem = itemData => {
+	let sockets = (itemData.item.sockets || []).reduce((a, v) => {
+		a[v.group] = a[v.group] || [];
+		a[v.group].push(v.sColour);
+		return a;
+	}, []);
+	let pseudoMods = itemData.item.pseudoMods || [];
+	return {
+		name: itemData.item.name,
+		sockets,
+		itemLevel: itemData.item.ilvl,
+		implicitMods: itemData.item.implicitMods || [],
+		explicitMods: itemData.item.explicitMods || [],
+		pseudoMods: pseudoMods,
+		accountText: `${itemData.listing.account.name} > ${itemData.listing.account.lastCharacterName}`,
+		whisper: itemData.listing.whisper,
+		note: itemData.item.note,
+		priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}`,
+		evalValue: evalValue(pseudoMods),
+		evalPrice: evalPrice(itemData.listing.price),
+	};
 };
 
 let evalValue = pseudoMods => {
@@ -226,7 +228,7 @@ let evalPrice = ({currency: currencyId, amount}) => {
 	return -1;
 };
 
-let getBorderItems = items => {
+let getBorderlineItems = items => {
 	let maxValue = 0;
 	return items.filter((item, i, items) => {
 		if (item.evalValue <= maxValue)
@@ -236,23 +238,4 @@ let getBorderItems = items => {
 	});
 };
 
-let weights = {
-	[PROPERTIES.flatLife]: 2,
-	[PROPERTIES.totalEleRes]: 1,
-};
-let query = formQuery(TYPES.boots, weights, 0, 2, SORT.price);
-getItems(query).then(itemsData => {
-	console.log(itemsData.items.length, borderItems.length);
-	console.log(borderItems.map(a => a.evalPrice + ' ' + a.evalValue))
-});
-
-
-// ui to form and persist query
-// convert armor and socket requirements to fuzzy query
-// parse query results into items, values, and prices
-// display parsed results and graph value v price
-// filter top value/price items
-// ignore accounts
-// multi-filter (e.g. & 30 movespeed; & not can't use body)
-// assume quality 0%
-// free affixes
+module.exports = {TYPES, PROPERTIES, SORT, CURRENCIES, formQuery, getItems};
