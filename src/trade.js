@@ -1,9 +1,9 @@
 const https = require('https');
 const querystring = require('querystring');
 
-let get = (url, queryParams = {}) =>
+let get = (endpoint, queryParams = {}) =>
 	new Promise((resolve, reject) => {
-		https.get(`${url}?${querystring.stringify(queryParams)}`, res => {
+		https.get(`${endpoint}?${querystring.stringify(queryParams)}`, res => {
 			if (res.statusCode < 200 || res.statusCode >= 300)
 				reject(res);
 			let body = [];
@@ -19,9 +19,9 @@ let get = (url, queryParams = {}) =>
 		}).on('error', reject);
 	});
 
-let post = (url, data) =>
+let post = (endpoint, data) =>
 	new Promise((resolve, reject) => {
-		let req = https.request(url, {
+		let req = https.request(endpoint, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -93,22 +93,24 @@ const SORT = {
 
 // todo update per poe.ninja
 const CURRENCIES = {
-	exalted: {id: "exa", chaos: 130},
-	divine: {id: "divine", chaos: 12},
-	vaal: {id: "vaal", chaos: 2},
-	regal: {id: "regal", chaos: 1},
-	chaos: {id: "chaos", chaos: 1},
-	gemcuttersPrism: {id: "gcp", chaos: 1},
-	regret: {id: "regret", chaos: 1},
-	fusing: {id: "fusing", chaos: 1 / 2},
-	alchemy: {id: "alch", chaos: 1 / 2},
-	scouring: {id: "scour", chaos: 1 / 2},
-	cartographersChisel: {id: "chisel", chaos: 1 / 2},
-	blessed: {id: "blessed", chaos: 1 / 2},
-	jewellers: {id: "jew", chaos: 1 / 6},
-	chromatic: {id: "chrom", chaos: 1 / 8},
-	alteration: {id: "alt", chaos: 1 / 8},
-	chance: {id: "chance", chaos: 1 / 8},
+	exalted: {id: 'exa', chaos: 130},
+	divine: {id: 'divine', chaos: 12},
+	vaal: {id: 'vaal', chaos: 2},
+	regal: {id: 'regal', chaos: 1},
+	chaos: {id: 'chaos', chaos: 1},
+	gemcuttersPrism: {id: 'gcp', chaos: 1},
+	regret: {id: 'regret', chaos: 1},
+	fusing: {id: 'fusing', chaos: 1 / 2},
+	alchemy: {id: 'alch', chaos: 1 / 2},
+	scouring: {id: 'scour', chaos: 1 / 2},
+	cartographersChisel: {id: 'chisel', chaos: 1 / 2},
+	blessed: {id: 'blessed', chaos: 1 / 2},
+	silver: {id: 'silver', chaos: 1 / 3},
+	jewellers: {id: 'jew', chaos: 1 / 6},
+	chromatic: {id: 'chrom', chaos: 1 / 8},
+	alteration: {id: 'alt', chaos: 1 / 8},
+	chance: {id: 'chance', chaos: 1 / 8},
+	perandus: {id: 'p', chaos: 1 / 100},
 };
 
 let formQuery = (type, weightValues,
@@ -171,8 +173,8 @@ let getItems = async query => {
 				query: data.id,
 				'pseudos[]': [PROPERTIES.totalEleRes, PROPERTIES.flatLife],
 			};
-			let url2 = `${api}/fetch/${requestGroup.join()}`;
-			let data2 = await get(url2, queryParams);
+			let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
+			let data2 = await get(endpoint2, queryParams);
 			return data2.result.map(item => {
 				let sockets = (item.item.sockets || []).reduce((a, v) => {
 					a[v.group] = a[v.group] || [];
@@ -196,11 +198,14 @@ let getItems = async query => {
 			});
 		});
 		let items = (await Promise.all(promises)).flat();
+		// low to high prices, high to low values
+		items.sort((a, b) => a.evalPrice - b.evalPrice || b.evalValue - a.evalValue);
 
 		return {
 			total: data.total,
 			retrieved: items.length,
 			items,
+			borderlineItems: getBorderItems(items),
 		}
 	} catch (e) {
 		console.log('ERROR', e);
@@ -212,16 +217,32 @@ let evalValue = pseudoMods =>
 		pseudoMods.find(mod => mod.startsWith('Sum: '))
 			.substring(5));
 
-let evalPrice = ({currency, amount}) =>
-	CURRENCIES.find()
+let evalPrice = ({currency: currencyId, amount}) => {
+	let currency = Object.values(CURRENCIES).find(({id}) => id === currencyId);
+	if (currency)
+		return currency.chaos * amount;
+	console.log('Missing currency', currencyId);
+	return -1;
+};
+
+let getBorderItems = items => {
+	let maxValue = 0;
+	return items.filter((item, i, items) => {
+		if (item.evalValue <= maxValue)
+			return false;
+		maxValue = item.evalValue;
+		return true;
+	});
+};
 
 let weights = {
 	[PROPERTIES.flatLife]: 2,
 	[PROPERTIES.totalEleRes]: 1,
 };
 let query = formQuery(TYPES.boots, weights, 0, 2, SORT.price);
-getItems(query).then(x => {
-	console.log(x.items[0]);
+getItems(query).then(itemsData => {
+	console.log(itemsData.items.length, borderItems.length);
+	console.log(borderItems.map(a => a.evalPrice + ' ' + a.evalValue))
 });
 
 

@@ -1,0 +1,24 @@
+{
+  "name": "arevtur",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/electronStarter.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahhov/arevtur.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mahhov/arevtur/issues"
+  },
+  "homepage": "https://github.com/mahhov/arevtur#readme",
+  "dependencies": {
+    "electron": "^7.1.8",
+    "xx-element": "^1.4.0"
+  }
+}
