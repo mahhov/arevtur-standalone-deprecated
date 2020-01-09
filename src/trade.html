@@ -22,6 +22,7 @@
 <script>
 	require('./xElements/import');
 	const {XElement} = require('xx-element');
+	const ApiConstants = require('./ApiConstants');
 	const DataFetcher = require('./DataFetcher');
 
 	const $ = document.querySelector.bind(document);
@@ -36,10 +37,10 @@
 
 	let load = async () => {
 		let weights = {
-			[DataFetcher.PROPERTIES.flatLife]: 2,
-			[DataFetcher.PROPERTIES.totalEleRes]: 1,
+			[ApiConstants.PROPERTIES.flatLife]: 2,
+			[ApiConstants.PROPERTIES.totalEleRes]: 1,
 		};
-		let query = DataFetcher.formQuery(DataFetcher.TYPES.boots, weights, 0, 2, DataFetcher.SORT.price);
+		let query = DataFetcher.formQuery(ApiConstants.TYPES.boots, weights, 0, 2);
 		let itemsData = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
 		XElement.clearChildren($('#results-progress'));
