@@ -14,12 +14,14 @@
 </style>
 
 <div id="results-container">
+	<div id="results-progress"></div>
 	<div id="results-list"></div>
 	<x-chart id="results-chart" width="400" height="400"></x-chart>
 </div>
 
 <script>
 	require('./xElements/import');
+	const {XElement} = require('xx-element');
 	const DataFetcher = require('./DataFetcher');
 
 	const $ = document.querySelector.bind(document);
@@ -38,7 +40,9 @@
 			[DataFetcher.PROPERTIES.totalEleRes]: 1,
 		};
 		let query = DataFetcher.formQuery(DataFetcher.TYPES.boots, weights, 0, 2, DataFetcher.SORT.price);
-		let itemsData = await DataFetcher.getItems(query);
+		let itemsData = await DataFetcher.getItems(query, progress =>
+			$c('div', [], progress, $('#results-progress')));
+		XElement.clearChildren($('#results-progress'));
 
 		let itemsToPoints = items =>
 			items.map(item => ({x: item.evalPrice, y: item.evalValue}));
@@ -60,9 +64,7 @@
 	};
 	load();
 
-
 	// todo
-	// display query proguress status
 	// ui to form and persist query
 	// convert armor and socket requirements to fuzzy query
 	// multi-filter (e.g. & 30 movespeed; & not can't use body)

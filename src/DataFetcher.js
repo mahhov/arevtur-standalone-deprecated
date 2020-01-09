@@ -159,27 +159,33 @@ let formQuery = (type, weightValues,
 	}
 };
 
-let getItems = async query => {
+let getItems = async (query, progressCallback) => {
 	try {
 		let api = 'https://www.pathofexile.com/api/trade';
+		progressCallback('Initial query.');
 		let data = await post(`${api}/search/Metamorph`, query);
+		progressCallback(`Received ${data.result.length} items.`);
 
 		let requestGroups = [];
 		while (data.result.length)
 			requestGroups.push(data.result.splice(0, 10));
+		progressCallback(`Will make ${requestGroups.length} grouped item queries.`);
 
-		let promises = requestGroups.map(async requestGroup => {
+		let promises = requestGroups.map(async (requestGroup, i) => {
 			let queryParams = {
 				query: data.id,
 				'pseudos[]': [PROPERTIES.totalEleRes, PROPERTIES.flatLife],
 			};
 			let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
 			let data2 = await get(endpoint2, queryParams);
+			progressCallback(`Received grouped item query # ${i}.`);
 			return data2.result.map(parseItem);
 		});
 		let items = (await Promise.all(promises)).flat();
+		progressCallback('All grouped item queries completed.');
 		// low to high prices, high to low values
 		items.sort((a, b) => a.evalPrice - b.evalPrice || b.evalValue - a.evalValue);
+		progressCallback('Items sorted.');
 
 		return {
 			total: data.total,
