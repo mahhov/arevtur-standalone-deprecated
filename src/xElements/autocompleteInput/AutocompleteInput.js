@@ -72,7 +72,7 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	updateAutocompletes() {
-		let optionValues = AutocompleteInput.smartFilter(this.$('input').value, this.autocompletes_, this.size);
+		let optionValues = AutocompleteInput.smartFilter(this.$('input').value, this.autocompletes_);
 		XElement.clearChildren(this.$('select'));
 		optionValues.forEach(v => {
 			let optionEl = document.createElement('option');
