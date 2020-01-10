@@ -90,6 +90,10 @@
 		let queryProperty = document.createElement('x-query-property');
 		$('#query-properties-list').appendChild(queryProperty);
 		queryProperty.properties = queryPropertyAutocompletes;
+		queryProperty.addEventListener('change', () => {
+			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
+				addQueryProperty();
+		});
 		return queryProperty;
 	};
 
@@ -103,7 +107,7 @@
 	addQueryProperty();
 
 	// todo
-	// query filters when last is filled
+	// query filters removal
 	// add type and price and value to query inputs
 	// drag to rearrange filters
 	// lock filter weights with above weights
