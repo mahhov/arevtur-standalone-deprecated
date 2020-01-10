@@ -11,6 +11,7 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	connectedCallback() {
+		this.$('input').addEventListener('change', () => this.value = this.$('input').value);
 		this.$('input').addEventListener('input', () => {
 			this.updateAutocompletes();
 			this.$('select').selectedIndex = -1;
@@ -23,11 +24,6 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 				this.$('select').selectedIndex = this.size - 1;
 				this.$('select').focus();
 			}
-		});
-		this.$('select').addEventListener('click', e => {
-			let selected = this.$('select').selectedOptions[0];
-			if (selected)
-				this.value = selected.value
 		});
 		this.$('select').addEventListener('keydown', e => {
 			if (e.key === 'Enter')
@@ -54,17 +50,15 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 
 	set size(value) {
 		this.$('select').size = value;
-		XElement.clearChildren(this.$('select'));
-		for (let i = 0; i < this.size; i++) {
-			let optionEl = document.createElement('option');
-			this.$('select').appendChild(optionEl);
-			optionEl.addEventListener('click', () => this.value = optionEl.textContent);
-		}
 		this.updateAutocompletes();
 	}
 
 	set value(value) {
-		// todo call this on input lose focus
+		if (value && !this.autocompletes_.includes(value)) {
+			this.value = '';
+			this.$('input').value = value;
+			return;
+		}
 		this.$('input').value = value;
 		this.updateAutocompletes();
 		this.emit('change');
@@ -74,9 +68,10 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 		let optionValues = AutocompleteInput.smartFilter(this.$('input').value, this.autocompletes_, this.size);
 		XElement.clearChildren(this.$('select'));
 		optionValues.forEach(v => {
-			let option = document.createElement('option');
-			option.textContent = v;
-			this.$('select').appendChild(option);
+			let optionEl = document.createElement('option');
+			optionEl.textContent = v;
+			this.$('select').appendChild(optionEl);
+			optionEl.addEventListener('click', () => this.value = optionEl.textContent);
 		});
 	}
 
