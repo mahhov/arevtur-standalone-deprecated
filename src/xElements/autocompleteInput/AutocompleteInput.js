@@ -11,7 +11,39 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	connectedCallback() {
-		this.$('input').addEventListener('input', () => this.updateAutocompletes());
+		this.$('input').addEventListener('input', () => {
+			this.updateAutocompletes();
+			this.$('select').selectedIndex = -1;
+		});
+		this.$('input').addEventListener('keydown', e => {
+			if (e.key === 'ArrowDown') {
+				this.$('select').selectedIndex = 0;
+				this.$('select').focus();
+			} else if (e.key === 'ArrowUp') {
+				this.$('select').selectedIndex = this.size - 1;
+				this.$('select').focus();
+			}
+		});
+		this.$('select').addEventListener('click', e => {
+			this.value = this.$('select').selectedOptions[0].value;
+			this.updateAutocompletes();
+		});
+		this.$('select').addEventListener('keydown', e => {
+			if (e.key === 'Enter') {
+				this.value = this.$('select').selectedOptions[0].value;
+				this.updateAutocompletes();
+			}
+			let arrowOut =
+				e.key === 'ArrowDown' && this.$('select').selectedIndex === this.size - 1 ||
+				e.key === 'ArrowUp' && this.$('select').selectedIndex === 0;
+			if (arrowOut)
+				e.preventDefault();
+			if (arrowOut || e.key === 'Escape' || e.key === 'Enter' ||
+				e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') {
+				this.$('select').selectedIndex = -1;
+				this.$('input').focus();
+			}
+		});
 		this.autocompletes = [];
 		this.size = 10;
 	}
@@ -38,7 +70,12 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 
 	updateAutocompletes() {
 		let optionValues = AutocompleteInput.smartFilter(this.$('input').value, this.autocompletes_, this.size);
-		this.$$('select option').forEach((el, i) => el.textContent = optionValues[i]);
+		XElement.clearChildren(this.$('select'));
+		optionValues.forEach(v => {
+			let option = document.createElement('option');
+			option.textContent = v;
+			this.$('select').appendChild(option);
+		});
 	}
 
 	static smartFilter(input, array, maxSize = Infinity) {
