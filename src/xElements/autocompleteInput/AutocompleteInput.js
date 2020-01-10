@@ -3,7 +3,7 @@ const template = require('fs').readFileSync(`${__dirname}/AutocompleteInput.html
 
 customElements.define('x-autocomplete-input', class AutocompleteInput extends XElement {
 	static get attributeTypes() {
-		return {size: false, value: false};
+		return {size: false, value: false, placeholder: false};
 	}
 
 	static get htmlTemplate() {
@@ -60,6 +60,10 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 			return;
 		}
 		this.$('input').value = value;
+	}
+
+	set placeholder(value) {
+		this.$('input').placeholder = value;
 	}
 
 	internalSetValue(value) {

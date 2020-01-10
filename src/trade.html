@@ -20,6 +20,9 @@
 </style>
 
 <div id="query-container">
+	<x-autocomplete-input id="query-type" placeholder="type"></x-autocomplete-input>
+	<input id="query-value" type="number" placeholder="value">
+	<input id="query-price" type="number" placeholder="price">
 	<div id="query-properties-list"></div>
 	<button id="query-submit">submit</button>
 </div>
@@ -86,7 +89,7 @@
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
 	};
 
-	$('#query-submit').addEventListener('click', submitQuery);
+	$('#query-type').autocompletes = Object.values(ApiConstants.TYPES);
 
 	let addQueryProperty = () => {
 		let queryProperty = document.createElement('x-query-property');
@@ -108,6 +111,9 @@
 		});
 
 	addQueryProperty();
+
+	$('#query-submit').addEventListener('click', submitQuery);
+	// submitQuery(); // todo restore all query inputs and submit query on load
 
 	// todo
 	// add type and price and value to query inputs
