@@ -1,0 +1,20 @@
+<style>
+	#select-container {
+		position: relative;
+		display: none;
+	}
+
+	#container:focus-within #select-container {
+		display: unset;
+	}
+
+	select {
+		width: 300px;
+		position: absolute;
+	}
+</style>
+
+<div id="container">
+	<div><input></div>
+	<div id="select-container"><select></select></div>
+</div>
