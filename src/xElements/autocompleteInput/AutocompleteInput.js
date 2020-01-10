@@ -24,9 +24,11 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	set size(value) {
 		this.$('select').size = value;
 		XElement.clearChildren(this.$('select'));
-		for (let i = 0; i < this.size; i++)
-			$c('option', [], '', this.$('select'))
-				.addEventListener('click', () => this.value = optionEl.textContent);
+		for (let i = 0; i < this.size; i++) {
+			let optionEl = document.createElement('option');
+			this.$('select').appendChild(optionEl);
+			optionEl.addEventListener('click', () => this.value = optionEl.textContent);
+		}
 		this.updateAutocompletes();
 	}
 

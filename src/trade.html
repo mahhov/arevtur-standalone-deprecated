@@ -1,7 +1,13 @@
 <style>
+	#query-container {
+		background: #f8f8f8;
+		padding: 10px;
+	}
+
 	#results-container {
 		display: flex;
 		align-items: flex-start;
+		margin-top: 30px;
 	}
 
 	#results-list {
@@ -12,6 +18,18 @@
 		margin: 10px;
 	}
 </style>
+
+<div id="query-container">
+	<x-autocomplete-input></x-autocomplete-input>
+	<input>
+	<x-autocomplete-input></x-autocomplete-input>
+	<input>
+	<x-autocomplete-input></x-autocomplete-input>
+	<input>
+	<x-autocomplete-input></x-autocomplete-input>
+	<input>
+	<button id="query-submit">submit</button>
+</div>
 
 <div id="results-container">
 	<div id="results-progress"></div>
@@ -26,6 +44,7 @@
 	const DataFetcher = require('./DataFetcher');
 
 	const $ = document.querySelector.bind(document);
+	const $$ = document.querySelectorAll.bind(document);
 	const $c = (tag, classList = [], text = '', parent = null) => {
 		let el = document.createElement(tag);
 		el.classList.add(...classList);
@@ -35,11 +54,20 @@
 		return el;
 	};
 
-	let load = async () => {
-		let weights = {
-			[ApiConstants.PROPERTIES.flatLife]: 2,
-			[ApiConstants.PROPERTIES.totalEleRes]: 1,
-		};
+	let queryPropertyAutocompletes = Object.values(ApiConstants.PROPERTIES)
+		.flat()
+		.map(property => property.id);
+
+	$$('x-autocomplete-input').forEach(queryInput =>
+		queryInput.autocompletes = queryPropertyAutocompletes);
+
+	$('#query-submit').addEventListener('click', async () => {
+		let weightEntries = [...$$('x-autocomplete-input')]
+			.map((queryInput, i) => [queryInput.value, $$('#query-container input')[i].value])
+			.filter(([a, b]) => a && b);
+
+		let weights = Object.fromEntries(weightEntries);
+
 		let query = DataFetcher.formQuery(ApiConstants.TYPES.boots, weights, 0, 2);
 		let itemsData = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
@@ -62,11 +90,11 @@
 
 		itemsData.items.forEach(itemData =>
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
-	};
-	load();
+	});
 
 	// todo
-	// ui to form and persist query
+	// persist query and submit query on load
+	// query filters when last is filled
 	// drag to rearrange filters
 	// lock filter weights with above weights
 	// some AND and NOT filters (e.g. & 30 move speed; & not can't use body)
