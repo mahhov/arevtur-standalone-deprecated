@@ -67,7 +67,6 @@
 		let itemsToPoints = items =>
 			items.map(item => ({x: item.evalPrice, y: item.evalValue}));
 
-		// todo clear chart
 		$('#results-chart').pointSets = [
 			{
 				color: 'rgb(0,0,0)',
@@ -80,7 +79,7 @@
 			},
 		];
 
-		// todo clear items
+		XElement.clearChildren($('#results-list'));
 		itemsData.items.forEach(itemData =>
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
 	};

@@ -23,6 +23,8 @@ customElements.define('x-chart', class extends XElement {
 	}
 
 	set pointSets(value) {
+		this.ctx.clearRect(0, 0, this.width, this.height);
+
 		let allPoints = value.flatMap(({points}) => points);
 		let [minX, deltaX] = this.getRange(allPoints.map(({x}) => x));
 		let [minY, deltaY] = this.getRange(allPoints.map(({y}) => y));
