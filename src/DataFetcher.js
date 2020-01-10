@@ -108,7 +108,7 @@ let getItems = async (query, progressCallback) => {
 		let promises = requestGroups.map(async (requestGroup, i) => {
 			let queryParams = {
 				query: data.id,
-				'pseudos[]': [ApiConstants.PROPERTIES.totalEleRes, ApiConstants.PROPERTIES.flatLife],
+				'pseudos[]': [ApiConstants.SHORT_PROPERTIES.totalEleRes, ApiConstants.SHORT_PROPERTIES.flatLife],
 			};
 			let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
 			let data2 = await get(endpoint2, queryParams);
