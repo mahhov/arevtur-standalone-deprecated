@@ -11,13 +11,19 @@ customElements.define('x-query-property', class extends XElement {
 	}
 
 	connectedCallback() {
-		this.$('#property').addEventListener('change', () => this.property = this.$('#property').value);
-		this.$('#weight').addEventListener('input', () => this.weight = this.$('#weight').value);
+		this.$('#property').addEventListener('change', () => {
+			this.property = this.$('#property').value;
+			this.emit('change');
+		});
+		this.$('#weight').addEventListener('input', () => {
+			this.weight = this.$('#weight').value;
+			this.emit('change');
+		});
 		this.$('#delete').addEventListener('click', () => this.emit('delete'));
 	}
 
 	get empty() {
-		return !this.property && !this.value;
+		return !this.property && !this.weight;
 	}
 
 	set properties(value) {
