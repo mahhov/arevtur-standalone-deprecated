@@ -47,16 +47,18 @@
 		return el;
 	};
 
-	let queryPropertyAutocompletes = Object.values(ApiConstants.PROPERTIES)
+	let queryPropertyIds = Object.values(ApiConstants.PROPERTIES)
 		.flat()
 		.map(property => property.id);
 
 	let submitQuery = async () => {
 		let weightEntries = [...$$('#query-properties-list x-query-property')]
 			.map(queryProperty => [queryProperty.property, queryProperty.weight])
-			.filter(([a, b]) => a && b);
-		localStorage.setItem('last-query-inputs', JSON.stringify(weightEntries));
+			.filter(([a, b]) => queryPropertyIds.includes(a) && b);
+		if (!weightEntries.length)
+			return;
 
+		localStorage.setItem('last-query-inputs', JSON.stringify(weightEntries));
 		let weights = Object.fromEntries(weightEntries);
 
 		let query = DataFetcher.formQuery(ApiConstants.TYPES.boots, weights, 0, 2);
@@ -89,7 +91,7 @@
 	let addQueryProperty = () => {
 		let queryProperty = document.createElement('x-query-property');
 		$('#query-properties-list').appendChild(queryProperty);
-		queryProperty.properties = queryPropertyAutocompletes;
+		queryProperty.properties = queryPropertyIds;
 		queryProperty.addEventListener('change', () => {
 			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
 				addQueryProperty();
