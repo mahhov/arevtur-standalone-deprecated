@@ -20,14 +20,7 @@
 </style>
 
 <div id="query-container">
-	<x-autocomplete-input></x-autocomplete-input>
-	<input>
-	<x-autocomplete-input></x-autocomplete-input>
-	<input>
-	<x-autocomplete-input></x-autocomplete-input>
-	<input>
-	<x-autocomplete-input></x-autocomplete-input>
-	<input>
+	<div id="query-properties-list"></div>
 	<button id="query-submit">submit</button>
 </div>
 
@@ -58,12 +51,9 @@
 		.flat()
 		.map(property => property.id);
 
-	$$('x-autocomplete-input').forEach(queryInput =>
-		queryInput.autocompletes = queryPropertyAutocompletes);
-
 	let submitQuery = async () => {
-		let weightEntries = [...$$('x-autocomplete-input')]
-			.map((queryInput, i) => [queryInput.value, $$('#query-container input')[i].value])
+		let weightEntries = [...$$('#query-properties-list x-query-property')]
+			.map(queryProperty => [queryProperty.property, queryProperty.weight])
 			.filter(([a, b]) => a && b);
 		localStorage.setItem('last-query-inputs', JSON.stringify(weightEntries));
 
@@ -77,6 +67,7 @@
 		let itemsToPoints = items =>
 			items.map(item => ({x: item.evalPrice, y: item.evalValue}));
 
+		// todo clear chart
 		$('#results-chart').pointSets = [
 			{
 				color: 'rgb(0,0,0)',
@@ -89,22 +80,32 @@
 			},
 		];
 
+		// todo clear items
 		itemsData.items.forEach(itemData =>
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
 	};
 
 	$('#query-submit').addEventListener('click', submitQuery);
 
+	let addQueryProperty = () => {
+		let queryProperty = document.createElement('x-query-property');
+		$('#query-properties-list').appendChild(queryProperty);
+		queryProperty.properties = queryPropertyAutocompletes;
+		return queryProperty;
+	};
+
 	(JSON.parse(localStorage.getItem('last-query-inputs')) || [])
-		.forEach(([property, weight], i) => {
-			$$('x-autocomplete-input')[i].value = property;
-			$$('#query-container input')[i].value = weight;
+		.forEach(([property, weight]) => {
+			let queryProperty = addQueryProperty();
+			queryProperty.property = property;
+			queryProperty.weight = weight;
 		});
 
-	submitQuery();
+	addQueryProperty();
 
 	// todo
 	// query filters when last is filled
+	// add type and price and value to query inputs
 	// drag to rearrange filters
 	// lock filter weights with above weights
 	// some AND and NOT filters (e.g. & 30 move speed; & not can't use body)

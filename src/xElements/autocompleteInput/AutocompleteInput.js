@@ -25,14 +25,13 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 			}
 		});
 		this.$('select').addEventListener('click', e => {
-			this.value = this.$('select').selectedOptions[0].value;
-			this.updateAutocompletes();
+			let selected = this.$('select').selectedOptions[0];
+			if (selected)
+				this.value = selected.value
 		});
 		this.$('select').addEventListener('keydown', e => {
-			if (e.key === 'Enter') {
+			if (e.key === 'Enter')
 				this.value = this.$('select').selectedOptions[0].value;
-				this.updateAutocompletes();
-			}
 			let arrowOut =
 				e.key === 'ArrowDown' && this.$('select').selectedIndex === this.size - 1 ||
 				e.key === 'ArrowUp' && this.$('select').selectedIndex === 0;
@@ -65,7 +64,10 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	set value(value) {
+		// todo call this on input lose focus
 		this.$('input').value = value;
+		this.updateAutocompletes();
+		this.emit('change');
 	}
 
 	updateAutocompletes() {
