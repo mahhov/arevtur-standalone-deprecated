@@ -94,6 +94,7 @@
 			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
 				addQueryProperty();
 		});
+		queryProperty.addEventListener('remove', () => queryProperty.remove());
 		return queryProperty;
 	};
 
@@ -107,7 +108,6 @@
 	addQueryProperty();
 
 	// todo
-	// query filters removal
 	// add type and price and value to query inputs
 	// drag to rearrange filters
 	// lock filter weights with above weights

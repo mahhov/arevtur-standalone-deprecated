@@ -19,7 +19,7 @@ customElements.define('x-query-property', class extends XElement {
 			this.weight = this.$('#weight').value;
 			this.emit('change');
 		});
-		this.$('#delete').addEventListener('click', () => this.emit('delete'));
+		this.$('#remove').addEventListener('click', () => this.emit('remove'));
 	}
 
 	get empty() {
