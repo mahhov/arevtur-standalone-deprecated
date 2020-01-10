@@ -11,7 +11,7 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	connectedCallback() {
-		this.$('input').addEventListener('change', () => this.value = this.$('input').value);
+		this.$('input').addEventListener('change', () => this.internalSetValue(this.$('input').value));
 		this.$('input').addEventListener('input', () => {
 			this.updateAutocompletes();
 			this.$('select').selectedIndex = -1;
@@ -21,15 +21,15 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 				this.$('select').selectedIndex = 0;
 				this.$('select').focus();
 			} else if (e.key === 'ArrowUp') {
-				this.$('select').selectedIndex = this.size - 1;
+				this.$('select').selectedIndex = this.$('select').length - 1;
 				this.$('select').focus();
 			}
 		});
 		this.$('select').addEventListener('keydown', e => {
 			if (e.key === 'Enter')
-				this.value = this.$('select').selectedOptions[0].value;
+				this.internalSetValue(this.$('select').selectedOptions[0].value);
 			let arrowOut =
-				e.key === 'ArrowDown' && this.$('select').selectedIndex === this.size - 1 ||
+				e.key === 'ArrowDown' && this.$('select').selectedIndex === this.$('select').length - 1 ||
 				e.key === 'ArrowUp' && this.$('select').selectedIndex === 0;
 			if (arrowOut)
 				e.preventDefault();
@@ -60,7 +60,10 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 			return;
 		}
 		this.$('input').value = value;
-		this.updateAutocompletes();
+	}
+
+	internalSetValue(value) {
+		this.value = value;
 		this.emit('change');
 	}
 
@@ -71,7 +74,7 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 			let optionEl = document.createElement('option');
 			optionEl.textContent = v;
 			this.$('select').appendChild(optionEl);
-			optionEl.addEventListener('click', () => this.value = optionEl.textContent);
+			optionEl.addEventListener('click', () => this.internalSetValue(optionEl.textContent));
 		});
 	}
 
