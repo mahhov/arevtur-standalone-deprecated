@@ -1,4 +1,12 @@
 <style>
+	:host {
+		display: inline-block;
+	}
+
+	input {
+		width: 100%;
+	}
+
 	#select-container {
 		position: relative;
 		display: none;
@@ -12,6 +20,7 @@
 		position: absolute;
 		border-top: 0;
 		overflow: hidden;
+		display: block;
 	}
 
 	option:hover {
@@ -19,9 +28,8 @@
 	}
 </style>
 
-<!--todo can we make these inline-block for better styling control-->
-<div id="container">
-	<div><input></div>
-	<div id="select-container"><select></select></div>
+<span id="container">
+	<span><input></span>
+	<span id="select-container"><select></select></span>
 	<!--todo fixed width for select-->
-</div>
+</span>
