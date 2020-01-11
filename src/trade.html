@@ -64,16 +64,23 @@
 		.map(property => property.id);
 
 	let submitQuery = async () => {
+		let type =  $('#query-type').value;
+		let minValue = $('#query-value').value;
+		let maxPrice = $('#query-price').value;
+		if (!type || !minValue || !maxPrice)
+			return;
+
 		let weightEntries = [...$$('#query-properties-list x-query-property')]
 			.map(queryProperty => [queryProperty.property, queryProperty.weight])
 			.filter(([a, b]) => queryPropertyIds.includes(a) && b);
 		if (!weightEntries.length)
 			return;
-
-		localStorage.setItem('last-query-inputs', JSON.stringify(weightEntries));
 		let weights = Object.fromEntries(weightEntries);
 
-		let query = DataFetcher.formQuery(ApiConstants.TYPES.boots, weights, 0, 2);
+		localStorage.setItem('last-query-inputs', JSON.stringify(weightEntries)); // todo remove
+		// localStorage.setItem('last-query-inputs', JSON.stringify({type, minValue, maxPrice, weightEntries}));
+
+		let query = DataFetcher.formQuery(type, weights, minValue, maxPrice);
 		let itemsData = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
 		XElement.clearChildren($('#results-progress'));
@@ -127,8 +134,6 @@
 	// submitQuery(); // todo restore all query inputs and submit query on load
 
 	// todo
-	// add type and price and value to query inputs
-	// drag to rearrange filters
 	// lock filter weights with above weights
 	// some AND and NOT filters (e.g. & 30 move speed; & not can't use body)
 	// multiple queries and sharing filter groups
