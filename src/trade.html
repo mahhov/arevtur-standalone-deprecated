@@ -4,6 +4,10 @@
 		padding: 10px;
 	}
 
+	#query-properties-inner-list .dragging {
+		outline: 1px solid black;
+	}
+
 	#results-container {
 		display: flex;
 		align-items: flex-start;
@@ -23,7 +27,9 @@
 	<x-autocomplete-input id="query-type" placeholder="type"></x-autocomplete-input>
 	<input id="query-value" type="number" placeholder="value">
 	<input id="query-price" type="number" placeholder="price">
-	<div id="query-properties-list"></div>
+	<x-arrangable-list id="query-properties-list">
+		<div id="query-properties-inner-list" slot="list"></div>
+	</x-arrangable-list>
 	<button id="query-submit">submit</button>
 </div>
 
@@ -55,7 +61,7 @@
 		.map(property => property.id);
 
 	let submitQuery = async () => {
-		let weightEntries = [...$$('#query-properties-list x-query-property')]
+		let weightEntries = [...$$('#query-properties-inner-list x-query-property')]
 			.map(queryProperty => [queryProperty.property, queryProperty.weight])
 			.filter(([a, b]) => queryPropertyIds.includes(a) && b);
 		if (!weightEntries.length)
@@ -93,10 +99,11 @@
 
 	let addQueryProperty = () => {
 		let queryProperty = document.createElement('x-query-property');
-		$('#query-properties-list').appendChild(queryProperty);
 		queryProperty.properties = queryPropertyIds;
+		$('#query-properties-inner-list').appendChild(queryProperty);
+		$('#query-properties-list').appended(queryProperty);
 		queryProperty.addEventListener('change', () => {
-			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
+			if (queryProperty === $('#query-properties-inner-list').lastChild && !queryProperty.empty)
 				addQueryProperty();
 		});
 		queryProperty.addEventListener('remove', () => queryProperty.remove());
