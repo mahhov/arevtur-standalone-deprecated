@@ -11,6 +11,10 @@ customElements.define('x-arrangable-list', class extends XElement {
 	}
 
 	connectedCallback() {
+		this.$('slot').addEventListener('slotchange', () =>
+			this.$('slot').assignedElements()
+				.filter(el => !el.draggable)
+				.forEach(el => this.appended(el)));
 	}
 
 	appended(element) {
@@ -20,7 +24,7 @@ customElements.define('x-arrangable-list', class extends XElement {
 			this.dragging.classList.add('dragging');
 		});
 		element.addEventListener('dragenter', e => {
-			let children = [...this.$('slot').assignedElements()[0].children];
+			let children = this.$('slot').assignedElements();
 			if (children.indexOf(this.dragging) < children.indexOf(e.target))
 				e.target.after(this.dragging);
 			else
