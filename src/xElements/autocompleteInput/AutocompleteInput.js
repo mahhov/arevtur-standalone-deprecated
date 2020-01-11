@@ -44,6 +44,8 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	set autocompletes(value) {
+		if (value === this.autocompletes_)
+			return;
 		this.autocompletes_ = value;
 		this.updateAutocompletes();
 	}
@@ -53,6 +55,8 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	set size(value) {
+		if (value === this.size)
+			return;
 		this.$('select').size = value;
 		this.updateAutocompletes();
 	}
