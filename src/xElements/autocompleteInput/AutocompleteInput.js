@@ -39,13 +39,17 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 				this.$('input').focus();
 			}
 		});
-		this.autocompletes = [];
-		this.size = 10;
+		this.autocompletes = this.autocompletes || [];
+		this.size = this.size || 10;
 	}
 
 	set autocompletes(value) {
 		this.autocompletes_ = value;
 		this.updateAutocompletes();
+	}
+
+	get autocompletes() {
+		return this.autocompletes_;
 	}
 
 	set size(value) {
@@ -54,7 +58,7 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	set value(value) {
-		if (value && !this.autocompletes_.includes(value)) {
+		if (value && !this.autocompletes.includes(value)) {
 			this.value = '';
 			this.$('input').value = value;
 			return;
@@ -72,7 +76,7 @@ customElements.define('x-autocomplete-input', class AutocompleteInput extends XE
 	}
 
 	updateAutocompletes() {
-		let optionValues = AutocompleteInput.smartFilter(this.$('input').value, this.autocompletes_);
+		let optionValues = AutocompleteInput.smartFilter(this.$('input').value, this.autocompletes);
 		XElement.clearChildren(this.$('select'));
 		optionValues.forEach(v => {
 			let optionEl = document.createElement('option');
