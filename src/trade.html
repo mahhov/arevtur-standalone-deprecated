@@ -24,11 +24,16 @@
 </style>
 
 <div id="query-container">
-	<x-autocomplete-input id="query-type" placeholder="type"></x-autocomplete-input>
-	<input id="query-value" type="number" placeholder="value">
-	<input id="query-price" type="number" placeholder="price">
+	<div>
+		<x-autocomplete-input id="query-type" placeholder="type"></x-autocomplete-input>
+		<input id="query-value" type="number" placeholder="value">
+		<input id="query-price" type="number" placeholder="price">
+	</div>
 	<x-arrangable-list id="query-properties-list"></x-arrangable-list>
-	<button id="query-submit">submit</button>
+	<div>
+		<button id="query-add-property">add</button>
+		<button id="query-submit">submit</button>
+	</div>
 </div>
 
 <div id="results-container">
@@ -108,16 +113,17 @@
 		return queryProperty;
 	};
 
+	$('#query-add-property').addEventListener('click', () => addQueryProperty());
+
+	$('#query-submit').addEventListener('click', submitQuery);
+
 	(JSON.parse(localStorage.getItem('last-query-inputs')) || [])
 		.forEach(([property, weight]) => {
 			let queryProperty = addQueryProperty();
 			queryProperty.property = property;
 			queryProperty.weight = weight;
 		});
-
 	addQueryProperty();
-
-	$('#query-submit').addEventListener('click', submitQuery);
 	// submitQuery(); // todo restore all query inputs and submit query on load
 
 	// todo
