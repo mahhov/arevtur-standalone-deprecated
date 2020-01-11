@@ -64,7 +64,7 @@
 		.map(property => property.id);
 
 	let submitQuery = async () => {
-		let type =  $('#query-type').value;
+		let type = $('#query-type').value;
 		let minValue = $('#query-value').value;
 		let maxPrice = $('#query-price').value;
 		if (!type || !minValue || !maxPrice)
@@ -77,8 +77,7 @@
 			return;
 		let weights = Object.fromEntries(weightEntries);
 
-		localStorage.setItem('last-query-inputs', JSON.stringify(weightEntries)); // todo remove
-		// localStorage.setItem('last-query-inputs', JSON.stringify({type, minValue, maxPrice, weightEntries}));
+		localStorage.setItem('last-query-inputs', JSON.stringify({type, minValue, maxPrice, weightEntries}));
 
 		let query = DataFetcher.formQuery(type, weights, minValue, maxPrice);
 		let itemsData = await DataFetcher.getItems(query, progress =>
@@ -124,7 +123,11 @@
 
 	$('#query-submit').addEventListener('click', submitQuery);
 
-	(JSON.parse(localStorage.getItem('last-query-inputs')) || [])
+	let lastQueryInputs = JSON.parse(localStorage.getItem('last-query-inputs')) || {weightEntries: []};
+	$('#query-type').value = lastQueryInputs.type;
+	$('#query-value').value = lastQueryInputs.minValue;
+	$('#query-price').value = lastQueryInputs.maxPrice;
+	lastQueryInputs.weightEntries
 		.forEach(([property, weight]) => {
 			let queryProperty = addQueryProperty();
 			queryProperty.property = property;
