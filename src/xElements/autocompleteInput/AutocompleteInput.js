@@ -11,7 +11,6 @@ customElements.define(name, class AutocompleteInput extends XElement {
 	}
 
 	connectedCallback() {
-		// todo show warning when invalid input
 		// todo arrow keys shouldn't scroll page
 		this.$('input').addEventListener('change', () => this.internalSetValue(this.$('input').value));
 		this.$('input').addEventListener('input', () => {
@@ -64,9 +63,9 @@ customElements.define(name, class AutocompleteInput extends XElement {
 	set value(value) {
 		if (value && !this.autocompletes.includes(value)) {
 			this.value = '';
-			this.$('input').value = value;
-			return;
-		}
+			this.$('input').classList.add('invalid');
+		} else
+			this.$('input').classList.remove('invalid');
 		this.$('input').value = value;
 	}
 
