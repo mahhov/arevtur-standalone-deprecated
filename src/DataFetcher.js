@@ -47,46 +47,54 @@ let post = (endpoint, data) =>
 		req.end();
 	});
 
-let formQuery = (type, weightValues,
+// param weights {property: weight, ...}
+// param ands {property: min, ...}
+// param nots {property: undefined, ...}
+let formQuery = (type, weights, ands = {}, nots = {},
                  minValue = 200, maxPrice = 20,
                  sort = ApiConstants.SORT.value, online = true) => {
-	let weightFilters = Object.entries(weightValues).map(([property, weight]) => ({
+	let weightFilters = Object.entries(weights).map(([property, weight]) => ({
 		id: property,
 		value: {weight},
 		disabled: false
 	}));
+	let andFilters = Object.entries(ands).map(([property, min]) => ({
+		id: property,
+		value: {min},
+		disabled: false
+	}));
+	let notFilters = Object.entries(nots).map(([property]) => ({
+		id: property,
+	}));
 	return {
 		query: {
-			status: {
-				option: online ? 'online' : 'any'
-			},
+			status: {option: online ? 'online' : 'any'},
 			stats: [
 				{
 					type: 'weight',
 					filters: weightFilters,
-					value: {
-						min: minValue
-					}
+					value: {min: minValue}
+				}, {
+					type: 'and',
+					filters: andFilters,
+				}, {
+					type: 'not',
+					filters: notFilters,
 				}
 			],
 			filters: {
 				type_filters: {
 					disabled: false,
 					filters: {
-						category: {
-							option: type
-						}
+						category: {option: type}
 					}
 				},
 				trade_filters: {
 					disabled: false,
 					filters: {
-						price: {
-							max: maxPrice
-						}
+						price: {max: maxPrice}
 					}
 				}
-
 			}
 		},
 		sort,
