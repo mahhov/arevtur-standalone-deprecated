@@ -3,7 +3,7 @@ const {template, name} = importUtil(__filename);
 
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
-		return {width: false, height: false};
+		return {width: {}, height: {}};
 	}
 
 	static get htmlTemplate() {

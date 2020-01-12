@@ -19,6 +19,6 @@
   "homepage": "https://github.com/mahhov/arevtur#readme",
   "dependencies": {
     "electron": "^7.1.8",
-    "xx-element": "^1.5.0"
+    "xx-element": "^2.0.0"
   }
 }

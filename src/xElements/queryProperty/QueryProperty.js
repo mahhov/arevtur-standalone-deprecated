@@ -3,7 +3,7 @@ const {template, name} = importUtil(__filename);
 
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
-		return {property: false, weight: false, filter: false, locked: true};
+		return {property: {}, weight: {}, filter: {}, locked: {boolean: true}};
 	}
 
 	static get htmlTemplate() {
@@ -40,8 +40,7 @@ customElements.define(name, class extends XElement {
 	}
 
 	set property(value) {
-		if (this.$('#property').value !== value)
-			this.$('#property').value = value;
+		this.$('#property').value = value;
 	}
 
 	set weight(value) {
@@ -49,8 +48,7 @@ customElements.define(name, class extends XElement {
 	}
 
 	set filter(value) {
-		if (this.$('#filter').value !== value)
-			this.$('#filter').value = value;
+		this.$('#filter').value = value;
 	}
 
 	set locked(value) {

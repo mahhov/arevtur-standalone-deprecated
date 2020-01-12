@@ -3,7 +3,7 @@ const {template, name} = importUtil(__filename);
 
 customElements.define(name, class AutocompleteInput extends XElement {
 	static get attributeTypes() {
-		return {size: false, value: false, placeholder: false};
+		return {size: {}, value: {}, placeholder: {}};
 	}
 
 	static get htmlTemplate() {
@@ -11,6 +11,7 @@ customElements.define(name, class AutocompleteInput extends XElement {
 	}
 
 	connectedCallback() {
+		// todo show warning when invalid input
 		// todo arrow keys shouldn't scroll page
 		this.$('input').addEventListener('change', () => this.internalSetValue(this.$('input').value));
 		this.$('input').addEventListener('input', () => {
