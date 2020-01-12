@@ -3,7 +3,7 @@ const template = require('fs').readFileSync(`${__dirname}/QueryProperty.html`, '
 
 customElements.define('x-query-property', class extends XElement {
 	static get attributeTypes() {
-		return {property: false, weight: false};
+		return {property: false, weight: false, locked: true};
 	}
 
 	static get htmlTemplate() {
@@ -18,6 +18,10 @@ customElements.define('x-query-property', class extends XElement {
 		this.$('#weight').addEventListener('input', () => {
 			this.weight = this.$('#weight').value;
 			this.emit('change');
+		});
+		this.$('#lock-above').addEventListener('input', () => {
+			this.locked = this.$('#lock-above').checked;
+			this.emit('lock-change');
 		});
 		this.$('#remove').addEventListener('click', () => this.emit('remove'));
 	}
@@ -37,5 +41,9 @@ customElements.define('x-query-property', class extends XElement {
 
 	set weight(value) {
 		this.$('#weight').value = value;
+	}
+
+	set locked(value) {
+		this.$('#lock-above').checked = value;
 	}
 });

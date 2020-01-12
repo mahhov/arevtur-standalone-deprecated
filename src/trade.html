@@ -122,6 +122,22 @@
 		queryProperty.addEventListener('change', () => {
 			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
 				addQueryProperty();
+			queryProperty.locked = false;
+			let next = queryProperty.nextSibling;
+			while (next && next.locked) {
+				next.weight = queryProperty.weight;
+				next = next.nextSibling;
+			}
+		});
+		queryProperty.addEventListener('lock-change', () => {
+			if (!queryProperty.locked)
+				return;
+			queryProperty.weight = queryProperty.previousSibling.weight;
+			let next = queryProperty.nextSibling;
+			while (next && next.locked) {
+				next.weight = queryProperty.weight;
+				next = next.nextSibling;
+			}
 		});
 		queryProperty.addEventListener('remove', () => queryProperty.remove());
 		return queryProperty;
@@ -145,7 +161,6 @@
 	// submitQuery(); // todo restore all query inputs and submit query on load
 
 	// todo
-	// lock filter weights with above weights
 	// some AND and NOT filters (e.g. & 30 move speed; & not can't use body)
 	// multiple queries and sharing filter groups
 	// query by name
