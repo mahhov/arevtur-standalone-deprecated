@@ -136,7 +136,7 @@
 		$('#query-properties-list').appendChild(queryProperty);
 		queryProperty.addEventListener('change', () => {
 			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
-				addQueryProperty(); // todo does not occur when property input and lose focus
+				addQueryProperty();
 			if (queryProperty.weight !== queryProperty.previousSibling.weight)
 				queryProperty.locked = false;
 			let next = queryProperty.nextSibling;

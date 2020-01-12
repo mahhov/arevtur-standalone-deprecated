@@ -1,7 +1,7 @@
-const {XElement} = require('xx-element');
-const template = require('fs').readFileSync(`${__dirname}/QueryProperty.html`, 'utf8');
+const {XElement, importUtil} = require('xx-element');
+const {template, name} = importUtil(__filename);
 
-customElements.define('x-query-property', class extends XElement {
+customElements.define(name, class extends XElement {
 	static get attributeTypes() {
 		return {property: false, weight: false, filter: false, locked: true};
 	}

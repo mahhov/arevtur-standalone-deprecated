@@ -1,7 +1,7 @@
-const {XElement} = require('xx-element');
-const template = require('fs').readFileSync(`${__dirname}/AutocompleteInput.html`, 'utf8');
+const {XElement, importUtil} = require('xx-element');
+const {template, name} = importUtil(__filename);
 
-customElements.define('x-autocomplete-input', class AutocompleteInput extends XElement {
+customElements.define(name, class AutocompleteInput extends XElement {
 	static get attributeTypes() {
 		return {size: false, value: false, placeholder: false};
 	}

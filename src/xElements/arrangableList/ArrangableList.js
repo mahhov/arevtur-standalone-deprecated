@@ -1,7 +1,7 @@
-const {importUtil, XElement} = require('xx-element');
-const template = require('fs').readFileSync(`${__dirname}/ArrangableList.html`, 'utf8');
+const {XElement, importUtil} = require('xx-element');
+const {template, name} = importUtil(__filename);
 
-customElements.define('x-arrangable-list', class extends XElement {
+customElements.define(name, class extends XElement {
 	static get attributeTypes() {
 		return {};
 	}
