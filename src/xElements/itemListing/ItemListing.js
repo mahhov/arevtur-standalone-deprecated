@@ -23,6 +23,7 @@ customElements.define(name, class extends XElement {
 		value.explicitMods.forEach(mod =>
 			$c('div', ['item-mod'], mod, this.$('#details-list')));
 
+		this.$('#value-text').textContent = value.evalValue;
 		this.$('#price-text').textContent = value.priceText;
 		this.$('#whisper-button').textContent = value.accountText;
 	}

@@ -1,12 +1,22 @@
 <style>
 	:host {
-		display: block
+		display: block;
+		padding: 5px;
+		border: 1px solid #666;
+	}
+
+	#bottom-row {
+		margin-top: 10px;
+	}
+
+	#price-text, #whisper-button {
+		margin-left: 10px;
 	}
 </style>
 
 <div id="details-list"></div>
-
-<div>
+<div id="bottom-row">
+	Value: <span id="value-text"></span>
 	<span id="price-text"></span>
 	<button id="whisper-button"></button>
 </div>
