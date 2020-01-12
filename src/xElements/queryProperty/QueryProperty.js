@@ -49,7 +49,8 @@ customElements.define(name, class extends XElement {
 	}
 
 	set filter(value) {
-		this.$('#filter').value = value;
+		if (this.$('#filter').value !== value)
+			this.$('#filter').value = value;
 	}
 
 	set locked(value) {

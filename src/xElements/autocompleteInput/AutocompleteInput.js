@@ -11,7 +11,6 @@ customElements.define(name, class AutocompleteInput extends XElement {
 	}
 
 	connectedCallback() {
-		// todo fix: type incomplete text, press enter, text is cleared
 		// todo arrow keys shouldn't scroll page
 		this.$('input').addEventListener('change', () => this.internalSetValue(this.$('input').value));
 		this.$('input').addEventListener('input', () => {
