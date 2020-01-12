@@ -137,7 +137,7 @@
 		queryProperty.addEventListener('change', () => {
 			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
 				addQueryProperty();
-			if (queryProperty.weight !== queryProperty.previousSibling.weight)
+			if (queryProperty.previousSibling && queryProperty.weight !== queryProperty.previousSibling.weight)
 				queryProperty.locked = false;
 			let next = queryProperty.nextSibling;
 			while (next && next.locked) {
@@ -146,6 +146,8 @@
 			}
 		});
 		queryProperty.addEventListener('lock-change', () => {
+			// todo don't allow locking first input
+			// update locking status when dragging
 			if (!queryProperty.locked)
 				return;
 			queryProperty.weight = queryProperty.previousSibling.weight;
