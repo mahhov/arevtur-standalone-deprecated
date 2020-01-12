@@ -83,12 +83,12 @@
 
 		let weightEntries = queryProperties
 			.filter(queryProperty => queryProperty.filter === 'weight' && queryProperty.weight)
-			.map(queryProperty => [queryProperty.property, queryProperty.weight]);
+			.map(queryProperty => [queryProperty.property, queryProperty.weight, queryProperty.locked]);
 		let weights = Object.fromEntries(weightEntries);
 
 		let andEntries = queryProperties
 			.filter(queryProperty => queryProperty.filter === 'and' && queryProperty.weight)
-			.map(queryProperty => [queryProperty.property, queryProperty.weight]);
+			.map(queryProperty => [queryProperty.property, queryProperty.weight, queryProperty.locked]);
 		let ands = Object.fromEntries(andEntries);
 
 		let notEntries = queryProperties
@@ -99,7 +99,8 @@
 		if (!weightEntries.length && !andEntries.length && !notEntries.length)
 			return;
 
-		localStorage.setItem('last-query-inputs', JSON.stringify({type, minValue, maxPrice, weightEntries})); // todo update for ands and nots
+		localStorage.setItem('last-query-inputs', JSON.stringify(
+			{type, minValue, maxPrice, weightEntries, andEntries, notEntries}));
 
 		let query = DataFetcher.formQuery(type, weights, ands, nots, parseInt(minValue), maxPrice);
 		let itemsData = await DataFetcher.getItems(query, progress =>
@@ -136,7 +137,8 @@
 		queryProperty.addEventListener('change', () => {
 			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
 				addQueryProperty(); // todo does not occur when property input and lose focus
-			queryProperty.locked = false;
+			if (queryProperty.weight !== queryProperty.previousSibling.weight)
+				queryProperty.locked = false;
 			let next = queryProperty.nextSibling;
 			while (next && next.locked) {
 				next.weight = queryProperty.weight;
@@ -161,15 +163,32 @@
 
 	$('#query-submit').addEventListener('click', submitQuery);
 
-	let lastQueryInputs = JSON.parse(localStorage.getItem('last-query-inputs')) || {weightEntries: []};
+	let lastQueryInputs = JSON.parse(localStorage.getItem('last-query-inputs')) ||
+		{weightEntries: [], andEntries: [], notEntries: []};
 	$('#query-type').value = lastQueryInputs.type;
 	$('#query-value').value = lastQueryInputs.minValue;
 	$('#query-price').value = lastQueryInputs.maxPrice;
 	lastQueryInputs.weightEntries
-		.forEach(([property, weight]) => {
+		.forEach(([property, weight, locked]) => {
 			let queryProperty = addQueryProperty();
 			queryProperty.property = property;
 			queryProperty.weight = weight;
+			queryProperty.filter = 'weight';
+			queryProperty.locked = locked;
+		});
+	lastQueryInputs.andEntries
+		.forEach(([property, weight, locked]) => {
+			let queryProperty = addQueryProperty();
+			queryProperty.property = property;
+			queryProperty.weight = weight;
+			queryProperty.filter = 'and';
+			queryProperty.locked = locked;
+		});
+	lastQueryInputs.notEntries
+		.forEach(([property]) => {
+			let queryProperty = addQueryProperty();
+			queryProperty.property = property;
+			queryProperty.filter = 'not';
 		});
 	addQueryProperty();
 	// submitQuery(); // todo submit query on load
