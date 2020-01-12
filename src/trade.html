@@ -67,12 +67,10 @@
 		return el;
 	};
 
-	let queryPropertyIds = Object.values(ApiConstants.PROPERTIES)
-		.flat()
-		.map(property => property.id);
+	let queryPropertyIds = ApiConstants.PROPERTIES_FLAT.map(property => property.id);
 
 	let submitQuery = async () => {
-		let type = $('#query-type').value;
+		let type = ApiConstants.TYPES_TEXT_TO_ID[$('#query-type').value];
 		let minValue = $('#query-value').value;
 		let maxPrice = $('#query-price').value;
 		if (!type || !minValue || !maxPrice)
@@ -99,8 +97,14 @@
 		if (!weightEntries.length && !andEntries.length && !notEntries.length)
 			return;
 
-		localStorage.setItem('last-query-inputs', JSON.stringify(
-			{type, minValue, maxPrice, weightEntries, andEntries, notEntries}));
+		localStorage.setItem('last-query-inputs', JSON.stringify({
+			type: $('#query-type').value,
+			minValue,
+			maxPrice,
+			weightEntries,
+			andEntries,
+			notEntries
+		}));
 
 		let query = DataFetcher.formQuery(type, weights, ands, nots, parseInt(minValue), maxPrice);
 		let itemsData = await DataFetcher.getItems(query, progress =>
@@ -127,7 +131,7 @@
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
 	};
 
-	$('#query-type').autocompletes = Object.values(ApiConstants.TYPES);
+	$('#query-type').autocompletes = ApiConstants.TYPES.map(({text}) => text);
 
 	let addQueryProperty = () => {
 		let queryProperty = document.createElement('x-query-property');

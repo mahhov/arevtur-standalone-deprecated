@@ -1,37 +1,131 @@
-const TYPES = {
-	anyWeapon: 'weapon',
-	oneHandedWeapon: 'weapon.one',
-	oneHandedMeleeWeapon: 'weapon.onemelee',
-	twoHandedMeleeWeapon: 'weapon.twomelee',
-	bow: 'weapon.bow',
-	claw: 'weapon.claw',
-	anyDagger: 'weapon.dagger',
-	runeDagger: 'weapon.runedagger',
-	oneHandedAxe: 'weapon.oneaxe',
-	oneHandedMace: 'weapon.onemace',
-	oneHandedSword: 'weapon.onesword',
-	sceptre: 'weapon.sceptre',
-	anyStaff: 'weapon.staff',
-	warstaff: 'weapon.warstaff',
-	twoHandedAxe: 'weapon.twoaxe',
-	twoHandedMace: 'weapon.twomace',
-	twoHandedSword: 'weapon.twosword',
-	wand: 'weapon.wand',
-	fishingRod: 'weapon.rod',
-	anyArmour: 'armour',
-	bodyArmour: 'armour.chest',
-	boots: 'armour.boots',
-	gloves: 'armour.gloves',
-	helmet: 'armour.helmet',
-	shield: 'armour.shield',
-	quiver: 'armour.quiver',
-	anyAccessory: 'accessory',
-	amulet: 'accessory.amulet',
-	belt: 'accessory.belt',
-	ring: 'accessory.ring',
-	anyJewel: 'jewel',
-	abyssJewel: 'jewel.abyss',
-};
+const TYPES = [
+	{
+		id: 'weapon',
+		text: 'any weapon'
+	},
+	{
+		id: 'weapon.one',
+		text: 'one handed weapon'
+	},
+	{
+		id: 'weapon.onemelee',
+		text: 'one handed melee weapon'
+	},
+	{
+		id: 'weapon.twomelee',
+		text: 'two handed melee weapon'
+	},
+	{
+		id: 'weapon.bow',
+		text: 'bow'
+	},
+	{
+		id: 'weapon.claw',
+		text: 'claw'
+	},
+	{
+		id: 'weapon.dagger',
+		text: 'any dagger'
+	},
+	{
+		id: 'weapon.runedagger',
+		text: 'rune dagger'
+	},
+	{
+		id: 'weapon.oneaxe',
+		text: 'one handed axe'
+	},
+	{
+		id: 'weapon.onemace',
+		text: 'one handed mace'
+	},
+	{
+		id: 'weapon.onesword',
+		text: 'one handed sword'
+	},
+	{
+		id: 'weapon.sceptre',
+		text: 'sceptre'
+	},
+	{
+		id: 'weapon.staff',
+		text: 'any staff'
+	},
+	{
+		id: 'weapon.warstaff',
+		text: 'warstaff'
+	},
+	{
+		id: 'weapon.twoaxe',
+		text: 'two handed axe'
+	},
+	{
+		id: 'weapon.twomace',
+		text: 'two handed mace'
+	},
+	{
+		id: 'weapon.twosword',
+		text: 'two handed sword'
+	},
+	{
+		id: 'weapon.wand',
+		text: 'wand'
+	},
+	{
+		id: 'armour',
+		text: 'any armour'
+	},
+	{
+		id: 'armour.chest',
+		text: 'body armour chest'
+	},
+	{
+		id: 'armour.boots',
+		text: 'boots'
+	},
+	{
+		id: 'armour.gloves',
+		text: 'gloves'
+	},
+	{
+		id: 'armour.helmet',
+		text: 'helmet'
+	},
+	{
+		id: 'armour.shield',
+		text: 'shield'
+	},
+	{
+		id: 'armour.quiver',
+		text: 'quiver'
+	},
+	{
+		id: 'accessory',
+		text: 'any accessory'
+	},
+	{
+		id: 'accessory.amulet',
+		text: 'amulet'
+	},
+	{
+		id: 'accessory.belt',
+		text: 'belt'
+	},
+	{
+		id: 'accessory.ring',
+		text: 'ring'
+	},
+	{
+		id: 'jewel',
+		text: 'any jewel'
+	},
+	{
+		id: 'jewel.abyss',
+		text: 'abyss jewel'
+	},
+];
+
+const TYPES_TEXT_TO_ID = Object.fromEntries(TYPES.map(({id, text}) => [text, id]));
 
 const PROPERTIES = {
 	pseudo: [
@@ -29515,6 +29609,10 @@ const PROPERTIES = {
 	],
 };
 
+const PROPERTIES_FLAT = Object.values(PROPERTIES).flat();
+
+const PROPERTIES_TEXT_TO_ID = Object.fromEntries(PROPERTIES_FLAT.map(({id, text}) => [text, id]));
+
 const SHORT_PROPERTIES = {
 	totalEleRes: 'pseudo.pseudo_total_elemental_resistance',
 	flatLife: 'pseudo.pseudo_total_life',
@@ -29547,4 +29645,4 @@ const CURRENCIES = {
 	perandus: {id: 'p', chaos: 1 / 100},
 };
 
-module.exports = {TYPES, PROPERTIES, SHORT_PROPERTIES, SORT, CURRENCIES};
+module.exports = {TYPES, TYPES_TEXT_TO_ID, PROPERTIES, PROPERTIES_FLAT, PROPERTIES_TEXT_TO_ID, SHORT_PROPERTIES, SORT, CURRENCIES};
