@@ -126,6 +126,7 @@ const TYPES = [
 ];
 
 const TYPES_TEXT_TO_ID = Object.fromEntries(TYPES.map(({id, text}) => [text, id]));
+const TYPES_ID_TO_TEXT = Object.fromEntries(TYPES.map(({id, text}) => [id, text]));
 
 const PROPERTIES = {
 	pseudo: [
@@ -29610,8 +29611,8 @@ const PROPERTIES = {
 };
 
 const PROPERTIES_FLAT = Object.values(PROPERTIES).flat();
-
 const PROPERTIES_TEXT_TO_ID = Object.fromEntries(PROPERTIES_FLAT.map(({id, text}) => [text, id]));
+const PROPERTIES_ID_TO_TEXT = Object.fromEntries(PROPERTIES_FLAT.map(({id, text}) => [id, text]));
 
 const SHORT_PROPERTIES = {
 	totalEleRes: 'pseudo.pseudo_total_elemental_resistance',
@@ -29645,4 +29646,8 @@ const CURRENCIES = {
 	perandus: {id: 'p', chaos: 1 / 100},
 };
 
-module.exports = {TYPES, TYPES_TEXT_TO_ID, PROPERTIES, PROPERTIES_FLAT, PROPERTIES_TEXT_TO_ID, SHORT_PROPERTIES, SORT, CURRENCIES};
+module.exports = {
+	TYPES, TYPES_TEXT_TO_ID, TYPES_ID_TO_TEXT,
+	PROPERTIES, PROPERTIES_FLAT, PROPERTIES_TEXT_TO_ID, PROPERTIES_ID_TO_TEXT, SHORT_PROPERTIES,
+	SORT, CURRENCIES,
+};

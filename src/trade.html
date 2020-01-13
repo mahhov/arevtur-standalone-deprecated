@@ -67,7 +67,7 @@
 		return el;
 	};
 
-	let queryPropertyIds = ApiConstants.PROPERTIES_FLAT.map(property => property.id);
+	let queryPropertyTexts = ApiConstants.PROPERTIES_FLAT.map(property => property.text);
 
 	let submitQuery = async () => {
 		let type = ApiConstants.TYPES_TEXT_TO_ID[$('#query-type').value];
@@ -76,29 +76,34 @@
 		if (!type || !minValue || !maxPrice)
 			return;
 
-		let queryProperties = [...$$('#query-properties-list x-query-property')]
-			.filter(queryProperty => queryPropertyIds.includes(queryProperty.property));
+		let propertyEntries = [...$$('#query-properties-list x-query-property')]
+			.map(queryProperty => ({
+				propertyId: ApiConstants.PROPERTIES_TEXT_TO_ID[queryProperty.property],
+				weight: queryProperty.weight,
+				filter: queryProperty.filter,
+				locked: queryProperty.locked,
+			})).filter(({propertyId}) => propertyId);
 
-		let weightEntries = queryProperties
-			.filter(queryProperty => queryProperty.filter === 'weight' && queryProperty.weight)
-			.map(queryProperty => [queryProperty.property, queryProperty.weight, queryProperty.locked]);
+		let weightEntries = propertyEntries
+			.filter(entry => entry.filter === 'weight' && entry.weight)
+			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
 		let weights = Object.fromEntries(weightEntries);
 
-		let andEntries = queryProperties
-			.filter(queryProperty => queryProperty.filter === 'and' && queryProperty.weight)
-			.map(queryProperty => [queryProperty.property, queryProperty.weight, queryProperty.locked]);
+		let andEntries = propertyEntries
+			.filter(entry => entry.filter === 'and' && entry.weight)
+			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
 		let ands = Object.fromEntries(andEntries);
 
-		let notEntries = queryProperties
-			.filter(queryProperty => queryProperty.filter === 'not')
-			.map(queryProperty => [queryProperty.property]);
+		let notEntries = propertyEntries
+			.filter(entry => entry.filter === 'not')
+			.map(entry => [entry.propertyId]);
 		let nots = Object.fromEntries(notEntries);
 
 		if (!weightEntries.length && !andEntries.length && !notEntries.length)
 			return;
 
 		localStorage.setItem('last-query-inputs', JSON.stringify({
-			type: $('#query-type').value,
+			type,
 			minValue,
 			maxPrice,
 			weightEntries,
@@ -135,7 +140,7 @@
 
 	let addQueryProperty = () => {
 		let queryProperty = document.createElement('x-query-property');
-		queryProperty.properties = queryPropertyIds;
+		queryProperty.properties = queryPropertyTexts;
 		queryProperty.slot = 'list';
 		$('#query-properties-list').appendChild(queryProperty);
 		queryProperty.addEventListener('change', () => {
@@ -171,13 +176,13 @@
 
 	let lastQueryInputs = JSON.parse(localStorage.getItem('last-query-inputs')) ||
 		{weightEntries: [], andEntries: [], notEntries: []};
-	$('#query-type').value = lastQueryInputs.type;
+	$('#query-type').value = ApiConstants.TYPES_ID_TO_TEXT[lastQueryInputs.type];
 	$('#query-value').value = lastQueryInputs.minValue;
 	$('#query-price').value = lastQueryInputs.maxPrice;
 	lastQueryInputs.weightEntries
 		.forEach(([property, weight, locked]) => {
 			let queryProperty = addQueryProperty();
-			queryProperty.property = property;
+			queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
 			queryProperty.weight = weight;
 			queryProperty.filter = 'weight';
 			queryProperty.locked = locked;
@@ -185,7 +190,7 @@
 	lastQueryInputs.andEntries
 		.forEach(([property, weight, locked]) => {
 			let queryProperty = addQueryProperty();
-			queryProperty.property = property;
+			queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
 			queryProperty.weight = weight;
 			queryProperty.filter = 'and';
 			queryProperty.locked = locked;
@@ -193,14 +198,13 @@
 	lastQueryInputs.notEntries
 		.forEach(([property]) => {
 			let queryProperty = addQueryProperty();
-			queryProperty.property = property;
+			queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
 			queryProperty.filter = 'not';
 		});
 	addQueryProperty();
 	// submitQuery(); // todo submit query on load
 
 	// todo
-	// display property texts instead of IDs for easier searching
 	// multiple queries and sharing filter groups
 	// query by name
 	// expand price range
