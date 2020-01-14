@@ -11,10 +11,14 @@ customElements.define(name, class extends XElement {
 	}
 
 	connectedCallback() {
-		this.$('slot').addEventListener('slotchange', () =>
-			this.$('slot').assignedElements()
-				.filter(el => !el.draggable)
-				.forEach(el => this.appended(el)));
+		this.$('slot').addEventListener('slotchange', () => this.checkForAppended());
+		this.checkForAppended();
+	}
+
+	checkForAppended() {
+		this.$('slot').assignedElements()
+			.filter(el => !el.draggable)
+			.forEach(el => this.appended(el));
 	}
 
 	appended(element) {
