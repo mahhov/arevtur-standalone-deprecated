@@ -48,9 +48,10 @@ customElements.define(name, class extends XElement {
 	}
 
 	loadQueryParams(queryParams = {weightEntries: [], andEntries: [], notEntries: []}) {
-		this.type = ApiConstants.TYPES_ID_TO_TEXT[queryParams.type];
-		this.minValue = queryParams.minValue;
-		this.price = queryParams.maxPrice;
+		this.type = ApiConstants.TYPES_ID_TO_TEXT[queryParams.type] || '';
+		this.minValue = queryParams.minValue || 0;
+		this.price = queryParams.maxPrice || 0;
+		XElement.clearChildren(this.$('#query-properties-list'));
 		queryParams.weightEntries
 			.forEach(([property, weight, locked], i) => {
 				let queryProperty = this.addQueryProperty();
