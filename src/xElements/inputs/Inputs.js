@@ -79,10 +79,11 @@ customElements.define(name, class extends XElement {
 			}
 		});
 		queryProperty.addEventListener('lock-change', () => {
-			// todo don't allow locking first input
 			// todo update locking status when dragging
 			if (!queryProperty.locked)
 				return;
+			if (!queryProperty.previousSibling)
+				return queryProperty.locked = false;
 			queryProperty.weight = queryProperty.previousSibling.weight;
 			let next = queryProperty.nextSibling;
 			while (next && next.locked) {
