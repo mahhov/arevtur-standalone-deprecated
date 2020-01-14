@@ -37,6 +37,7 @@ customElements.define(name, class extends XElement {
 		element.addEventListener('dragend', () => {
 			this.dragging.classList.remove('dragging');
 			this.dragging = null;
+			this.emit('arrange');
 		});
 	}
 });

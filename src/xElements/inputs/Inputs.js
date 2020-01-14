@@ -15,6 +15,7 @@ customElements.define(name, class extends XElement {
 	connectedCallback() {
 		this.queryPropertyTexts = ApiConstants.PROPERTIES_FLAT.map(property => property.text);
 		this.$('#type-input').autocompletes = ApiConstants.TYPES.map(({text}) => text);
+		this.$('#query-properties-list').addEventListener('arrange', () => this.checkLocksAndEmptyQueryProperty());
 		this.$('#add-property-button').addEventListener('click', () => this.addQueryProperty());
 		this.$('#submit-button').addEventListener('click', () => this.emit('submit'));
 		this.restore();
@@ -62,34 +63,40 @@ customElements.define(name, class extends XElement {
 		}));
 	}
 
+	checkLocksAndEmptyQueryProperty() {
+		let queryProperties = this.$$('#query-properties-list x-query-property');
+		queryProperties.forEach(queryProperty =>
+			queryProperty.locked = queryProperty.locked && queryProperty.previousSibling &&
+				queryProperty.weight === queryProperty.previousSibling.weight);
+		if (!this.$('#query-properties-list').lastChild.empty)
+			this.addQueryProperty();
+	}
+
+	propagateLockedWeights(queryProperty) {
+		let next = queryProperty.nextSibling;
+		while (next && next.locked) {
+			next.weight = queryProperty.weight;
+			next = next.nextSibling;
+		}
+	}
+
 	addQueryProperty() {
 		let queryProperty = document.createElement('x-query-property');
 		queryProperty.properties = this.queryPropertyTexts;
 		queryProperty.slot = 'list';
 		this.$('#query-properties-list').appendChild(queryProperty);
 		queryProperty.addEventListener('change', () => {
-			if (queryProperty === this.$('#query-properties-list').lastChild && !queryProperty.empty)
-				this.addQueryProperty();
-			if (queryProperty.previousSibling && queryProperty.weight !== queryProperty.previousSibling.weight)
-				queryProperty.locked = false;
-			let next = queryProperty.nextSibling;
-			while (next && next.locked) {
-				next.weight = queryProperty.weight;
-				next = next.nextSibling;
-			}
+			this.propagateLockedWeights(queryProperty);
+			this.checkLocksAndEmptyQueryProperty();
 		});
 		queryProperty.addEventListener('lock-change', () => {
-			// todo update locking status when dragging
 			if (!queryProperty.locked)
 				return;
 			if (!queryProperty.previousSibling)
 				return queryProperty.locked = false;
 			queryProperty.weight = queryProperty.previousSibling.weight;
-			let next = queryProperty.nextSibling;
-			while (next && next.locked) {
-				next.weight = queryProperty.weight;
-				next = next.nextSibling;
-			}
+			this.propagateLockedWeights(queryProperty);
+			this.checkLocksAndEmptyQueryProperty();
 		});
 		queryProperty.addEventListener('remove', () => queryProperty.remove());
 		return queryProperty;
@@ -140,5 +147,4 @@ customElements.define(name, class extends XElement {
 
 		return DataFetcher.formQuery(type, weights, ands, nots, parseInt(minValue), maxPrice);
 	}
-
 });
