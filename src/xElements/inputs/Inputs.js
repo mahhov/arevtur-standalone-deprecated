@@ -15,10 +15,17 @@ customElements.define(name, class extends XElement {
 	connectedCallback() {
 		this.queryPropertyTexts = ApiConstants.PROPERTIES_FLAT.map(property => property.text);
 		this.$('#type-input').autocompletes = ApiConstants.TYPES.map(({text}) => text);
-		this.$('#query-properties-list').addEventListener('arrange', () => this.checkLocksAndEmptyQueryProperty());
+		this.$('#type-input').addEventListener('change', () => this.updateQueryParams());
+		this.$('#value-input').addEventListener('change', () => this.updateQueryParams());
+		this.$('#price-input').addEventListener('change', () => this.updateQueryParams());
+		this.$('#query-properties-list').addEventListener('arrange', () => {
+			this.checkLocksAndEmptyQueryProperty();
+			this.updateQueryParams();
+		});
 		this.$('#add-property-button').addEventListener('click', () => this.addQueryProperty());
 		this.$('#submit-button').addEventListener('click', () => this.emit('submit'));
 		this.restore();
+		this.updateQueryParams();
 		this.addQueryProperty();
 	}
 
@@ -52,15 +59,8 @@ customElements.define(name, class extends XElement {
 			});
 	}
 
-	store() {
-		localStorage.setItem('last-query-inputs', JSON.stringify({
-			type,
-			minValue,
-			maxPrice,
-			weightEntries,
-			andEntries,
-			notEntries
-		}));
+	store(queryParams) {
+		localStorage.setItem('last-query-inputs', JSON.stringify(this.queryParams));
 	}
 
 	checkLocksAndEmptyQueryProperty() {
@@ -90,6 +90,7 @@ customElements.define(name, class extends XElement {
 		queryProperty.addEventListener('change', () => {
 			this.propagateLockedWeights(queryProperty);
 			this.checkLocksAndEmptyQueryProperty();
+			this.updateQueryParams();
 		});
 		queryProperty.addEventListener('lock-change', () => {
 			if (!queryProperty.locked)
@@ -99,17 +100,19 @@ customElements.define(name, class extends XElement {
 			queryProperty.weight = queryProperty.previousSibling.weight;
 			this.propagateLockedWeights(queryProperty);
 			this.checkLocksAndEmptyQueryProperty();
+			this.updateQueryParams();
 		});
-		queryProperty.addEventListener('remove', () => queryProperty.remove());
+		queryProperty.addEventListener('remove', () => {
+			queryProperty.remove();
+			this.updateQueryParams();
+		});
 		return queryProperty;
 	};
 
-	get query() {
+	updateQueryParams() {
 		let type = ApiConstants.TYPES_TEXT_TO_ID[this.$('#type-input').value];
 		let minValue = this.$('#value-input').value;
 		let maxPrice = this.$('#price-input').value;
-		if (!type || !minValue || !maxPrice)
-			return;
 
 		let propertyEntries = [...this.$$('#query-properties-list x-query-property')]
 			.map(queryProperty => ({
@@ -122,31 +125,29 @@ customElements.define(name, class extends XElement {
 		let weightEntries = propertyEntries
 			.filter(entry => entry.filter === 'weight' && entry.weight)
 			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
-		let weights = Object.fromEntries(weightEntries);
-
 		let andEntries = propertyEntries
 			.filter(entry => entry.filter === 'and' && entry.weight)
 			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
-		let ands = Object.fromEntries(andEntries);
-
 		let notEntries = propertyEntries
 			.filter(entry => entry.filter === 'not')
 			.map(entry => [entry.propertyId]);
-		let nots = Object.fromEntries(notEntries);
 
-		if (!weightEntries.length && !andEntries.length && !notEntries.length)
-			return;
-
-		// this.store(); // todo save on input change rather than wait on submit. reuse saved summary for get query
-		localStorage.setItem('last-query-inputs', JSON.stringify({
+		this.queryParams = {
 			type,
 			minValue,
 			maxPrice,
 			weightEntries,
 			andEntries,
 			notEntries
-		}));
+		};
+		this.store(this.queryParams);
+	}
 
+	get query() {
+		let {type, minValue, maxPrice, weightEntries, andEntries, notEntries} = this.queryParams;
+		let weights = Object.fromEntries(weightEntries);
+		let ands = Object.fromEntries(andEntries);
+		let nots = Object.fromEntries(notEntries);
 		return DataFetcher.formQuery(type, weights, ands, nots, parseInt(minValue), maxPrice);
 	}
 });
