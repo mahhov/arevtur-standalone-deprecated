@@ -18,14 +18,15 @@
 	}
 
 	#container:focus-within #select-container {
-		display: unset;
+		display: block;
 	}
 
 	select {
-		position: absolute;
-		border-top: 0;
-		overflow: hidden;
 		display: block;
+		position: absolute;
+		width: 100%;
+		border-top: 0;
+		overflow: hidden; /* todo some way to view; e.g. scrolling */
 	}
 
 	option:hover {
@@ -35,6 +36,5 @@
 
 <span id="container">
 	<span><input></span>
-	<span id="select-container"><select></select></span>
-	<!--todo fixed width for select-->
+	<div id="select-container"><select></select></div>
 </span>
