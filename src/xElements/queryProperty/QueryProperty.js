@@ -29,6 +29,7 @@ customElements.define(name, class extends XElement {
 			this.emit('lock-change');
 		});
 		this.$('#remove').addEventListener('click', () => this.emit('remove'));
+		this.filter = this.filter || 'weight';
 	}
 
 	get empty() {
