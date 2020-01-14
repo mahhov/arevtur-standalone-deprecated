@@ -6,8 +6,7 @@ const QUERY_PROPERTY_TEXTS = ApiConstants.PROPERTIES_FLAT.map(property => proper
 
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
-		return {type: {}, value: {}, price: {}};
-		// todo these attributes have no setters and setting them externally won't update this element
+		return {type: {}, minValue: {}, price: {}};
 	}
 
 	static get htmlTemplate() {
@@ -16,9 +15,18 @@ customElements.define(name, class extends XElement {
 
 	connectedCallback() {
 		this.$('#type-input').autocompletes = ApiConstants.TYPES.map(({text}) => text);
-		this.$('#type-input').addEventListener('change', () => this.updateQueryParams());
-		this.$('#value-input').addEventListener('change', () => this.updateQueryParams());
-		this.$('#price-input').addEventListener('change', () => this.updateQueryParams());
+		this.$('#type-input').addEventListener('change', () => {
+			this.type = this.$('#type-input').value;
+			this.updateQueryParams();
+		});
+		this.$('#min-value-input').addEventListener('change', () => {
+			this.minValue = this.$('#min-value-input').value;
+			this.updateQueryParams();
+		});
+		this.$('#price-input').addEventListener('change', () => {
+			this.price = this.$('#price-input').value;
+			this.updateQueryParams();
+		});
 		this.$('#query-properties-list').addEventListener('arrange', () => {
 			this.checkLocksAndEmptyQueryProperty();
 			this.updateQueryParams();
@@ -27,10 +35,22 @@ customElements.define(name, class extends XElement {
 		this.queryParams = {};
 	}
 
+	set type(value) {
+		this.$('#type-input').value = value;
+	}
+
+	set minValue(value) {
+		this.$('#min-value-input').value = value;
+	}
+
+	set price(value) {
+		this.$('#price-input').value = value;
+	}
+
 	loadQueryParams(queryParams = {weightEntries: [], andEntries: [], notEntries: []}) {
-		this.$('#type-input').value = ApiConstants.TYPES_ID_TO_TEXT[queryParams.type];
-		this.$('#value-input').value = queryParams.minValue;
-		this.$('#price-input').value = queryParams.maxPrice;
+		this.type = ApiConstants.TYPES_ID_TO_TEXT[queryParams.type];
+		this.minValue = queryParams.minValue;
+		this.price = queryParams.maxPrice;
 		queryParams.weightEntries
 			.forEach(([property, weight, locked], i) => {
 				let queryProperty = this.addQueryProperty();
@@ -104,9 +124,7 @@ customElements.define(name, class extends XElement {
 	};
 
 	updateQueryParams() {
-		let type = ApiConstants.TYPES_TEXT_TO_ID[this.$('#type-input').value];
-		let minValue = this.$('#value-input').value;
-		let maxPrice = this.$('#price-input').value;
+		let type = ApiConstants.TYPES_TEXT_TO_ID[this.type];
 
 		let propertyEntries = [...this.$$('#query-properties-list x-query-property')]
 			.map(queryProperty => ({
@@ -128,8 +146,8 @@ customElements.define(name, class extends XElement {
 
 		this.queryParams = {
 			type,
-			minValue,
-			maxPrice,
+			minValue: this.minValue,
+			maxPrice: this.price,
 			weightEntries,
 			andEntries,
 			notEntries
