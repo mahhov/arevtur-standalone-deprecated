@@ -11,7 +11,6 @@ customElements.define(name, class AutocompleteInput extends XElement {
 	}
 
 	connectedCallback() {
-		// todo arrow keys shouldn't scroll page
 		this.$('input').addEventListener('change', () => this.internalSetValue(this.$('input').value));
 		this.$('input').addEventListener('input', () => {
 			this.updateAutocompletes();
@@ -24,7 +23,9 @@ customElements.define(name, class AutocompleteInput extends XElement {
 			} else if (e.key === 'ArrowUp') {
 				this.$('select').selectedIndex = this.$('select').length - 1;
 				this.$('select').focus();
-			}
+			} else
+				return;
+			e.preventDefault();
 		});
 		this.$('select').addEventListener('keydown', e => {
 			if (e.key === 'Enter')
