@@ -67,7 +67,9 @@ customElements.define(name, class extends XElement {
 		let queryProperties = this.$$('#query-properties-list x-query-property');
 		queryProperties.forEach(queryProperty =>
 			queryProperty.locked = queryProperty.locked && queryProperty.previousSibling &&
-				queryProperty.weight === queryProperty.previousSibling.weight);
+				queryProperty.weight === queryProperty.previousSibling.weight &&
+				queryProperty.filter === queryProperty.previousSibling.filter &&
+				queryProperty.filter !== 'not');
 		if (!this.$('#query-properties-list').lastChild.empty)
 			this.addQueryProperty();
 	}
