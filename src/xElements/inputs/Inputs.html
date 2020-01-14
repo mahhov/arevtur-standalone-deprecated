@@ -1,31 +1,23 @@
 <style>
-	#input-container {
+	#container {
 		background: #f8f8f8;
 		padding: 10px;
 	}
 
-	#type-input {
-		width: 300px;
-	}
-
-	#value-input, #price-input {
-		width: 60px;
-	}
-
-	#query-properties-list x-query-property.dragging {
+	#input-set-list x-query-property.dragging {
 		outline: 1px solid black;
 	}
 </style>
 
-<div id="input-container">
-	<div>
-		<x-autocomplete-input id="type-input" placeholder="type"></x-autocomplete-input>
-		<input id="value-input" type="number" placeholder="value">
-		<input id="price-input" type="number" placeholder="price">
+<div id="container">
+	<div id="input-set-container">
+		<x-arrangable-list id="input-set-list"></x-arrangable-list>
+		<button id="add-input-set-button">add</button>
 	</div>
-	<x-arrangable-list id="query-properties-list"></x-arrangable-list>
+
+	<x-input-params id="input-params"></x-input-params>
+
 	<div>
-		<button id="add-property-button">add</button>
 		<button id="submit-button">submit</button>
 	</div>
 </div>
