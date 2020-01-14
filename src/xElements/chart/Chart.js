@@ -65,3 +65,4 @@ customElements.define(name, class extends XElement {
 });
 
 // todo clicking on chart point will scroll to item in list
+// todo zoom and pan

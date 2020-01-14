@@ -1,21 +1,4 @@
 <style>
-	#query-container {
-		background: #f8f8f8;
-		padding: 10px;
-	}
-
-	#query-type {
-		width: 300px;
-	}
-
-	#query-value, #query-price {
-		width: 60px;
-	}
-
-	#query-properties-list x-query-property.dragging {
-		outline: 1px solid black;
-	}
-
 	#results-container {
 		display: flex;
 		align-items: flex-start;
@@ -31,19 +14,11 @@
 	}
 </style>
 
-<div id="query-container">
-	<div>
-		<x-autocomplete-input id="query-type" placeholder="type"></x-autocomplete-input>
-		<input id="query-value" type="number" placeholder="value">
-		<input id="query-price" type="number" placeholder="price">
-	</div>
-	<x-arrangable-list id="query-properties-list"></x-arrangable-list>
-	<div>
-		<button id="query-add-property">add</button>
-		<button id="query-submit">submit</button>
-	</div>
-</div>
+<script>
+	require('./xElements/import');
+</script>
 
+<x-inputs></x-inputs>
 <div id="results-container">
 	<div id="results-progress"></div>
 	<div id="results-list"></div>
@@ -51,9 +26,7 @@
 </div>
 
 <script>
-	require('./xElements/import');
 	const {XElement} = require('xx-element');
-	const ApiConstants = require('./ApiConstants');
 	const DataFetcher = require('./DataFetcher');
 
 	const $ = document.querySelector.bind(document);
@@ -67,51 +40,8 @@
 		return el;
 	};
 
-	let queryPropertyTexts = ApiConstants.PROPERTIES_FLAT.map(property => property.text);
-
 	let submitQuery = async () => {
-		let type = ApiConstants.TYPES_TEXT_TO_ID[$('#query-type').value];
-		let minValue = $('#query-value').value;
-		let maxPrice = $('#query-price').value;
-		if (!type || !minValue || !maxPrice)
-			return;
-
-		let propertyEntries = [...$$('#query-properties-list x-query-property')]
-			.map(queryProperty => ({
-				propertyId: ApiConstants.PROPERTIES_TEXT_TO_ID[queryProperty.property],
-				weight: queryProperty.weight,
-				filter: queryProperty.filter,
-				locked: queryProperty.locked,
-			})).filter(({propertyId}) => propertyId);
-
-		let weightEntries = propertyEntries
-			.filter(entry => entry.filter === 'weight' && entry.weight)
-			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
-		let weights = Object.fromEntries(weightEntries);
-
-		let andEntries = propertyEntries
-			.filter(entry => entry.filter === 'and' && entry.weight)
-			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
-		let ands = Object.fromEntries(andEntries);
-
-		let notEntries = propertyEntries
-			.filter(entry => entry.filter === 'not')
-			.map(entry => [entry.propertyId]);
-		let nots = Object.fromEntries(notEntries);
-
-		if (!weightEntries.length && !andEntries.length && !notEntries.length)
-			return;
-
-		localStorage.setItem('last-query-inputs', JSON.stringify({
-			type,
-			minValue,
-			maxPrice,
-			weightEntries,
-			andEntries,
-			notEntries
-		}));
-
-		let query = DataFetcher.formQuery(type, weights, ands, nots, parseInt(minValue), maxPrice);
+		let query = $('x-inputs').query;
 		let itemsData = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
 		XElement.clearChildren($('#results-progress'));
@@ -136,76 +66,11 @@
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
 	};
 
-	$('#query-type').autocompletes = ApiConstants.TYPES.map(({text}) => text);
-
-	let addQueryProperty = () => {
-		let queryProperty = document.createElement('x-query-property');
-		queryProperty.properties = queryPropertyTexts;
-		queryProperty.slot = 'list';
-		$('#query-properties-list').appendChild(queryProperty);
-		queryProperty.addEventListener('change', () => {
-			if (queryProperty === $('#query-properties-list').lastChild && !queryProperty.empty)
-				addQueryProperty();
-			if (queryProperty.previousSibling && queryProperty.weight !== queryProperty.previousSibling.weight)
-				queryProperty.locked = false;
-			let next = queryProperty.nextSibling;
-			while (next && next.locked) {
-				next.weight = queryProperty.weight;
-				next = next.nextSibling;
-			}
-		});
-		queryProperty.addEventListener('lock-change', () => {
-			// todo don't allow locking first input
-			// update locking status when dragging
-			if (!queryProperty.locked)
-				return;
-			queryProperty.weight = queryProperty.previousSibling.weight;
-			let next = queryProperty.nextSibling;
-			while (next && next.locked) {
-				next.weight = queryProperty.weight;
-				next = next.nextSibling;
-			}
-		});
-		queryProperty.addEventListener('remove', () => queryProperty.remove());
-		return queryProperty;
-	};
-
-	$('#query-add-property').addEventListener('click', () => addQueryProperty());
-
-	$('#query-submit').addEventListener('click', submitQuery);
-
-	let lastQueryInputs = JSON.parse(localStorage.getItem('last-query-inputs')) ||
-		{weightEntries: [], andEntries: [], notEntries: []};
-	$('#query-type').value = ApiConstants.TYPES_ID_TO_TEXT[lastQueryInputs.type];
-	$('#query-value').value = lastQueryInputs.minValue;
-	$('#query-price').value = lastQueryInputs.maxPrice;
-	lastQueryInputs.weightEntries
-		.forEach(([property, weight, locked]) => {
-			let queryProperty = addQueryProperty();
-			queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
-			queryProperty.weight = weight;
-			queryProperty.filter = 'weight';
-			queryProperty.locked = locked;
-		});
-	lastQueryInputs.andEntries
-		.forEach(([property, weight, locked]) => {
-			let queryProperty = addQueryProperty();
-			queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
-			queryProperty.weight = weight;
-			queryProperty.filter = 'and';
-			queryProperty.locked = locked;
-		});
-	lastQueryInputs.notEntries
-		.forEach(([property]) => {
-			let queryProperty = addQueryProperty();
-			queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
-			queryProperty.filter = 'not';
-		});
-	addQueryProperty();
-	// submitQuery(); // todo submit query on load
+	$('x-inputs').addEventListener('submit', submitQuery);
 
 	// todo
 	// multiple queries and sharing filter groups
+	// submit query on load
 	// query by name
 	// expand price range
 	// convert armor and socket requirements to fuzzy query

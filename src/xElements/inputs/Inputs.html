@@ -1,0 +1,31 @@
+<style>
+	#query-container {
+		background: #f8f8f8;
+		padding: 10px;
+	}
+
+	#query-type {
+		width: 300px;
+	}
+
+	#query-value, #query-price {
+		width: 60px;
+	}
+
+	#query-properties-list x-query-property.dragging {
+		outline: 1px solid black;
+	}
+</style>
+
+<div id="query-container">
+	<div>
+		<x-autocomplete-input id="type-input" placeholder="type"></x-autocomplete-input>
+		<input id="value-input" type="number" placeholder="value">
+		<input id="price-input" type="number" placeholder="price">
+	</div>
+	<x-arrangable-list id="query-properties-list"></x-arrangable-list>
+	<div>
+		<button id="add-property-button">add</button>
+		<button id="submit-button">submit</button>
+	</div>
+</div>
