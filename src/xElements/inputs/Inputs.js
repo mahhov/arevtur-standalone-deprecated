@@ -44,7 +44,9 @@ customElements.define(name, class Inputs extends XElement {
 		this.inputSetIndex = fromEl ? indexSetEls.indexOf(fromEl) : index;
 		if (exclusive)
 			indexSetEls.forEach(indexSetEl => indexSetEl.active = false);
+		indexSetEls.forEach(indexSetEl => indexSetEl.selected = false);
 		indexSetEls[this.inputSetIndex].active = true;
+		indexSetEls[this.inputSetIndex].selected = true;
 		this.$('#input-params').loadQueryParams(this.inputSets[this.inputSetIndex].queryParams);
 	}
 

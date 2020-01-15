@@ -3,7 +3,7 @@ const {template, name} = importUtil(__filename);
 
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
-		return {name: {}, active: {boolean: true}}
+		return {name: {}, active: {boolean: true}, selected: {boolean: true}}
 	}
 
 	static get htmlTemplate() {
@@ -14,10 +14,6 @@ customElements.define(name, class extends XElement {
 		this.$('#name').addEventListener('change', () => {
 			this.name = this.$('#name').value;
 			this.emit('name-change')
-		});
-		this.$('#active').addEventListener('input', () => {
-			this.active = this.$('#active').checked;
-			this.emit('active-change');
 		});
 		this.$('#remove').addEventListener('click', e => {
 			this.emit('remove');
@@ -31,6 +27,10 @@ customElements.define(name, class extends XElement {
 	}
 
 	set active(value) {
-		this.$('#active').checked = value;
+		this.$('#container').classList.toggle('active', value);
+	}
+
+	set selected(value){
+		this.$('#container').classList.toggle('selected', value);
 	}
 });
