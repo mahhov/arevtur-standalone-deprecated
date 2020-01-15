@@ -95,7 +95,7 @@ customElements.define(name, class Inputs extends XElement {
 	}
 
 	get query() {
-		let {type, minValue, maxPrice, weightEntries, andEntries, notEntries} = this.inputSets[this.inputSetIndex];
+		let {type, minValue, maxPrice, weightEntries, andEntries, notEntries} = this.inputSets[this.inputSetIndex].queryParams;
 		let weights = Object.fromEntries(weightEntries);
 		let ands = Object.fromEntries(andEntries);
 		let nots = Object.fromEntries(notEntries);
