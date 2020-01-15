@@ -11,7 +11,10 @@ customElements.define(name, class extends XElement {
 	}
 
 	connectedCallback() {
-		this.$('#name').addEventListener('change', () => this.emit('name-change'));
+		this.$('#name').addEventListener('change', () => {
+			this.name = this.$('#name').value;
+			this.emit('name-change')
+		});
 		this.$('#active').addEventListener('input', () => {
 			this.active = this.$('#active').checked;
 			this.emit('active-change');
@@ -20,6 +23,7 @@ customElements.define(name, class extends XElement {
 			this.emit('remove');
 			e.stopPropagation();
 		});
+		this.name = this.name || '';
 	}
 
 	set name(value) {
