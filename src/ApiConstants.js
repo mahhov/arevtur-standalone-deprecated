@@ -29610,7 +29610,7 @@ const PROPERTIES = {
 	],
 };
 
-const PROPERTIES_FLAT = Object.values(PROPERTIES).flat();
+const PROPERTIES_FLAT = Object.values(PROPERTIES).flat().map((({id, text, type}) => ({id, text: `${text} (${type})`}))); // todo sort
 const PROPERTIES_TEXT_TO_ID = Object.fromEntries(PROPERTIES_FLAT.map(({id, text}) => [text, id]));
 const PROPERTIES_ID_TO_TEXT = Object.fromEntries(PROPERTIES_FLAT.map(({id, text}) => [id, text]));
 
