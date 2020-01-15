@@ -121,11 +121,7 @@ let getItems = async (query, progressCallback) => {
 		});
 		let items = (await Promise.all(promises)).flat();
 		progressCallback('All grouped item queries completed.');
-
-		return {
-			total: data.total,
-			items,
-		}
+		return items;
 	} catch (e) {
 		console.log('ERROR', e);
 	}
