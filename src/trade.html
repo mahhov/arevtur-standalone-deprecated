@@ -20,6 +20,7 @@
 
 <x-inputs></x-inputs>
 <div id="results-container">
+	<div>Count: <span id="results-count"></span></div>
 	<div id="results-progress"></div>
 	<div id="results-list"></div>
 	<x-chart id="results-chart" width="400" height="400"></x-chart>
@@ -40,11 +41,21 @@
 		return el;
 	};
 
-	let submitQuery = async () => {
+	let submitQuery = async add => {
 		let query = $('x-inputs').query;
-		let itemsData = await DataFetcher.getItems(query, progress =>
+		let itemsDataNew = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
 		XElement.clearChildren($('#results-progress'));
+		if (add) {
+			// todo make ItemsData class
+			itemsData.items = itemsData.items.concat(itemsDataNew.items)
+				.filter((v, i, a) => a.findIndex(vv => vv.id === v.id) === i);
+			itemsData.total += itemsDataNew.items.total;
+		} else
+			itemsData = itemsDataNew;
+		// high to low values, low to high prices
+		itemsData.items = itemsData.items.sort((a, b) =>
+			b.evalValue - a.evalValue || a.evalPrice - b.evalPrice);
 
 		let itemsToPoints = items =>
 			items.map(item => ({x: item.evalPrice, y: item.evalValue}));
@@ -57,18 +68,32 @@
 			}, {
 				color: 'rgb(0,0,255)',
 				size: 6,
-				points: itemsToPoints(itemsData.borderlineItems),
+				points: itemsToPoints(getBorderlineItems(itemsData.items)),
 			},
 		];
 
 		XElement.clearChildren($('#results-list'));
 		itemsData.items.forEach(itemData =>
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
+
+		$('#results-count').textContent = itemsData.items.length
 	};
 
-	$('x-inputs').addEventListener('submit', submitQuery);
+	let getBorderlineItems = itemsSorted => {
+		let minPrice = Infinity;
+		return itemsSorted.filter(item => {
+			if (item.evalPrice >= minPrice)
+				return false;
+			minPrice = item.evalPrice;
+			return true;
+		});
+	};
+
+	let itemsData = [];
+	$('x-inputs').addEventListener('submit', e => submitQuery(e.detail.add));
 
 	// todo
+	// query all active item sets
 	// draw chart exhausted rects
 	// click chart to requery
 	// ctrl click submit to add query

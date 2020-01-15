@@ -121,16 +121,10 @@ let getItems = async (query, progressCallback) => {
 		});
 		let items = (await Promise.all(promises)).flat();
 		progressCallback('All grouped item queries completed.');
-		// high to low values, low to high prices
-		items.sort((a, b) => b.evalValue - a.evalValue || a.evalPrice - b.evalPrice);
-		let borderlineItems = getBorderlineItems(items);
-		progressCallback('Items sorted.');
 
 		return {
 			total: data.total,
-			retrieved: items.length,
 			items,
-			borderlineItems,
 		}
 	} catch (e) {
 		console.log('ERROR', e);
@@ -145,6 +139,7 @@ let parseItem = itemData => {
 	}, []);
 	let pseudoMods = itemData.item.pseudoMods || [];
 	return {
+		id: itemData.id,
 		name: itemData.item.name,
 		sockets,
 		itemLevel: itemData.item.ilvl,
@@ -171,16 +166,6 @@ let evalPrice = ({currency: currencyId, amount}) => {
 		return currency.chaos * amount;
 	console.log('Missing currency', currencyId);
 	return -1;
-};
-
-let getBorderlineItems = itemsSorted => {
-	let minPrice = Infinity;
-	return itemsSorted.filter(item => {
-		if (item.evalPrice >= minPrice)
-			return false;
-		minPrice = item.evalPrice;
-		return true;
-	});
 };
 
 module.exports = {formQuery, getItems};

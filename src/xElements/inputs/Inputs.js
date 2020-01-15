@@ -30,7 +30,7 @@ customElements.define(name, class Inputs extends XElement {
 			this.inputSets[this.inputSetIndex].queryParams = this.$('#input-params').queryParams;
 			this.store();
 		});
-		this.$('#submit-button').addEventListener('click', () => this.emit('submit'));
+		this.$('#submit-button').addEventListener('click', e => this.emit('submit', {add: e.ctrlKey}));
 
 		this.inputSets.forEach(inputSet => {
 			let inputSetEl = this.addInputSetEl();
