@@ -56,12 +56,10 @@ let formQuery = (type, weights, ands = {}, nots = {},
 	let weightFilters = Object.entries(weights).map(([property, weight]) => ({
 		id: property,
 		value: {weight},
-		disabled: false
 	}));
 	let andFilters = Object.entries(ands).map(([property, min]) => ({
 		id: property,
 		value: {min},
-		disabled: false
 	}));
 	let notFilters = Object.entries(nots).map(([property]) => ({
 		id: property,
@@ -73,7 +71,7 @@ let formQuery = (type, weights, ands = {}, nots = {},
 				{
 					type: 'weight',
 					filters: weightFilters,
-					value: {min: minValue}
+					value: {min: minValue},
 				}, {
 					type: 'and',
 					filters: andFilters,
@@ -84,13 +82,11 @@ let formQuery = (type, weights, ands = {}, nots = {},
 			],
 			filters: {
 				type_filters: {
-					disabled: false,
 					filters: {
 						category: {option: type}
 					}
 				},
 				trade_filters: {
-					disabled: false,
 					filters: {
 						price: {max: maxPrice}
 					}
@@ -125,15 +121,16 @@ let getItems = async (query, progressCallback) => {
 		});
 		let items = (await Promise.all(promises)).flat();
 		progressCallback('All grouped item queries completed.');
-		// low to high prices, high to low values
-		items.sort((a, b) => a.evalPrice - b.evalPrice || b.evalValue - a.evalValue);
+		// high to low values, low to high prices
+		items.sort((a, b) => b.evalValue - a.evalValue || a.evalPrice - b.evalPrice);
+		let borderlineItems = getBorderlineItems(items);
 		progressCallback('Items sorted.');
 
 		return {
 			total: data.total,
 			retrieved: items.length,
 			items,
-			borderlineItems: getBorderlineItems(items),
+			borderlineItems,
 		}
 	} catch (e) {
 		console.log('ERROR', e);
@@ -176,12 +173,12 @@ let evalPrice = ({currency: currencyId, amount}) => {
 	return -1;
 };
 
-let getBorderlineItems = items => {
-	let maxValue = 0;
-	return items.filter((item, i, items) => {
-		if (item.evalValue <= maxValue)
+let getBorderlineItems = itemsSorted => {
+	let minPrice = Infinity;
+	return itemsSorted.filter(item => {
+		if (item.evalPrice >= minPrice)
 			return false;
-		maxValue = item.evalValue;
+		minPrice = item.evalPrice;
 		return true;
 	});
 };
