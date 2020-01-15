@@ -23,7 +23,9 @@ customElements.define(name, class AutocompleteInput extends XElement {
 			} else if (e.key === 'ArrowUp') {
 				this.$('select').selectedIndex = this.$('select').length - 1;
 				this.$('select').focus();
-			} else
+			} else if (e.key === 'Enter')
+				this.internalSetValue(this.$('select').options[0].value);
+			else
 				return;
 			e.preventDefault();
 		});
