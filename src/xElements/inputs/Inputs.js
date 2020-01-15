@@ -15,8 +15,10 @@ customElements.define(name, class Inputs extends XElement {
 		this.inputSetIndex = parseInt(localStorage.getItem('input-set-index')) || 0;
 		this.inputSets = JSON.parse(localStorage.getItem('input-sets')) || [{}];
 
-		this.$('#input-set-list').addEventListener('arrange', () => {
-			// todo
+		this.$('#input-set-list').addEventListener('arrange', e => {
+			let [removed] = this.inputSets.splice(e.detail.from, 1);
+			this.inputSets.splice(e.detail.to, 0, removed);
+			this.store();
 		});
 		this.$('#add-input-set-button').addEventListener('click', e => {
 			this.inputSets.push({});

@@ -24,12 +24,12 @@ customElements.define(name, class extends XElement {
 	appended(element) {
 		element.draggable = true;
 		element.addEventListener('dragstart', e => {
+			this.draggingFrom = this.indexOf(element);
 			this.dragging = e.target;
 			this.dragging.classList.add('dragging');
 		});
 		element.addEventListener('dragenter', e => {
-			let children = this.$('slot').assignedElements();
-			if (children.indexOf(this.dragging) < children.indexOf(e.target))
+			if (this.indexOf(this.dragging) < this.indexOf(e.target))
 				e.target.after(this.dragging);
 			else
 				e.target.before(this.dragging);
@@ -37,7 +37,12 @@ customElements.define(name, class extends XElement {
 		element.addEventListener('dragend', () => {
 			this.dragging.classList.remove('dragging');
 			this.dragging = null;
-			this.emit('arrange');
+			this.emit('arrange', {from: this.draggingFrom, to: this.indexOf(element)});
 		});
+	}
+
+	indexOf(child) {
+		let children = this.$('slot').assignedElements();
+		return children.indexOf(child);
 	}
 });
