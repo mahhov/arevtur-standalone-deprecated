@@ -16,20 +16,13 @@ customElements.define(name, class Inputs extends XElement {
 		this.inputSets = JSON.parse(localStorage.getItem('input-sets')) || [{}];
 
 		this.$('#input-set-list').addEventListener('arrange', () => {
-			this.checkLocksAndEmptyQueryProperty();
-			this.updateQueryParams();
 			// todo
 		});
 		this.$('#add-input-set-button').addEventListener('click', e => {
-			this.inputSetIndex = this.inputSets.push({});
-			let inputSetEl = this.addQuerySetEl();
-			// todo extract below 6 duplicate lines
-			let indexSetEls = [...this.$('#input-set-list').children];
-			if (!e.ctrlKey)
-				indexSetEls.forEach(indexSetEl => indexSetEl.active = false);
-			inputSetEl.active = true;
-			this.inputSetIndex = indexSetEls.indexOf(inputSetEl);
-			this.loadSelectedInputSet();
+			this.inputSets.push({});
+			let inputSetEl = this.addInputSetEl();
+			this.setInputSetIndex(this.inputSets.length - 1, null, !e.ctrlKey);
+			this.store();
 		});
 		this.$('#input-params').addEventListener('change', () => {
 			this.inputSets[this.inputSetIndex].queryParams = this.$('#input-params').queryParams;
@@ -38,58 +31,62 @@ customElements.define(name, class Inputs extends XElement {
 		this.$('#submit-button').addEventListener('click', () => this.emit('submit'));
 
 		this.inputSets.forEach(inputSet => {
-			let inputSetEl = this.addQuerySetEl();
+			let inputSetEl = this.addInputSetEl();
 			inputSetEl.name = inputSet.name;
 			inputSetEl.active = inputSet.active;
 		});
-		this.loadSelectedInputSet();
+		this.setInputSetIndex(this.inputSetIndex);
 	}
 
-	addQuerySetEl() {
+	setInputSetIndex(index, fromEl = null, exclusive = true) {
+		// if fromEl is specified, index is ignored
+		let indexSetEls = [...this.$('#input-set-list').children];
+		this.inputSetIndex = fromEl ? indexSetEls.indexOf(fromEl) : index;
+		if (exclusive)
+			indexSetEls.forEach(indexSetEl => indexSetEl.active = false);
+		indexSetEls[this.inputSetIndex].active = true;
+		this.$('#input-params').loadQueryParams(this.inputSets[this.inputSetIndex].queryParams);
+	}
+
+	inputSetIndexFromEl(inputSetEl) {
+		let indexSetEls = [...this.$('#input-set-list').children];
+		return indexSetEls.indexOf(inputSetEl);
+	}
+
+	inputSetFromEl(inputSetEl) {
+		let index = this.inputSetIndexFromEl(inputSetEl);
+		return this.inputSets[index];
+	}
+
+	addInputSetEl() {
 		let inputSetEl = document.createElement('x-input-set');
 		inputSetEl.slot = 'list';
-		inputSetEl.name = '';
 		this.$('#input-set-list').appendChild(inputSetEl);
-		inputSetEl.addEventListener('click', e => {
-			let indexSetEls = [...this.$('#input-set-list').children];
-			if (!e.ctrlKey)
-				indexSetEls.forEach(indexSetEl => indexSetEl.active = false);
-			inputSetEl.active = true;
-			this.inputSetIndex = indexSetEls.indexOf(inputSetEl);
-			this.loadSelectedInputSet();
-			this.store();
-		});
+		inputSetEl.addEventListener('click', e =>
+			this.setInputSetIndex(0, inputSetEl, !e.ctrlKey));
 		inputSetEl.addEventListener('name-change', () => {
-			let index = [...this.$('#input-set-list').children].indexOf(inputSetEl);
-			this.inputSets[this.inputSetIndex].name = inputSetEl.name;
+			this.inputSetFromEl(inputSetEl).name = inputSetEl.name;
 			this.store();
 		});
 		inputSetEl.addEventListener('active-change', () => {
-			let index = [...this.$('#input-set-list').children].indexOf(inputSetEl);
-			this.inputSets[this.inputSetIndex].active = inputSetEl.active;
+			this.inputSetFromEl(inputSetEl).active = inputSetEl.active;
 			this.store();
 		});
 		inputSetEl.addEventListener('remove', () => {
-			let inputSetEls = [...this.$('#input-set-list').children];
-			let index = inputSetEls.indexOf(inputSetEl);
-			if (this.inputSetIndex >= index)
+			let index = this.inputSetIndexFromEl(inputSetEl);
+			if (this.inputSetIndex >= index && this.inputSetIndex)
 				this.inputSetIndex--;
 			this.inputSets.splice(index, 1);
+			inputSetEl.remove();
 			if (!this.inputSets.length) {
 				this.inputSets.push({});
-				this.inputSetIndex = 0;
-				let inputSetEl = this.addQuerySetEl();
-				inputSetEl.active = true;
-			}
-			inputSetEl.remove();
-			inputSetEls[this.inputSetIndex].active = true;
+				this.addInputSetEl();
+				this.setInputSetIndex(0);
+			} else
+				this.setInputSetIndex(this.inputSetIndex);
 			this.store();
 		});
 		return inputSetEl;
-	}
-
-	loadSelectedInputSet() {
-		this.$('#input-params').loadQueryParams(this.inputSets[this.inputSetIndex].queryParams);
 	}
 
 	store() {
