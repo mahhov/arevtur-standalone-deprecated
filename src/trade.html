@@ -42,14 +42,10 @@
 		return el;
 	};
 
-	let submitQuery = async add => {
-		let query = $('x-inputs').query;
+	let submitQuery = async query => {
 		let items = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
 		XElement.clearChildren($('#results-progress'));
-
-		if (!add)
-			itemsData.clear();
 		itemsData.join(items);
 
 		let itemsToPoints = items =>
@@ -75,7 +71,11 @@
 	};
 
 	let itemsData = new ItemsData();
-	$('x-inputs').addEventListener('submit', e => submitQuery(e.detail.add));
+	$('x-inputs').addEventListener('submit', e => {
+		if (!e.detail.add)
+			itemsData.clear();
+		$('x-inputs').queries.forEach(query => submitQuery(query))
+	});
 
 	// todo
 	// query all active item sets

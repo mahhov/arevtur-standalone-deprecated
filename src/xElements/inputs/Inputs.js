@@ -44,10 +44,14 @@ customElements.define(name, class Inputs extends XElement {
 		// if fromEl is specified, index is ignored
 		let indexSetEls = [...this.$('#input-set-list').children];
 		this.inputSetIndex = fromEl ? indexSetEls.indexOf(fromEl) : index;
-		if (exclusive)
+		if (exclusive) {
 			indexSetEls.forEach(indexSetEl => indexSetEl.active = false);
+			this.inputSets.forEach(indexSet => indexSet.active = false);
+		}
 		indexSetEls.forEach(indexSetEl => indexSetEl.selected = false);
 		indexSetEls[this.inputSetIndex].active = true;
+		this.inputSets[this.inputSetIndex].active = true;
+		// todo propogating to both elements and js objects is cumbersome
 		indexSetEls[this.inputSetIndex].selected = true;
 		this.$('#input-params').loadQueryParams(this.inputSets[this.inputSetIndex].queryParams);
 	}
@@ -72,10 +76,6 @@ customElements.define(name, class Inputs extends XElement {
 			this.inputSetFromEl(inputSetEl).name = inputSetEl.name;
 			this.store();
 		});
-		inputSetEl.addEventListener('active-change', () => {
-			this.inputSetFromEl(inputSetEl).active = inputSetEl.active;
-			this.store();
-		});
 		inputSetEl.addEventListener('remove', () => {
 			let index = this.inputSetIndexFromEl(inputSetEl);
 			if (this.inputSetIndex >= index && this.inputSetIndex)
@@ -98,11 +98,15 @@ customElements.define(name, class Inputs extends XElement {
 		localStorage.setItem('input-sets', JSON.stringify(this.inputSets));
 	}
 
-	get query() {
-		let {type, minValue, maxPrice, weightEntries, andEntries, notEntries} = this.inputSets[this.inputSetIndex].queryParams;
-		let weights = Object.fromEntries(weightEntries);
-		let ands = Object.fromEntries(andEntries);
-		let nots = Object.fromEntries(notEntries);
-		return DataFetcher.formQuery(type, weights, ands, nots, parseInt(minValue), maxPrice);
+	get queries() {
+		return this.inputSets
+			.filter(inputSet => inputSet.active)
+			.map(inputSet => {
+				let {type, minValue, maxPrice, weightEntries, andEntries, notEntries} = inputSet.queryParams;
+				let weights = Object.fromEntries(weightEntries);
+				let ands = Object.fromEntries(andEntries);
+				let nots = Object.fromEntries(notEntries);
+				return DataFetcher.formQuery(type, weights, ands, nots, parseInt(minValue), maxPrice);
+			});
 	}
 });
