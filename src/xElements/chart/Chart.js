@@ -1,7 +1,7 @@
 const {XElement, importUtil} = require('xx-element');
 const {template, name} = importUtil(__filename);
 
-customElements.define(name, class extends XElement {
+customElements.define(name, class Chart extends XElement {
 	static get attributeTypes() {
 		return {width: {}, height: {}};
 	}
@@ -12,6 +12,7 @@ customElements.define(name, class extends XElement {
 
 	connectedCallback() {
 		this.ctx = this.$('canvas').getContext('2d');
+		this.ctx.font = '18px serif';
 	}
 
 	set width(value) {
@@ -26,8 +27,8 @@ customElements.define(name, class extends XElement {
 		this.ctx.clearRect(0, 0, this.width, this.height);
 
 		let allPoints = value.flatMap(({points}) => points);
-		let [minX, deltaX] = this.getRange(allPoints.map(({x}) => x));
-		let [minY, deltaY] = this.getRange(allPoints.map(({y}) => y));
+		let [minX, deltaX] = Chart.getRange(allPoints.map(({x}) => x));
+		let [minY, deltaY] = Chart.getRange(allPoints.map(({y}) => y));
 
 		value.forEach(({color, size, points}) => {
 			this.ctx.fillStyle = color;
@@ -41,26 +42,28 @@ customElements.define(name, class extends XElement {
 		this.ctx.fillStyle = `rgb(0,0,0)`;
 
 		let n = 20;
+		this.ctx.strokeRect(this.width / n, this.height * (n - 1) / n, this.width * (n - 2) / n, 0); // x axis line
+		this.ctx.strokeRect(this.width / n, this.height / n, 0, this.width * (n - 2) / n); // y axis line
 		let step = this.width / n;
-		this.ctx.strokeRect(this.width / n, this.height / n, 0, this.width * (n - 2) / n);
-		this.ctx.strokeRect(this.width / n, this.height * (n - 1) / n, this.width * (n - 2) / n, 0);
-		for (let i = 1; i < n; i += 2) {
+		for (let i = 2; i < n; i += 2) {
 			let x = i * step;
-			let s = 4;
-			let xText = parseInt(minX + i / n * deltaX);
-			let yTet = parseInt(minY + i / n * deltaY);
-			this.ctx.fillText(xText, x, step * (n - 1) + 10);
-			this.ctx.fillText(yTet, step - 20, x, 30);
-			this.ctx.fillRect(x - s / 2, step * (n - 1) - s / 2, s, s);
-			this.ctx.fillRect(step - s / 2, x - s / 2, s, s);
+			let y = (n - i) * step;
+			let size = 10;
+			let sizeSmall = 1;
+			let xText = (minX + i / n * deltaX).toFixed(1);
+			let yText = (minY + i / n * deltaY).toFixed(1);
+			this.ctx.fillText(xText, x - 9, step * (n - 1) + 17); // x axis text
+			this.ctx.fillText(yText, step - 25, y + 4, 30); // y axis text
+			this.ctx.fillRect(x - sizeSmall / 2, step * (n - 1) - size / 2, sizeSmall, size); // x axis dots
+			this.ctx.fillRect(step - size / 2, x - sizeSmall / 2, size, sizeSmall); // y axis dots
 		}
 	}
 
-	getRange(values, buffer = .1) {
+	static getRange(values, buffer = .1) {
 		let min = Math.min(...values);
 		let max = Math.max(...values);
 		let delta = max - min;
-		return [min - delta * buffer, delta + 2 * delta * buffer * 2]
+		return [min - delta * buffer, delta + delta * buffer * 2]
 	}
 });
 
