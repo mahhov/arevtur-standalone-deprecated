@@ -45,7 +45,6 @@
 	let submitQuery = async query => {
 		let items = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
-		XElement.clearChildren($('#results-progress'));
 		itemsData.join(items);
 
 		let itemsToPoints = items =>
@@ -71,10 +70,11 @@
 	};
 
 	let itemsData = new ItemsData();
-	$('x-inputs').addEventListener('submit', e => {
+	$('x-inputs').addEventListener('submit', async e => {
 		if (!e.detail.add)
 			itemsData.clear();
-		$('x-inputs').queries.forEach(query => submitQuery(query))
+		await Promise.all($('x-inputs').queries.map(query => submitQuery(query)));
+		XElement.clearChildren($('#results-progress'));
 	});
 
 	// todo
