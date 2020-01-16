@@ -64,6 +64,8 @@ let formQuery = (type, weights, ands = {}, nots = {},
 	let notFilters = Object.entries(nots).map(([property]) => ({
 		id: property,
 	}));
+	if (!weightFilters.length)
+		sort = ApiConstants.SORT.price;
 	return {
 		query: {
 			status: {option: online ? 'online' : 'any'},
