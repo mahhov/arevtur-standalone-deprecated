@@ -85,7 +85,7 @@ customElements.define(name, class extends XElement {
 				queryProperty.weight === queryProperty.previousSibling.weight &&
 				queryProperty.filter === queryProperty.previousSibling.filter &&
 				queryProperty.filter !== 'not');
-		if (!this.$('#query-properties-list').lastChild.empty)
+		if (this.$('#query-properties-list').lastChild.property)
 			this.addQueryProperty();
 	}
 
