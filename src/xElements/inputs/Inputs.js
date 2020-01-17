@@ -108,7 +108,6 @@ customElements.define(name, class Inputs extends XElement {
 				let weights = Object.fromEntries(weightEntries);
 				let ands = Object.fromEntries(andEntries);
 				let nots = Object.fromEntries(notEntries);
-				console.log('get queries', 'value', minValue, 'price', maxPrice)
 				return DataFetcher.formQuery(type, weights, ands, nots, minValue, maxPrice);
 			});
 	}

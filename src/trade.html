@@ -68,6 +68,11 @@
 				color: 'rgb(0,0,255)',
 				size: 6,
 				points: ItemsData.itemsToPoints(itemsData.borderlineItems),
+			}, , {
+				color: 'rgb(255,0,0)',
+				size: 1,
+				points: ItemsData.itemsToPoints(itemsData.cornerPath),
+				isPath: true,
 			},
 		];
 		if (resetChartRange)
@@ -93,6 +98,11 @@
 	})
 
 	// todo
+	// chart corners
+	// hover and select result list and chart
+	// default no min value
+	// data fetcher progress bar
+	// price adjustment for socket
 	// draw chart exhausted rects
 	// click chart to request
 	// ctrl click submit to add query
