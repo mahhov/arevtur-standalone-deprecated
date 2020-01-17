@@ -52,12 +52,14 @@ customElements.define(name, class Chart extends XElement {
 		let allPoints = this.pointSets_.flatMap(({points}) => points);
 		[this.minX, this.deltaX] = Chart.getRange(allPoints.map(({x}) => x));
 		[this.minY, this.deltaY] = Chart.getRange(allPoints.map(({y}) => y));
+		this.verifyRange();
 		this.draw();
 	}
 
 	panRange(x, y) {
 		this.minX -= x * this.deltaX / this.width;
 		this.minY += y * this.deltaY / this.height;
+		this.verifyRange();
 		this.draw();
 	}
 
@@ -68,7 +70,13 @@ customElements.define(name, class Chart extends XElement {
 		this.minY += dy;
 		this.deltaX -= dx * 2;
 		this.deltaY -= dy * 2;
+		this.verifyRange();
 		this.draw();
+	}
+
+	verifyRange() {
+		this.minX = Math.max(this.minX, -this.deltaX / 10);
+		this.minY = Math.max(this.minY, -this.deltaY / 10);
 	}
 
 	draw() {
