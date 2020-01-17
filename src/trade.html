@@ -50,6 +50,7 @@
 		let itemsToPoints = items =>
 			items.map(item => ({x: item.evalPrice, y: item.evalValue}));
 
+		// todo lines
 		$('#results-chart').pointSets = [
 			{
 				color: 'rgb(0,0,0)',
@@ -76,6 +77,9 @@
 		await Promise.all($('x-inputs').queries.map(query => submitQuery(query)));
 		XElement.clearChildren($('#results-progress'));
 	});
+
+	// todo submit query
+	$('#results-chart').addEventListener('action-click', e => console.log(e.detail))
 
 	// todo
 	// draw chart exhausted rects
