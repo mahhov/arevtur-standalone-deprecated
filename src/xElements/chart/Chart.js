@@ -29,11 +29,10 @@ customElements.define(name, class Chart extends XElement {
 			}
 		});
 		document.addEventListener('mouseup', () => this.mouseDown = null);
-		this.$('canvas').addEventListener('dblclick', () => {
-			this.resetRange();
-			this.draw();
-		});
+		this.$('canvas').addEventListener('dblclick', () => this.resetRange());
 		this.$('canvas').addEventListener('contextmenu', e => e.preventDefault());
+		this.pointSets = [];
+		this.resetRange();
 	}
 
 	set width(value) {
@@ -46,7 +45,6 @@ customElements.define(name, class Chart extends XElement {
 
 	set pointSets(value) {
 		this.pointSets_ = value;
-		this.resetRange();
 		this.draw();
 	}
 
@@ -54,6 +52,7 @@ customElements.define(name, class Chart extends XElement {
 		let allPoints = this.pointSets_.flatMap(({points}) => points);
 		[this.minX, this.deltaX] = Chart.getRange(allPoints.map(({x}) => x));
 		[this.minY, this.deltaY] = Chart.getRange(allPoints.map(({y}) => y));
+		this.draw();
 	}
 
 	panRange(x, y) {
@@ -139,8 +138,8 @@ customElements.define(name, class Chart extends XElement {
 	}
 
 	static getRange(values, buffer = .1) {
-		let min = Math.min(...values);
-		let max = Math.max(...values);
+		let min = values.length ? Math.min(...values) : 0;
+		let max = values.length ? Math.max(...values) : 10;
 		let delta = max - min;
 		return [min - delta * buffer, delta + delta * buffer * 2]
 	}

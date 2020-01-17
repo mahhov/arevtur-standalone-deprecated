@@ -42,7 +42,8 @@
 		return el;
 	};
 
-	let submitQuery = async query => {
+	let submitQuery = async (query, resetChartRange) => {
+		// todo split into renderOutput
 		let items = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
 		itemsData.join(items);
@@ -62,6 +63,8 @@
 				points: itemsToPoints(itemsData.borderlineItems),
 			},
 		];
+		if (resetChartRange)
+			$('#results-chart').resetRange();
 
 		XElement.clearChildren($('#results-list'));
 		itemsData.items.forEach(itemData =>
@@ -74,12 +77,19 @@
 	$('x-inputs').addEventListener('submit', async e => {
 		if (!e.detail.add)
 			itemsData.clear();
-		await Promise.all($('x-inputs').queries.map(query => submitQuery(query)));
+		await Promise.all($('x-inputs')
+			.getQueries()
+			.map(query => submitQuery(query, true)));
 		XElement.clearChildren($('#results-progress'));
 	});
 
-	// todo submit query
-	$('#results-chart').addEventListener('action-click', e => console.log(e.detail))
+	// todo submit query verify
+	$('#results-chart').addEventListener('action-click', async e => {
+		await Promise.all($('x-inputs')
+			.getQueries(e.detail.y || 0, e.detail.x || null)
+			.map(query => submitQuery(query, false)));
+		XElement.clearChildren($('#results-progress'));
+	})
 
 	// todo
 	// draw chart exhausted rects
