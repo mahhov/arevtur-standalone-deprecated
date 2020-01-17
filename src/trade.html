@@ -42,35 +42,36 @@
 		return el;
 	};
 
-	let submitQuery = async (query, resetChartRange) => {
+	let submitQuery = async query => {
 		// todo split into renderOutput
 		let items = await DataFetcher.getItems(query, progress =>
 			$c('div', [], progress, $('#results-progress')));
 		itemsData.join(items);
+	};
 
-		let itemsToPoints = items =>
-			items.map(item => ({x: item.evalPrice, y: item.evalValue}));
+	let renderItemsData = (itemsData, resetChartRange = true) => {
+		XElement.clearChildren($('#results-progress'));
+
+		$('#results-count').textContent = itemsData.length;
+
+		XElement.clearChildren($('#results-list'));
+		itemsData.items.forEach(itemData =>
+			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
 
 		// todo lines
 		$('#results-chart').pointSets = [
 			{
 				color: 'rgb(0,0,0)',
 				size: 4,
-				points: itemsToPoints(itemsData.items),
+				points: ItemsData.itemsToPoints(itemsData.items),
 			}, {
 				color: 'rgb(0,0,255)',
 				size: 6,
-				points: itemsToPoints(itemsData.borderlineItems),
+				points: ItemsData.itemsToPoints(itemsData.borderlineItems),
 			},
 		];
 		if (resetChartRange)
 			$('#results-chart').resetRange();
-
-		XElement.clearChildren($('#results-list'));
-		itemsData.items.forEach(itemData =>
-			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
-
-		$('#results-count').textContent = itemsData.length
 	};
 
 	let itemsData = new ItemsData();
@@ -79,16 +80,16 @@
 			itemsData.clear();
 		await Promise.all($('x-inputs')
 			.getQueries()
-			.map(query => submitQuery(query, true)));
-		XElement.clearChildren($('#results-progress'));
+			.map(submitQuery));
+		renderItemsData(itemsData);
 	});
 
 	// todo submit query verify
 	$('#results-chart').addEventListener('action-click', async e => {
 		await Promise.all($('x-inputs')
 			.getQueries(e.detail.y || 0, e.detail.x || null)
-			.map(query => submitQuery(query, false)));
-		XElement.clearChildren($('#results-progress'));
+			.map(submitQuery));
+		renderItemsData(itemsData, false);
 	})
 
 	// todo

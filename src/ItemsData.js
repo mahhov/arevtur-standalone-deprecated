@@ -26,6 +26,10 @@ class ItemsData {
 	get length() {
 		return this.items.length;
 	}
+
+	static itemsToPoints(items) {
+		items.map(item => ({x: item.evalPrice, y: item.evalValue}));
+	}
 }
 
 module.exports = ItemsData;
