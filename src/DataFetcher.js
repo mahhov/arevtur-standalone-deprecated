@@ -102,15 +102,16 @@ let formQuery = (type, weights, ands = {}, nots = {},
 let getItems = async (query, progressCallback) => {
 	try {
 		let api = 'https://www.pathofexile.com/api/trade';
-		progressCallback('Initial query.');
+		progressCallback('Initial query.', 0);
 		let data = await post(`${api}/search/Metamorph`, query);
-		progressCallback(`Received ${data.result.length} items.`);
+		progressCallback(`Received ${data.result.length} items.`, 0);
 
 		let requestGroups = [];
 		while (data.result.length)
 			requestGroups.push(data.result.splice(0, 10));
-		progressCallback(`Will make ${requestGroups.length} grouped item queries.`);
+		progressCallback(`Will make ${requestGroups.length} grouped item queries.`, 1 / (requestGroups.length + 1));
 
+		let receivedCount = 0;
 		let promises = requestGroups.map(async (requestGroup, i) => {
 			let queryParams = {
 				query: data.id,
@@ -118,11 +119,11 @@ let getItems = async (query, progressCallback) => {
 			};
 			let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
 			let data2 = await get(endpoint2, queryParams);
-			progressCallback(`Received grouped item query # ${i}.`);
+			progressCallback(`Received grouped item query # ${i}.`, (1 + ++receivedCount) / (requestGroups.length + 1));
 			return data2.result.map(parseItem);
 		});
 		let items = (await Promise.all(promises)).flat();
-		progressCallback('All grouped item queries completed.');
+		progressCallback('All grouped item queries completed.', 1);
 		return items;
 	} catch (e) {
 		console.log('ERROR', e);

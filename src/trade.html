@@ -5,6 +5,10 @@
 		margin-top: 30px;
 	}
 
+	progress[value="1"] {
+		display: none;
+	}
+
 	#results-list {
 		flex: 1;
 	}
@@ -21,7 +25,8 @@
 <x-inputs></x-inputs>
 <div id="results-container">
 	<div>Count: <span id="results-count"></span></div>
-	<div id="results-progress"></div>
+	<progress id="results-progress-bar" max="1"></progress>
+	<div id="results-progress-text"></div>
 	<div id="results-list"></div>
 	<x-chart id="results-chart" width="600" height="600"></x-chart>
 </div>
@@ -44,13 +49,15 @@
 
 	let submitQuery = async query => {
 		// todo split into renderOutput
-		let items = await DataFetcher.getItems(query, progress =>
-			$c('div', [], progress, $('#results-progress')));
+		let items = await DataFetcher.getItems(query, (text, ratio) => {
+			$('#results-progress-bar').value = ratio;
+			$c('div', [], text, $('#results-progress-text'));
+		});
 		itemsData.join(items);
 	};
 
 	let renderItemsData = (itemsData, resetChartRange = true) => {
-		XElement.clearChildren($('#results-progress'));
+		XElement.clearChildren($('#results-progress-text'));
 
 		$('#results-count').textContent = itemsData.length;
 
@@ -106,15 +113,9 @@
 	// todo
 	// items sometimes coming back without pseudo mod 'Sum: '
 	// hover and select result list and chart
-	// data fetcher progress bar
-	// price adjustment for socket
-	// draw chart exhausted rects
-	// click chart to request
-	// ctrl click submit to add query
-	// multiple queries and sharing filter groups
+	// sharing filter groups
 	// submit query on load
 	// query by name
-	// expand price range
 	// convert armor and socket requirements to fuzzy query
 	// assume quality 0%
 	// free affixes
