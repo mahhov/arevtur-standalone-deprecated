@@ -96,11 +96,11 @@ customElements.define(name, class Chart extends XElement {
 	}
 
 	drawPoints() {
-		this.pointSets_.forEach(({color, size, points, isPath, fill}) => {
+		this.pointSets_.forEach(({color, fill, size, points, isPath}) => {
+			this.ctx.strokeStyle = color;
+			this.ctx.fillStyle = color;
 			if (isPath) {
 				this.ctx.lineWidth = size;
-				this.ctx.strokeStyle = color;
-				this.ctx.fillStyle = fill;
 				this.ctx.beginPath();
 				points.forEach((p, i) => {
 					let {x, y} = this.coordToPixel(p.x, p.y);
@@ -114,10 +114,9 @@ customElements.define(name, class Chart extends XElement {
 				else
 					this.ctx.stroke();
 			} else {
-				this.ctx.fillStyle = color;
 				points.forEach(p => {
 					let {x, y} = this.coordToPixel(p.x, p.y);
-					this.ctx.fillRect(x - size / 2, y - size / 2, size, size);
+					this.ctx[fill ? 'fillRect' : 'strokeRect'](x - size / 2, y - size / 2, size, size);
 				});
 			}
 		});

@@ -5,7 +5,7 @@ class ItemsData {
 
 	clear() {
 		this.items = [];
-		this.bestBoundItems = []; // top
+		this.bestBoundItems_ = []; // top
 		this.searchBoundItems = []; // bottom
 	}
 
@@ -23,7 +23,7 @@ class ItemsData {
 		// update bestBoundItems
 		let minPriceFound = Infinity;
 		// ordered top right to bottom left
-		this.bestBoundItems = this.items
+		this.bestBoundItems_ = this.items
 			.filter(item => {
 				if (item.evalPrice >= minPriceFound)
 					return false;
@@ -50,12 +50,16 @@ class ItemsData {
 		item.selected = !item.selected;
 	}
 
+	get bestBoundItems() {
+		return this.bestBoundItems_.filter(item => !item.selected);
+	}
+
 	get selectedItems() {
 		return this.items.filter(({selected}) => selected);
 	}
 
 	get bestBoundPath() {
-		let path = this.bestBoundItems.flatMap(({evalValue, evalPrice}, i, a) =>
+		let path = this.bestBoundItems_.flatMap(({evalValue, evalPrice}, i, a) =>
 			[{evalValue, evalPrice: i ? a[i - 1].evalPrice : this.maxPrice}, {evalValue, evalPrice}]);
 		return ItemsData.itemsToPoints(path);
 	}

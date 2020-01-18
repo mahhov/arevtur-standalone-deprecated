@@ -70,7 +70,6 @@
 		itemsData.items.forEach(itemData => {
 			let itemListing = $c('x-item-listing', ['item'], '', $('#results-list'));
 			itemListing.addEventListener('click', () => {
-				console.log('click gotten');
 				itemsData.select(itemData);
 				itemListing.itemData = itemData;
 				renderItemsDataChart(itemsData);
@@ -83,11 +82,11 @@
 		$('#results-chart').background = 'rgb(245,245,245)';
 		$('#results-chart').pointSets = [
 			{
-				color: 'rgb(255,0,0)',
+				color: 'rgb(255,255,255)',
+				fill: true,
 				size: 1,
 				points: itemsData.searchBoundPath,
 				isPath: true,
-				fill: 'rgb(255,255,255)',
 			}, {
 				color: 'rgb(0,0,255)',
 				size: 1,
@@ -95,12 +94,17 @@
 				isPath: true,
 			}, {
 				color: 'rgb(0,0,0)',
+				fill: true,
 				size: 4,
 				points: ItemsData.itemsToPoints(itemsData.items),
 			}, {
 				color: 'rgb(0,0,255)',
-				size: 6,
+				size: 8,
 				points: ItemsData.itemsToPoints(itemsData.bestBoundItems),
+			}, {
+				color: 'rgb(170,170,0)',
+				size: 8,
+				points: ItemsData.itemsToPoints(itemsData.selectedItems),
 			},
 		];
 		if (resetChartRange)
