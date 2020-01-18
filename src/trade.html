@@ -71,9 +71,12 @@
 			let itemListing = $c('x-item-listing', ['item'], '', $('#results-list'));
 			itemListing.addEventListener('select', () => {
 				itemsData.selectItem(itemData);
-				// itemsData.hoverItem(itemData);
 				itemListing.itemData = itemData;
 				renderItemsDataChart(itemsData);
+			});
+			itemListing.addEventListener('hover', e => {
+				itemsData.hoverItem(e.detail && itemData);
+				renderItemsData(itemsData);
 			});
 			itemListing.itemData = itemData;
 		});
@@ -150,8 +153,8 @@
 	});
 
 	// todo
+	// rendering efficiency
 	// items sometimes coming back without pseudo mod 'Sum: '
-	// hover and select result list and chart
 	// sharing filter groups
 	// submit query on load
 	// query by name

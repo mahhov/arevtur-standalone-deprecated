@@ -16,6 +16,11 @@ customElements.define(name, class extends XElement {
 			e.stopPropagation();
 		});
 		this.addEventListener('click', () => this.emit('select'));
+		this.addEventListener('mouseenter', () => {
+			if (!this.hovered)
+				this.emit('hover', true);
+		});
+		this.addEventListener('mouseleave', () => this.emit('hover', false));
 	}
 
 	set itemData(value) {
