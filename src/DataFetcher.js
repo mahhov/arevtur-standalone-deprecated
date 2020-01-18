@@ -126,6 +126,7 @@ let getItems = async (query, progressCallback) => {
 		return items;
 	} catch (e) {
 		console.log('ERROR', e);
+		return [];
 	}
 };
 
