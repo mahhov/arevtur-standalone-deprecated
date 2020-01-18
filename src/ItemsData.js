@@ -46,8 +46,19 @@ class ItemsData {
 			});
 	}
 
-	select(item) {
+	selectItem(item) {
 		item.selected = !item.selected;
+	}
+
+	selectByRange(value, price, valueRange, priceRange) {
+		let minValue = value - valueRange / 2;
+		let maxValue = value + valueRange / 2;
+		let minPrice = price - priceRange / 2;
+		let maxPrice = price + priceRange / 2;
+		this.items
+			.filter(({evalValue, evalPrice}) =>
+				evalValue > minValue && evalValue < maxValue && evalPrice > minPrice && evalPrice < maxPrice)
+			.forEach(item => this.selectItem(item));
 	}
 
 	get bestBoundItems() {

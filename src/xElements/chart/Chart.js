@@ -14,9 +14,7 @@ customElements.define(name, class Chart extends XElement {
 		this.ctx = this.$('canvas').getContext('2d');
 		this.ctx.font = '14px serif';
 		this.$('canvas').addEventListener('mousedown', e => {
-			if (e.ctrlKey)
-				this.emit('action-click', this.pixelToCoord(e.offsetX, e.offsetY));
-			else
+			if (!e.ctrlKey)
 				this.mouseDown = {x: e.offsetX, y: e.offsetY};
 		});
 		this.$('canvas').addEventListener('mousemove', e => {
@@ -29,6 +27,14 @@ customElements.define(name, class Chart extends XElement {
 			}
 		});
 		document.addEventListener('mouseup', () => this.mouseDown = null);
+		this.$('canvas').addEventListener('click', e => {
+			// todo don't emit events if mouse moved
+			let coord = this.pixelToCoord(e.offsetX, e.offsetY);
+			if (e.ctrlKey)
+				this.emit('action-click', coord);
+			else
+				this.emit('select-click', {...coord, width: 20 / this.width * this.deltaX, height: 20 / this.height * this.deltaY});
+		});
 		this.$('canvas').addEventListener('dblclick', () => this.resetRange());
 		this.$('canvas').addEventListener('contextmenu', e => e.preventDefault());
 		this.background = this.background || 'white';
