@@ -71,6 +71,7 @@
 			let itemListing = $c('x-item-listing', ['item'], '', $('#results-list'));
 			itemListing.addEventListener('select', () => {
 				itemsData.selectItem(itemData);
+				// itemsData.hoverItem(itemData);
 				itemListing.itemData = itemData;
 				renderItemsDataChart(itemsData);
 			});
@@ -79,7 +80,6 @@
 	};
 
 	let renderItemsDataChart = (itemsData, resetChartRange = false) => {
-		$('#results-chart').background = 'rgb(245,245,245)';
 		$('#results-chart').pointSets = [
 			{
 				color: 'rgb(255,255,255)',
@@ -105,6 +105,10 @@
 				color: 'rgb(170,170,0)',
 				size: 8,
 				points: ItemsData.itemsToPoints(itemsData.selectedItems),
+			}, {
+				color: 'rgb(100,70,20)',
+				size: 8,
+				points: ItemsData.itemsToPoints(itemsData.hoveredItems),
 			},
 		];
 		if (resetChartRange)
@@ -112,6 +116,8 @@
 	};
 
 	let itemsData = new ItemsData();
+	$('#results-chart').background = 'rgb(245,245,245)';
+
 	$('x-inputs').addEventListener('submit', async e => {
 		if (!e.detail.add)
 			itemsData.clear();
@@ -122,15 +128,24 @@
 	});
 
 	// todo submit query verify
-	$('#results-chart').addEventListener('action-click', async e => {
+	$('#results-chart').addEventListener('action', async e => {
 		await Promise.all($('x-inputs')
 			.getQueries(e.detail.x || null)
 			.map(submitQuery));
 		renderItemsData(itemsData);
 	});
 
-	$('#results-chart').addEventListener('select-click', async e => {
-		itemsData.selectByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
+	$('#results-chart').addEventListener('select', async e => {
+		let item = itemsData.itemByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
+		if (item) {
+			itemsData.selectItem(item);
+			renderItemsData(itemsData);
+		}
+	});
+
+	$('#results-chart').addEventListener('hover', async e => {
+		let item = e.detail && itemsData.itemByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
+		itemsData.hoverItem(item);
 		renderItemsData(itemsData);
 	});
 

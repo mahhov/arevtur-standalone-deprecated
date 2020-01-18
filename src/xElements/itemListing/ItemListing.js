@@ -3,7 +3,7 @@ const {template, name} = importUtil(__filename);
 
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
-		return {selected: {boolean: true}};
+		return {selected: {boolean: true}, hovered: {boolean: true}};
 	}
 
 	static get htmlTemplate() {
@@ -41,10 +41,15 @@ customElements.define(name, class extends XElement {
 		this.$('#whisper-button').textContent = value.accountText;
 
 		this.selected = value.selected;
+		this.hovered = value.hovered;
 	}
 
 	set selected(value) {
-		this.$('#container').classList.toggle('selected', value);
+		this.classList.toggle('selected', value);
+	}
+
+	set hovered(value) {
+		this.classList.toggle('hovered', value);
 	}
 });
 

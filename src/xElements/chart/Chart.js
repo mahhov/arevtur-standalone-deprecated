@@ -19,6 +19,7 @@ customElements.define(name, class Chart extends XElement {
 				this.mouseDown = {x: e.offsetX, y: e.offsetY};
 		});
 		this.$('canvas').addEventListener('mousemove', e => {
+			this.emit('hover', this.pixelToCoord(e.offsetX, e.offsetY));
 			if (!this.mouseDown)
 				return;
 			this.dragged = true;
@@ -28,15 +29,12 @@ customElements.define(name, class Chart extends XElement {
 				this.zoomRange(e.offsetX - this.mouseDown.x, e.offsetY - this.mouseDown.y);
 			this.mouseDown = {x: e.offsetX, y: e.offsetY};
 		});
+		this.$('canvas').addEventListener('mouseleave', () => this.emit('hover'));
 		document.addEventListener('mouseup', () => this.mouseDown = null);
 		this.$('canvas').addEventListener('click', e => {
 			if (this.dragged)
 				return;
-			let coord = this.pixelToCoord(e.offsetX, e.offsetY);
-			if (e.ctrlKey)
-				this.emit('action-click', coord);
-			else
-				this.emit('select-click', {...coord, width: 20 / this.width * this.deltaX, height: 20 / this.height * this.deltaY});
+			this.emit(e.ctrlKey ? 'action' : 'select', this.pixelToCoord(e.offsetX, e.offsetY));
 		});
 		this.$('canvas').addEventListener('dblclick', () => {
 			if (!this.dragged)
@@ -159,15 +157,19 @@ customElements.define(name, class Chart extends XElement {
 	}
 
 	pixelToCoord(x, y) {
-		x = x / this.width * this.deltaX + this.minX;
-		y = (1 - y / this.height) * this.deltaY + this.minY;
-		return {x, y};
+		return {
+			x: x / this.width * this.deltaX + this.minX,
+			y: (1 - y / this.height) * this.deltaY + this.minY,
+			width: 20 / this.width * this.deltaX,
+			height: 20 / this.height * this.deltaY
+		};
 	}
 
 	coordToPixel(x, y) {
-		x = x === Infinity ? this.width : (x - this.minX) / this.deltaX * this.width;
-		y = y === Infinity ? 0 : (1 - (y - this.minY) / this.deltaY) * this.height;
-		return {x, y};
+		return {
+			x: x === Infinity ? this.width : (x - this.minX) / this.deltaX * this.width,
+			y: y === Infinity ? 0 : (1 - (y - this.minY) / this.deltaY) * this.height,
+		};
 	}
 
 	static getRange(values, buffer = .1) {

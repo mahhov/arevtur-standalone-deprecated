@@ -5,8 +5,12 @@
 		border: 1px solid #666;
 	}
 
-	#container.selected {
+	:host(.selected) {
 		background: #ffffd3;
+	}
+
+	:host(.hovered) {
+		background: #fff0d3;
 	}
 
 	#bottom-row {
@@ -18,11 +22,9 @@
 	}
 </style>
 
-<div id="container">
-	<div id="details-list"></div>
-	<div id="bottom-row">
-		Value: <span id="value-text"></span>
-		<span id="price-text"></span>
-		<button id="whisper-button"></button>
-	</div>
+<div id="details-list"></div>
+<div id="bottom-row">
+	Value: <span id="value-text"></span>
+	<span id="price-text"></span>
+	<button id="whisper-button"></button>
 </div>

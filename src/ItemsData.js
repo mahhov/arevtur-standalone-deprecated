@@ -50,15 +50,18 @@ class ItemsData {
 		item.selected = !item.selected;
 	}
 
-	selectByRange(value, price, valueRange, priceRange) {
+	hoverItem(item = null) {
+		// null item means no item is hovered
+		this.items.forEach(itemI => itemI.hovered = itemI === item);
+	}
+
+	itemByRange(value, price, valueRange, priceRange) {
 		let minValue = value - valueRange / 2;
 		let maxValue = value + valueRange / 2;
 		let minPrice = price - priceRange / 2;
 		let maxPrice = price + priceRange / 2;
-		this.items
-			.filter(({evalValue, evalPrice}) =>
-				evalValue > minValue && evalValue < maxValue && evalPrice > minPrice && evalPrice < maxPrice)
-			.forEach(item => this.selectItem(item));
+		return this.items.find(({evalValue, evalPrice}) =>
+			evalValue > minValue && evalValue < maxValue && evalPrice > minPrice && evalPrice < maxPrice);
 	}
 
 	get bestBoundItems() {
@@ -67,6 +70,10 @@ class ItemsData {
 
 	get selectedItems() {
 		return this.items.filter(({selected}) => selected);
+	}
+
+	get hoveredItems() {
+		return this.items.filter(({hovered}) => hovered);
 	}
 
 	get bestBoundPath() {
