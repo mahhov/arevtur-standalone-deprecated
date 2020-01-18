@@ -14,28 +14,34 @@ customElements.define(name, class Chart extends XElement {
 		this.ctx = this.$('canvas').getContext('2d');
 		this.ctx.font = '14px serif';
 		this.$('canvas').addEventListener('mousedown', e => {
+			this.dragged = false;
 			if (!e.ctrlKey)
 				this.mouseDown = {x: e.offsetX, y: e.offsetY};
 		});
 		this.$('canvas').addEventListener('mousemove', e => {
-			if (this.mouseDown) {
-				if (e.buttons & 1)
-					this.panRange(e.offsetX - this.mouseDown.x, e.offsetY - this.mouseDown.y);
-				else if (e.buttons & 2)
-					this.zoomRange(e.offsetX - this.mouseDown.x, e.offsetY - this.mouseDown.y);
-				this.mouseDown = {x: e.offsetX, y: e.offsetY};
-			}
+			if (!this.mouseDown)
+				return;
+			this.dragged = true;
+			if (e.buttons & 1)
+				this.panRange(e.offsetX - this.mouseDown.x, e.offsetY - this.mouseDown.y);
+			else if (e.buttons & 2)
+				this.zoomRange(e.offsetX - this.mouseDown.x, e.offsetY - this.mouseDown.y);
+			this.mouseDown = {x: e.offsetX, y: e.offsetY};
 		});
 		document.addEventListener('mouseup', () => this.mouseDown = null);
 		this.$('canvas').addEventListener('click', e => {
-			// todo don't emit events if mouse moved
+			if (this.dragged)
+				return;
 			let coord = this.pixelToCoord(e.offsetX, e.offsetY);
 			if (e.ctrlKey)
 				this.emit('action-click', coord);
 			else
 				this.emit('select-click', {...coord, width: 20 / this.width * this.deltaX, height: 20 / this.height * this.deltaY});
 		});
-		this.$('canvas').addEventListener('dblclick', () => this.resetRange());
+		this.$('canvas').addEventListener('dblclick', () => {
+			if (!this.dragged)
+				this.resetRange();
+		});
 		this.$('canvas').addEventListener('contextmenu', e => e.preventDefault());
 		this.background = this.background || 'white';
 		this.pointSets = [];
