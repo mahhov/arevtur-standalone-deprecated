@@ -45,8 +45,8 @@ class ItemsData {
 			return [{evalValue, evalPrice: i ? a[i - 1].evalPrice : 0}, {evalValue, evalPrice}];
 		});
 		let last = path[path.length - 1];
-		path.push({evalValue: last.evalValue + 1000, evalPrice: last.evalPrice}); // todo try Infinity for evalValue
-		path.push({evalValue: last.evalValue + 1000, evalPrice: 0});
+		path.push({evalValue: Infinity, evalPrice: last.evalPrice});
+		path.push({evalValue: Infinity, evalPrice: 0});
 		return path;
 	}
 

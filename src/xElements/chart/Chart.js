@@ -3,7 +3,7 @@ const {template, name} = importUtil(__filename);
 
 customElements.define(name, class Chart extends XElement {
 	static get attributeTypes() {
-		return {width: {}, height: {}};
+		return {width: {}, height: {}, background: {}};
 	}
 
 	static get htmlTemplate() {
@@ -31,6 +31,7 @@ customElements.define(name, class Chart extends XElement {
 		document.addEventListener('mouseup', () => this.mouseDown = null);
 		this.$('canvas').addEventListener('dblclick', () => this.resetRange());
 		this.$('canvas').addEventListener('contextmenu', e => e.preventDefault());
+		this.background = this.background || 'white';
 		this.pointSets = [];
 		this.resetRange();
 	}
@@ -43,13 +44,19 @@ customElements.define(name, class Chart extends XElement {
 		this.$('canvas').height = value;
 	}
 
+	set background(value) {
+		this.draw();
+	}
+
 	set pointSets(value) {
 		this.pointSets_ = value;
 		this.draw();
 	}
 
 	resetRange() {
-		let allPoints = this.pointSets_.flatMap(({points}) => points);
+		let allPoints = this.pointSets_
+			.filter(({isPath}) => !isPath)
+			.flatMap(({points}) => points);
 		[this.minX, this.deltaX] = Chart.getRange(allPoints.map(({x}) => x));
 		[this.minY, this.deltaY] = Chart.getRange(allPoints.map(({y}) => y));
 		this.verifyRange();
@@ -80,16 +87,20 @@ customElements.define(name, class Chart extends XElement {
 	}
 
 	draw() {
-		this.ctx.clearRect(0, 0, this.width, this.height);
+		if (!this.background || !this.pointSets_ || this.minX === undefined)
+			return;
+		this.ctx.fillStyle = this.background;
+		this.ctx.fillRect(0, 0, this.width, this.height);
 		this.drawPoints();
 		this.drawAxis();
 	}
 
 	drawPoints() {
-		this.pointSets_.forEach(({color, size, points, isPath}) => {
+		this.pointSets_.forEach(({color, size, points, isPath, fill}) => {
 			if (isPath) {
 				this.ctx.lineWidth = size;
 				this.ctx.strokeStyle = color;
+				this.ctx.fillStyle = fill;
 				this.ctx.beginPath();
 				points.forEach((p, i) => {
 					let {x, y} = this.coordToPixel(p.x, p.y);
@@ -98,7 +109,10 @@ customElements.define(name, class Chart extends XElement {
 					else
 						this.ctx.lineTo(x, y);
 				});
-				this.ctx.stroke();
+				if (fill)
+					this.ctx.fill();
+				else
+					this.ctx.stroke();
 			} else {
 				this.ctx.fillStyle = color;
 				points.forEach(p => {
@@ -140,8 +154,8 @@ customElements.define(name, class Chart extends XElement {
 	}
 
 	coordToPixel(x, y) {
-		x = (x - this.minX) / this.deltaX * this.width;
-		y = (1 - (y - this.minY) / this.deltaY) * this.height;
+		x = x === Infinity ? this.width : (x - this.minX) / this.deltaX * this.width;
+		y = y === Infinity ? 0 : (1 - (y - this.minY) / this.deltaY) * this.height;
 		return {x, y};
 	}
 

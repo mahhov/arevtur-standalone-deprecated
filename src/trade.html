@@ -58,9 +58,15 @@
 		itemsData.items.forEach(itemData =>
 			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
 
-		// todo lines
+		$('#results-chart').background = 'rgb(245,245,245)';
 		$('#results-chart').pointSets = [
 			{
+				color: 'rgb(255,0,0)',
+				size: 1,
+				points: ItemsData.itemsToPoints(itemsData.cornerPath),
+				isPath: true,
+				fill: 'rgb(255,255,255)',
+			}, {
 				color: 'rgb(0,0,0)',
 				size: 4,
 				points: ItemsData.itemsToPoints(itemsData.items),
@@ -68,11 +74,6 @@
 				color: 'rgb(0,0,255)',
 				size: 6,
 				points: ItemsData.itemsToPoints(itemsData.borderlineItems),
-			}, , {
-				color: 'rgb(255,0,0)',
-				size: 1,
-				points: ItemsData.itemsToPoints(itemsData.cornerPath),
-				isPath: true,
 			},
 		];
 		if (resetChartRange)
@@ -98,6 +99,7 @@
 	})
 
 	// todo
+	// items sometimes coming back without pseudo mod 'Sum: '
 	// chart corners
 	// hover and select result list and chart
 	// default no min value
