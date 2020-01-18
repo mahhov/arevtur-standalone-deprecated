@@ -46,6 +46,14 @@ class ItemsData {
 			});
 	}
 
+	select(item) {
+		item.selected = !item.selected;
+	}
+
+	get selectedItems() {
+		return this.items.filter(({selected}) => selected);
+	}
+
 	get bestBoundPath() {
 		let path = this.bestBoundItems.flatMap(({evalValue, evalPrice}, i, a) =>
 			[{evalValue, evalPrice: i ? a[i - 1].evalPrice : this.maxPrice}, {evalValue, evalPrice}]);

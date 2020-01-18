@@ -25,7 +25,7 @@
 <x-inputs></x-inputs>
 <div id="results-container">
 	<div>Count: <span id="results-count"></span></div>
-	<progress id="results-progress-bar" max="1"></progress>
+	<progress id="results-progress-bar" max="1" value="1"></progress>
 	<div id="results-progress-text"></div>
 	<div id="results-list"></div>
 	<x-chart id="results-chart" width="600" height="600"></x-chart>
@@ -56,15 +56,30 @@
 		itemsData.join(items);
 	};
 
-	let renderItemsData = (itemsData, resetChartRange = true) => {
+	let renderItemsData = (itemsData, resetChartRange = false) => {
+		renderItemsDataList(itemsData);
+		renderItemsDataChart(itemsData, resetChartRange);
+	};
+
+	let renderItemsDataList = itemsData => {
 		XElement.clearChildren($('#results-progress-text'));
 
 		$('#results-count').textContent = itemsData.length;
 
 		XElement.clearChildren($('#results-list'));
-		itemsData.items.forEach(itemData =>
-			$c('x-item-listing', ['item'], '', $('#results-list')).itemData = itemData);
+		itemsData.items.forEach(itemData => {
+			let itemListing = $c('x-item-listing', ['item'], '', $('#results-list'));
+			itemListing.addEventListener('click', () => {
+				console.log('click gotten');
+				itemsData.select(itemData);
+				itemListing.itemData = itemData;
+				renderItemsDataChart(itemsData);
+			});
+			itemListing.itemData = itemData;
+		});
+	};
 
+	let renderItemsDataChart = (itemsData, resetChartRange = false) => {
 		$('#results-chart').background = 'rgb(245,245,245)';
 		$('#results-chart').pointSets = [
 			{
@@ -99,7 +114,7 @@
 		await Promise.all($('x-inputs')
 			.getQueries()
 			.map(submitQuery));
-		renderItemsData(itemsData);
+		renderItemsData(itemsData, true);
 	});
 
 	// todo submit query verify
@@ -107,7 +122,7 @@
 		await Promise.all($('x-inputs')
 			.getQueries(e.detail.x || null)
 			.map(submitQuery));
-		renderItemsData(itemsData, false);
+		renderItemsData(itemsData);
 	})
 
 	// todo

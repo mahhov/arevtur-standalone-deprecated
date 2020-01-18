@@ -5,6 +5,10 @@
 		border: 1px solid #666;
 	}
 
+	#container.selected {
+		background: #ffffd3;
+	}
+
 	#bottom-row {
 		margin-top: 10px;
 	}
@@ -14,9 +18,11 @@
 	}
 </style>
 
-<div id="details-list"></div>
-<div id="bottom-row">
-	Value: <span id="value-text"></span>
-	<span id="price-text"></span>
-	<button id="whisper-button"></button>
+<div id="container">
+	<div id="details-list"></div>
+	<div id="bottom-row">
+		Value: <span id="value-text"></span>
+		<span id="price-text"></span>
+		<button id="whisper-button"></button>
+	</div>
 </div>
