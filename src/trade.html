@@ -93,7 +93,7 @@
 	// todo submit query verify
 	$('#results-chart').addEventListener('action-click', async e => {
 		await Promise.all($('x-inputs')
-			.getQueries(e.detail.y || 0, e.detail.x || null)
+			.getQueries(e.detail.x || null)
 			.map(submitQuery));
 		renderItemsData(itemsData, false);
 	})
@@ -102,7 +102,6 @@
 	// items sometimes coming back without pseudo mod 'Sum: '
 	// chart corners
 	// hover and select result list and chart
-	// default no min value
 	// data fetcher progress bar
 	// price adjustment for socket
 	// draw chart exhausted rects

@@ -98,17 +98,16 @@ customElements.define(name, class Inputs extends XElement {
 		localStorage.setItem('input-sets', JSON.stringify(this.inputSets));
 	}
 
-	getQueries(overrideValue = null, overridePrice = null) {
+	getQueries(overridePrice = null) {
 		return this.inputSets
 			.filter(inputSet => inputSet.active)
 			.map(inputSet => {
-				let {type, minValue, maxPrice, weightEntries, andEntries, notEntries} = inputSet.queryParams;
-				minValue = overrideValue !== null ? overrideValue : parseInt(minValue);
+				let {type, maxPrice, weightEntries, andEntries, notEntries} = inputSet.queryParams;
 				maxPrice = overridePrice !== null ? overridePrice : maxPrice;
 				let weights = Object.fromEntries(weightEntries);
 				let ands = Object.fromEntries(andEntries);
 				let nots = Object.fromEntries(notEntries);
-				return DataFetcher.formQuery(type, weights, ands, nots, minValue, maxPrice);
+				return DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice);
 			});
 	}
 });
