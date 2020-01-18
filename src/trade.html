@@ -69,7 +69,7 @@
 		XElement.clearChildren($('#results-list'));
 		itemsData.items.forEach(itemData => {
 			let itemListing = $c('x-item-listing', ['item'], '', $('#results-list'));
-			itemListing.addEventListener('click', () => {
+			itemListing.addEventListener('select', () => {
 				itemsData.select(itemData);
 				itemListing.itemData = itemData;
 				renderItemsDataChart(itemsData);

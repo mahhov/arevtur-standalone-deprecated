@@ -15,6 +15,7 @@ customElements.define(name, class extends XElement {
 			navigator.clipboard.writeText(this.itemData_.whisper);
 			e.stopPropagation();
 		});
+		this.addEventListener('click', () => this.emit('select'));
 	}
 
 	set itemData(value) {
