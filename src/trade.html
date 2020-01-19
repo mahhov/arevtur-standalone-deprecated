@@ -56,8 +56,11 @@
 		itemsData.join(items);
 	};
 
-	let renderItemsData = (itemsData, resetChartRange = false) => {
-		renderItemsDataList(itemsData);
+	let renderItemsData = (itemsData, listBackgroundsOnly = false, resetChartRange = false) => {
+		if (listBackgroundsOnly)
+			renderItemsDataListBackgroundsOnly(itemsData);
+		else
+			renderItemsDataList(itemsData);
 		renderItemsDataChart(itemsData, resetChartRange);
 	};
 
@@ -71,14 +74,21 @@
 			let itemListing = $c('x-item-listing', ['item'], '', $('#results-list'));
 			itemListing.addEventListener('select', () => {
 				itemsData.selectItem(itemData);
-				itemListing.itemData = itemData;
+				itemListing.selected = itemData.selected;
 				renderItemsDataChart(itemsData);
 			});
 			itemListing.addEventListener('hover', e => {
 				itemsData.hoverItem(e.detail && itemData);
-				renderItemsData(itemsData);
+				renderItemsData(itemsData, true);
 			});
 			itemListing.itemData = itemData;
+		});
+	};
+
+	let renderItemsDataListBackgroundsOnly = itemsData => {
+		[...$('#results-list').children].forEach((el, i) => {
+			el.selected = itemsData.items[i].selected;
+			el.hovered = itemsData.items[i].hovered;
 		});
 	};
 
@@ -127,7 +137,7 @@
 		await Promise.all($('x-inputs')
 			.getQueries()
 			.map(submitQuery));
-		renderItemsData(itemsData, true);
+		renderItemsData(itemsData, false, true);
 	});
 
 	// todo submit query verify
@@ -142,18 +152,17 @@
 		let item = itemsData.itemByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
 		if (item) {
 			itemsData.selectItem(item);
-			renderItemsData(itemsData);
+			renderItemsData(itemsData, true);
 		}
 	});
 
 	$('#results-chart').addEventListener('hover', async e => {
 		let item = e.detail && itemsData.itemByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
 		itemsData.hoverItem(item);
-		renderItemsData(itemsData);
+		renderItemsData(itemsData, true);
 	});
 
 	// todo
-	// rendering efficiency
 	// items sometimes coming back without pseudo mod 'Sum: '
 	// sharing filter groups
 	// submit query on load
@@ -3304,6 +3313,6 @@
 			"evalPrice": 35
 		}
 	]);
-	renderItemsData(itemsData, true);
+	renderItemsData(itemsData, false, true);
 
 </script>
