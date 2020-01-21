@@ -149,16 +149,18 @@
 	});
 
 	$('#results-chart').addEventListener('select', async e => {
-		let item = itemsData.itemByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
-		if (item) {
-			itemsData.selectItem(item);
+		let itemIndex = itemsData.itemIndexByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
+		if (itemIndex) {
+			itemsData.selectItem(itemIndex);
 			renderItemsData(itemsData, true);
+			$('#results-list').children[itemIndex].scrollIntoView({block: 'nearest'});
 		}
 	});
 
 	$('#results-chart').addEventListener('hover', async e => {
-		let item = e.detail && itemsData.itemByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
-		itemsData.hoverItem(item);
+		let itemIndex = e.detail &&
+			itemsData.itemIndexByRange(e.detail.y, e.detail.x, e.detail.height, e.detail.width);
+		itemsData.hoverItem(itemIndex);
 		renderItemsData(itemsData, true);
 	});
 

@@ -46,21 +46,21 @@ class ItemsData {
 			});
 	}
 
-	selectItem(item) {
-		item.selected = !item.selected;
+	selectItem(index) {
+		this.items[index].selected = !this.items[index].selected;
 	}
 
-	hoverItem(item = null) {
-		// null item means no item is hovered
-		this.items.forEach(itemI => itemI.hovered = itemI === item);
+	hoverItem(index = -1) {
+		// index -1 item means no item is hovered
+		this.items.forEach((itemI, i) => itemI.hovered = i === index);
 	}
 
-	itemByRange(value, price, valueRange, priceRange) {
+	itemIndexByRange(value, price, valueRange, priceRange) {
 		let minValue = value - valueRange / 2;
 		let maxValue = value + valueRange / 2;
 		let minPrice = price - priceRange / 2;
 		let maxPrice = price + priceRange / 2;
-		return this.items.find(({evalValue, evalPrice}) =>
+		return this.items.findIndex(({evalValue, evalPrice}) =>
 			evalValue > minValue && evalValue < maxValue && evalPrice > minPrice && evalPrice < maxPrice);
 	}
 
