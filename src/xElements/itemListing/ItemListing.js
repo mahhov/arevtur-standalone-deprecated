@@ -57,5 +57,3 @@ customElements.define(name, class extends XElement {
 		this.classList.toggle('hovered', value);
 	}
 });
-
-// todo on hover, highlight chart dot

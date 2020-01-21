@@ -150,7 +150,6 @@ customElements.define(name, class Chart extends XElement {
 			let yText = (this.minY + i / n * this.deltaY).toFixed(0);
 			this.ctx.fillText(xText, x - 9, step * (n - 1) + 17); // x axis text
 			this.ctx.fillText(yText, step - 28, y + 4, 30); // y axis text
-			// todo center text on axis tick
 			this.ctx.fillRect(x - sizeSmall / 2, step * (n - 1) - size / 2, sizeSmall, size); // x axis dots
 			this.ctx.fillRect(step - size / 2, x - sizeSmall / 2, size, sizeSmall); // y axis dots
 		}
@@ -179,6 +178,3 @@ customElements.define(name, class Chart extends XElement {
 		return [min - delta * buffer, delta + delta * buffer * 2]
 	}
 });
-
-// todo clicking on chart point will scroll to item in list
-// todo zoom and pan

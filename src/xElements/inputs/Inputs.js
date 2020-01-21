@@ -51,7 +51,7 @@ customElements.define(name, class Inputs extends XElement {
 		indexSetEls.forEach(indexSetEl => indexSetEl.selected = false);
 		indexSetEls[this.inputSetIndex].active = true;
 		this.inputSets[this.inputSetIndex].active = true;
-		// todo propogating to both elements and js objects is cumbersome
+		// todo propagating to both elements and js objects is cumbersome
 		indexSetEls[this.inputSetIndex].selected = true;
 		this.$('#input-params').loadQueryParams(this.inputSets[this.inputSetIndex].queryParams);
 	}
