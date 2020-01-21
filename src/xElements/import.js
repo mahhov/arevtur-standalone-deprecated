@@ -6,3 +6,4 @@ require('./inputs/Inputs');
 require('./inputSet/InputSet');
 require('./itemListing/ItemListing');
 require('./queryProperty/QueryProperty');
+require('./results/Results');

@@ -1,0 +1,27 @@
+<style>
+	#results-container {
+		display: flex;
+		align-items: flex-start;
+		margin-top: 30px;
+	}
+
+	progress[value="1"] {
+		display: none;
+	}
+
+	#results-list {
+		flex: 1;
+	}
+
+	#results-list .item {
+		margin: 10px;
+	}
+</style>
+
+<div id="results-container">
+	<div>Count: <span id="results-count"></span></div>
+	<progress id="results-progress-bar" max="1" value="1"></progress>
+	<div id="results-progress-text"></div>
+	<div id="results-list"></div>
+	<x-chart id="results-chart" width="600" height="600"></x-chart>
+</div>
