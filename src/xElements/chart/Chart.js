@@ -23,9 +23,9 @@ customElements.define(name, class Chart extends XElement {
 			if (!this.mouseDown)
 				return;
 			this.dragged = true;
-			if (e.buttons & 1)
+			if (e.buttons & 1 && !e.shiftKey)
 				this.panRange(e.offsetX - this.mouseDown.x, e.offsetY - this.mouseDown.y);
-			else if (e.buttons & 2)
+			else if (e.buttons & 2 || e.shiftKey)
 				this.zoomRange(e.offsetX - this.mouseDown.x, e.offsetY - this.mouseDown.y);
 			this.mouseDown = {x: e.offsetX, y: e.offsetY};
 		});
@@ -36,11 +36,11 @@ customElements.define(name, class Chart extends XElement {
 				return;
 			this.emit(e.ctrlKey ? 'action' : 'select', this.pixelToCoord(e.offsetX, e.offsetY));
 		});
-		this.$('canvas').addEventListener('dblclick', () => {
-			if (!this.dragged)
-				this.resetRange();
+		this.$('canvas').addEventListener('dblclick', e => {
+			if (this.dragged)
+				return;
+			this.resetRange(e.shiftKey);
 		});
-		this.$('canvas').addEventListener('contextmenu', e => e.preventDefault());
 		this.background = this.background || 'white';
 		this.pointSets = [];
 		this.resetRange();
@@ -63,12 +63,12 @@ customElements.define(name, class Chart extends XElement {
 		this.draw();
 	}
 
-	resetRange() {
+	resetRange(zeroMins = false) {
 		let allPoints = this.pointSets_
 			.filter(({isPath}) => !isPath)
 			.flatMap(({points}) => points);
-		[this.minX, this.deltaX] = Chart.getRange(allPoints.map(({x}) => x));
-		[this.minY, this.deltaY] = Chart.getRange(allPoints.map(({y}) => y));
+		[this.minX, this.deltaX] = Chart.getRange(allPoints.map(({x}) => x), zeroMins);
+		[this.minY, this.deltaY] = Chart.getRange(allPoints.map(({y}) => y), zeroMins);
 		this.verifyRange();
 		this.draw();
 	}
@@ -171,8 +171,8 @@ customElements.define(name, class Chart extends XElement {
 		};
 	}
 
-	static getRange(values, buffer = .1) {
-		let min = values.length ? Math.min(...values) : 0;
+	static getRange(values, zeroMin = false, buffer = .1) {
+		let min = values.length && !zeroMin ? Math.min(...values) : 0;
 		let max = values.length ? Math.max(...values) : 10;
 		let delta = max - min;
 		return [min - delta * buffer, delta + delta * buffer * 2]
