@@ -31,7 +31,7 @@
 
 	$('x-inputs').addEventListener('submit', async e => {
 		if (!e.detail.add)
-			$('x-results').itemsClear();
+			$('x-results').clearItems();
 		await Promise.all($('x-inputs')
 			.getQueries()
 			.map(submitQuery));
@@ -47,6 +47,7 @@
 
 	// todo
 	// sharing filter groups
+	// style results (scroll bar and progress bar)
 	// convert armor and socket requirements to fuzzy query
 	// assume quality 0%
 	// free affixes

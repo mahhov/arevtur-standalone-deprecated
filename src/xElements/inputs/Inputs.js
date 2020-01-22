@@ -107,7 +107,7 @@ customElements.define(name, class Inputs extends XElement {
 			.map(inputSet => {
 				let {type, maxPrice, weightEntries, andEntries, notEntries} = inputSet.queryParams;
 				maxPrice = overridePrice !== null ? overridePrice : maxPrice;
-				let weights = Object.fromEntries([...weightEntries, ...inputSet.sharedWeightEntries]);
+				let weights = Object.fromEntries([...weightEntries, ...this.sharedWeightEntries]);
 				let ands = Object.fromEntries(andEntries);
 				let nots = Object.fromEntries(notEntries);
 				return DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice);

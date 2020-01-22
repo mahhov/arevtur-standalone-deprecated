@@ -3214,7 +3214,7 @@ customElements.define(name, class Inputs extends XElement {
 			});
 			itemListing.addEventListener('hover', e => {
 				this.itemsData.hoverItem(e.detail && itemData);
-				renderItemsData(true);
+				this.renderItemsData(true);
 			});
 			itemListing.itemData = itemData;
 		});
