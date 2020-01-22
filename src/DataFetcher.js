@@ -2,6 +2,8 @@ const https = require('https');
 const querystring = require('querystring');
 const ApiConstants = require('./ApiConstants');
 
+let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 let get = (endpoint, queryParams = {}) =>
 	new Promise((resolve, reject) => {
 		https.get(`${endpoint}?${querystring.stringify(queryParams)}`, res => {
@@ -19,6 +21,19 @@ let get = (endpoint, queryParams = {}) =>
 			});
 		}).on('error', reject);
 	});
+
+let retryGet = async (endpoint, queryParams = {}, retries = [100, 200, 400]) => {
+	let tryI = 0;
+	while (true) {
+		await sleep(retries[tryI]);
+		try {
+			return await get(endpoint, queryParams);
+		} catch (e) {
+			if (++tryI >= retries.length)
+				throw e;
+		}
+	}
+};
 
 let post = (endpoint, data) =>
 	new Promise((resolve, reject) => {
@@ -124,7 +139,7 @@ let getItems = async (query, progressCallback) => {
 				'pseudos[]': [ApiConstants.SHORT_PROPERTIES.totalEleRes, ApiConstants.SHORT_PROPERTIES.flatLife],
 			};
 			let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
-			let data2 = await get(endpoint2, queryParams);
+			let data2 = await retryGet(endpoint2, queryParams);
 			progressCallback(`Received grouped item query # ${i}.`, (1 + ++receivedCount) / (requestGroups.length + 1));
 			return data2.result.map(parseItem);
 		});
