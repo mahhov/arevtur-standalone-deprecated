@@ -1,0 +1,65 @@
+{
+  "query": {
+    "status": {
+      "option": "any"
+    },
+    "stats": [
+      {
+        "type": "weight",
+        "filters": [
+          {
+            "id": "pseudo.pseudo_total_elemental_resistance",
+            "value": {
+              "weight": 1
+            },
+            "disabled": false
+          },
+          {
+            "id": "pseudo.pseudo_total_life",
+            "value": {
+              "weight": 2
+            },
+            "disabled": false
+          }
+        ],
+        "disabled": false,
+        "value": {
+          "min": 100
+        }
+      },
+      {
+        "filters": [
+          {
+            "id": "pseudo.pseudo_increased_movement_speed",
+            "value": {
+              "min": 30
+            },
+            "disabled": false
+          }
+        ],
+        "type": "and"
+      },
+      {
+        "filters": [
+          {
+            "id": "explicit.stat_4007482102"
+          }
+        ],
+        "type": "not"
+      }
+    ],
+    "filters": {
+      "type_filters": {
+        "disabled": false,
+        "filters": {
+          "category": {
+            "option": "armour.boots"
+          }
+        }
+      }
+    }
+  },
+  "sort": {
+    "statgroup.0": "desc"
+  }
+}

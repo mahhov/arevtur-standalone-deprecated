@@ -1,0 +1,2124 @@
+{
+  "result": [
+    {
+      "id": "42a6e1d28ef6964afa6ae3e3131715ea831f87ca08acb0ec559fb93f9b1f9685",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-20T15:09:24Z",
+        "stash": {
+          "name": "$\u041f\u0440\u043e\u0434\u0430\u0436\u0430$",
+          "x": 0,
+          "y": 8
+        },
+        "whisper": "@\u0412\u044d\u0434\u044c\u043c\u0430_\u0437\u043e\u043c\u0431\u0438 \u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, \u0445\u043e\u0447\u0443 \u043a\u0443\u043f\u0438\u0442\u044c \u0443 \u0432\u0430\u0441 <<set:\u0441\u043f\u0430\u0441\u0438\u0442\u0435\u043b\u044c>> \u0441\u043f\u0430\u0441\u0438\u0442\u0435\u043b\u044c \u0428\u043b\u0435\u043c \u043a\u043e\u043c\u0430\u043d\u0434\u0438\u0440\u0430 \u0437\u0430 1 jew \u0432 \u043b\u0438\u0433\u0435 \u041c\u0435\u0442\u0430\u043c\u043e\u0440\u0444 (\u0441\u0435\u043a\u0446\u0438\u044f \"$\u041f\u0440\u043e\u0434\u0430\u0436\u0430$\"; \u043f\u043e\u0437\u0438\u0446\u0438\u044f: 1 \u0441\u0442\u043e\u043b\u0431\u0435\u0446, 9 \u0440\u044f\u0434)",
+        "account": {
+          "name": "Jellyfish88",
+          "lastCharacterName": "\u0412\u044d\u0434\u044c\u043c\u0430_\u0437\u043e\u043c\u0431\u0438",
+          "online": null,
+          "language": "ru_RU"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "jew"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetStrDex7.png?scale=1&w=2&h=2&v=46850cbf68128793111cf393ddca4c3f",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "S",
+            "sColour": "R"
+          }
+        ],
+        "name": "Plague Salvation",
+        "typeLine": "Lacquered Helmet",
+        "identified": true,
+        "ilvl": 71,
+        "note": "~price 1 jew",
+        "properties": [
+          {
+            "name": "Armour",
+            "values": [
+              [
+                "138",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 16
+          },
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "138",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "51",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Str",
+            "values": [
+              [
+                "57",
+                0
+              ]
+            ],
+            "displayMode": 1
+          },
+          {
+            "name": "Dex",
+            "values": [
+              [
+                "57",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "+50 to maximum Life",
+          "+18% to Fire Resistance",
+          "15% increased Stun and Block Recovery"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 166,
+          "ev_aug": true,
+          "ar": 166,
+          "ar_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Robust",
+                "tier": "P5",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3299347043",
+                    "min": 50,
+                    "max": 59
+                  }
+                ]
+              },
+              {
+                "name": "of the Drake",
+                "tier": "S6",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3372524247",
+                    "min": 18,
+                    "max": 23
+                  }
+                ]
+              },
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of Stone Skin",
+                "tier": "S5",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_2511217560",
+                    "min": 14,
+                    "max": 16
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  2
+                ]
+              ],
+              [
+                "explicit.stat_3299347043",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_3372524247",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_2511217560",
+                [
+                  3
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "pseudo.pseudo_total_life",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpQbGFndWUgU2FsdmF0aW9uDQpMYWNxdWVyZWQgSGVsbWV0DQotLS0tLS0tLQ0KQXJtb3VyOiAxMzgNCkV2YXNpb24gUmF0aW5nOiAxMzgNCi0tLS0tLS0tDQpSZXF1aXJlbWVudHM6DQpMZXZlbDogNTENClN0cjogNTcNCkRleDogNTcNCi0tLS0tLS0tDQpTb2NrZXRzOiBHLUctRy1SIA0KLS0tLS0tLS0NCkl0ZW0gTGV2ZWw6IDcxDQotLS0tLS0tLQ0KKzEgdG8gTGV2ZWwgb2YgU29ja2V0ZWQgTWluaW9uIEdlbXMNCis1MCB0byBtYXhpbXVtIExpZmUNCisxOCUgdG8gRmlyZSBSZXNpc3RhbmNlDQoxNSUgaW5jcmVhc2VkIFN0dW4gYW5kIEJsb2NrIFJlY292ZXJ5DQotLS0tLS0tLQ0KTm90ZTogfnByaWNlIDEgamV3DQo="
+        },
+        "pseudoMods": [
+          "(pseudo) +18% total Elemental Resistance",
+          "(pseudo) +50 total maximum Life",
+          "Sum: 568"
+        ]
+      }
+    },
+    {
+      "id": "1281b51a36bf1201038db70b20d0ad8b04a16dddf7e6848819f7720698a02294",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-14T15:48:18Z",
+        "stash": {
+          "name": "~price 1 chance",
+          "x": 10,
+          "y": 8
+        },
+        "whisper": "@Arthemist_Morph_Necro Hi, I would like to buy your Brimstone Guardian Iron Mask listed for 1 chance in Metamorph (stash tab \"~price 1 chance\"; position: left 11, top 9)",
+        "account": {
+          "name": "Arthemist_Sapphire",
+          "lastCharacterName": "Arthemist_Morph_Necro",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "chance"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDexInt3.png?scale=1&w=2&h=2&v=a7a448b300c687ae9917532efce52223",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "I",
+            "sColour": "B"
+          },
+          {
+            "group": 1,
+            "attr": "I",
+            "sColour": "B"
+          }
+        ],
+        "name": "Brimstone Guardian",
+        "typeLine": "Iron Mask",
+        "identified": true,
+        "ilvl": 24,
+        "properties": [
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "48",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          },
+          {
+            "name": "Energy Shield",
+            "values": [
+              [
+                "10",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 18
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "17",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Dex",
+            "values": [
+              [
+                "21",
+                0
+              ]
+            ],
+            "displayMode": 1
+          },
+          {
+            "name": "Int",
+            "values": [
+              [
+                "21",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "10% increased Global Accuracy Rating",
+          "+36 to maximum Life",
+          "+17% to Cold Resistance",
+          "5% increased Light Radius"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 58,
+          "ev_aug": true,
+          "es": 12,
+          "es_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of Shining",
+                "tier": "S3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_624954515",
+                    "min": 9,
+                    "max": 11
+                  },
+                  {
+                    "hash": "explicit.stat_1263695895",
+                    "min": 5,
+                    "max": 5
+                  }
+                ]
+              },
+              {
+                "name": "Stalwart",
+                "tier": "P7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3299347043",
+                    "min": 30,
+                    "max": 39
+                  }
+                ]
+              },
+              {
+                "name": "of the Seal",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_4220027924",
+                    "min": 12,
+                    "max": 17
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_624954515",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_3299347043",
+                [
+                  2
+                ]
+              ],
+              [
+                "explicit.stat_4220027924",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_1263695895",
+                [
+                  1
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "pseudo.pseudo_total_life",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpCcmltc3RvbmUgR3VhcmRpYW4NCklyb24gTWFzaw0KLS0tLS0tLS0NCkV2YXNpb24gUmF0aW5nOiA0OA0KRW5lcmd5IFNoaWVsZDogMTANCi0tLS0tLS0tDQpSZXF1aXJlbWVudHM6DQpMZXZlbDogMTcNCkRleDogMjENCkludDogMjENCi0tLS0tLS0tDQpTb2NrZXRzOiBHLUIgQiANCi0tLS0tLS0tDQpJdGVtIExldmVsOiAyNA0KLS0tLS0tLS0NCisxIHRvIExldmVsIG9mIFNvY2tldGVkIE1pbmlvbiBHZW1zDQoxMCUgaW5jcmVhc2VkIEdsb2JhbCBBY2N1cmFjeSBSYXRpbmcNCiszNiB0byBtYXhpbXVtIExpZmUNCisxNyUgdG8gQ29sZCBSZXNpc3RhbmNlDQo1JSBpbmNyZWFzZWQgTGlnaHQgUmFkaXVzDQo="
+        },
+        "pseudoMods": [
+          "(pseudo) +17% total Elemental Resistance",
+          "(pseudo) +36 total maximum Life",
+          "Sum: 525"
+        ]
+      }
+    },
+    {
+      "id": "32e06de749cce550302b9f0fe524a80b5aae3a7f5ec9dac4dfe552fa92d45cb6",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-13T23:25:55Z",
+        "stash": {
+          "name": "~price 1 chance",
+          "x": 10,
+          "y": 10
+        },
+        "whisper": "@Arthemist_Morph_Necro Hi, I would like to buy your Dire Crest Iron Mask listed for 1 chance in Metamorph (stash tab \"~price 1 chance\"; position: left 11, top 11)",
+        "account": {
+          "name": "Arthemist_Sapphire",
+          "lastCharacterName": "Arthemist_Morph_Necro",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "chance"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDexInt3.png?scale=1&w=2&h=2&v=a7a448b300c687ae9917532efce52223",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "I",
+            "sColour": "B"
+          },
+          {
+            "group": 1,
+            "attr": "I",
+            "sColour": "B"
+          }
+        ],
+        "name": "Dire Crest",
+        "typeLine": "Iron Mask",
+        "identified": true,
+        "ilvl": 17,
+        "properties": [
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "52",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          },
+          {
+            "name": "Energy Shield",
+            "values": [
+              [
+                "14",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 18
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "17",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Dex",
+            "values": [
+              [
+                "21",
+                0
+              ]
+            ],
+            "displayMode": 1
+          },
+          {
+            "name": "Int",
+            "values": [
+              [
+                "21",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "15% increased Global Accuracy Rating",
+          "+4 to Evasion Rating",
+          "+4 to maximum Energy Shield",
+          "+13% to Fire Resistance",
+          "Reflects 9 Physical Damage to Melee Attackers",
+          "10% increased Light Radius"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 62,
+          "ev_aug": true,
+          "es": 17,
+          "es_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of Light",
+                "tier": "S2",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_624954515",
+                    "min": 12,
+                    "max": 15
+                  },
+                  {
+                    "hash": "explicit.stat_1263695895",
+                    "min": 10,
+                    "max": 10
+                  }
+                ]
+              },
+              {
+                "name": "Will-o-wisp's",
+                "tier": "P4",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_53045048",
+                    "min": 3,
+                    "max": 7
+                  },
+                  {
+                    "hash": "explicit.stat_4052037485",
+                    "min": 3,
+                    "max": 4
+                  }
+                ]
+              },
+              {
+                "name": "Spiny",
+                "tier": "P1",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3767873853",
+                    "min": 5,
+                    "max": 10
+                  }
+                ]
+              },
+              {
+                "name": "of the Salamander",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3372524247",
+                    "min": 12,
+                    "max": 17
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_624954515",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_53045048",
+                [
+                  2
+                ]
+              ],
+              [
+                "explicit.stat_4052037485",
+                [
+                  2
+                ]
+              ],
+              [
+                "explicit.stat_3372524247",
+                [
+                  4
+                ]
+              ],
+              [
+                "explicit.stat_3767873853",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_1263695895",
+                [
+                  1
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpEaXJlIENyZXN0DQpJcm9uIE1hc2sNCi0tLS0tLS0tDQpFdmFzaW9uIFJhdGluZzogNTIgKGF1Z21lbnRlZCkNCkVuZXJneSBTaGllbGQ6IDE0IChhdWdtZW50ZWQpDQotLS0tLS0tLQ0KUmVxdWlyZW1lbnRzOg0KTGV2ZWw6IDE3DQpEZXg6IDIxDQpJbnQ6IDIxDQotLS0tLS0tLQ0KU29ja2V0czogRy1CIEIgDQotLS0tLS0tLQ0KSXRlbSBMZXZlbDogMTcNCi0tLS0tLS0tDQorMSB0byBMZXZlbCBvZiBTb2NrZXRlZCBNaW5pb24gR2Vtcw0KMTUlIGluY3JlYXNlZCBHbG9iYWwgQWNjdXJhY3kgUmF0aW5nDQorNCB0byBFdmFzaW9uIFJhdGluZw0KKzQgdG8gbWF4aW11bSBFbmVyZ3kgU2hpZWxkDQorMTMlIHRvIEZpcmUgUmVzaXN0YW5jZQ0KUmVmbGVjdHMgOSBQaHlzaWNhbCBEYW1hZ2UgdG8gTWVsZWUgQXR0YWNrZXJzDQoxMCUgaW5jcmVhc2VkIExpZ2h0IFJhZGl1cw0K"
+        },
+        "pseudoMods": [
+          "(pseudo) +13% total Elemental Resistance",
+          "Sum: 413"
+        ]
+      }
+    },
+    {
+      "id": "e34d9384b93c0441ba56848191ad1b16cf45ebd73b485fbcf4917b389fee33f3",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-19T01:19:05Z",
+        "stash": {
+          "name": "~price 1 alch",
+          "x": 3,
+          "y": 10
+        },
+        "whisper": "@Idrxplxl Hi, I would like to buy your Blight Veil Barbute Helmet listed for 1 alt in Metamorph (stash tab \"~price 1 alch\"; position: left 4, top 11)",
+        "account": {
+          "name": "Azincourt12",
+          "lastCharacterName": "Idrxplxl",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "alt"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetStr3.png?scale=1&w=2&h=2&v=14950decf84fa158acc759b4cbd78c24",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "S",
+            "sColour": "R"
+          }
+        ],
+        "name": "Blight Veil",
+        "typeLine": "Barbute Helmet",
+        "identified": true,
+        "ilvl": 20,
+        "note": "~price 1 alt",
+        "properties": [
+          {
+            "name": "Quality",
+            "values": [
+              [
+                "+12%",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 6
+          },
+          {
+            "name": "Armour",
+            "values": [
+              [
+                "118",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 16
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "18",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Str",
+            "values": [
+              [
+                "42",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "16% increased Armour",
+          "+12 to maximum Life",
+          "22% increased Stun and Block Recovery"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ar": 125,
+          "ar_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Crab's",
+                "tier": "P5",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_1062208444",
+                    "min": 14,
+                    "max": 20
+                  },
+                  {
+                    "hash": "explicit.stat_2511217560",
+                    "min": 8,
+                    "max": 9
+                  }
+                ]
+              },
+              {
+                "name": "Healthy",
+                "tier": "P9",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3299347043",
+                    "min": 10,
+                    "max": 19
+                  }
+                ]
+              },
+              {
+                "name": "of Thick Skin",
+                "tier": "S6",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_2511217560",
+                    "min": 11,
+                    "max": 13
+                  }
+                ]
+              },
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_1062208444",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_3299347043",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_2511217560",
+                [
+                  0,
+                  2
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_life",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpCbGlnaHQgVmVpbA0KQmFyYnV0ZSBIZWxtZXQNCi0tLS0tLS0tDQpRdWFsaXR5OiArMTIlIChhdWdtZW50ZWQpDQpBcm1vdXI6IDExOCAoYXVnbWVudGVkKQ0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiAxOA0KU3RyOiA0Mg0KLS0tLS0tLS0NClNvY2tldHM6IFIgDQotLS0tLS0tLQ0KSXRlbSBMZXZlbDogMjANCi0tLS0tLS0tDQorMSB0byBMZXZlbCBvZiBTb2NrZXRlZCBNaW5pb24gR2Vtcw0KMTYlIGluY3JlYXNlZCBBcm1vdXINCisxMiB0byBtYXhpbXVtIExpZmUNCjIyJSBpbmNyZWFzZWQgU3R1biBhbmQgQmxvY2sgUmVjb3ZlcnkNCi0tLS0tLS0tDQpOb3RlOiB+cHJpY2UgMSBhbHQNCg=="
+        },
+        "pseudoMods": [
+          "(pseudo) +12 total maximum Life",
+          "Sum: 436"
+        ]
+      }
+    },
+    {
+      "id": "0c0e5c1581a0715f853b9c67865dc9edd49707e5e24e7e68e40f5de2abdcd238",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-18T10:38:15Z",
+        "stash": {
+          "name": "~price 1 alt",
+          "x": 4,
+          "y": 3
+        },
+        "whisper": "@midimorpher Hi, I would like to buy your Blood Corona Hunter Hood listed for 1 alt in Metamorph (stash tab \"~price 1 alt\"; position: left 5, top 4)",
+        "account": {
+          "name": "midijamz",
+          "lastCharacterName": "midimorpher",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "alt"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDex5.png?scale=1&w=2&h=2&v=ef5c6816a636e2ab45fcfd879444834c",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 1,
+            "attr": "D",
+            "sColour": "G"
+          }
+        ],
+        "name": "Blood Corona",
+        "typeLine": "Hunter Hood",
+        "identified": true,
+        "ilvl": 55,
+        "properties": [
+          {
+            "name": "Quality",
+            "values": [
+              [
+                "+11%",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 6
+          },
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "225",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "43",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Dex",
+            "values": [
+              [
+                "87",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "+19 to Dexterity",
+          "+29 to Intelligence",
+          "+210 to Accuracy Rating",
+          "+81 to maximum Life"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 244,
+          "ev_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "of the Fox",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3261801346",
+                    "min": 18,
+                    "max": 22
+                  }
+                ]
+              },
+              {
+                "name": "of the Sniper",
+                "tier": "S4",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_803737631",
+                    "min": 166,
+                    "max": 250
+                  }
+                ]
+              },
+              {
+                "name": "Athlete's",
+                "tier": "P2",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3299347043",
+                    "min": 80,
+                    "max": 89
+                  }
+                ]
+              },
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of the Philosopher",
+                "tier": "S6",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_328541901",
+                    "min": 28,
+                    "max": 32
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_3261801346",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_328541901",
+                [
+                  4
+                ]
+              ],
+              [
+                "explicit.stat_803737631",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_3299347043",
+                [
+                  2
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_life",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpCbG9vZCBDb3JvbmENCkh1bnRlciBIb29kDQotLS0tLS0tLQ0KUXVhbGl0eTogKzExJSAoYXVnbWVudGVkKQ0KRXZhc2lvbiBSYXRpbmc6IDIyNSAoYXVnbWVudGVkKQ0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiA0Mw0KRGV4OiA4Nw0KLS0tLS0tLS0NClNvY2tldHM6IEcgRyANCi0tLS0tLS0tDQpJdGVtIExldmVsOiA1NQ0KLS0tLS0tLS0NCisxIHRvIExldmVsIG9mIFNvY2tldGVkIE1pbmlvbiBHZW1zDQorMTkgdG8gRGV4dGVyaXR5DQorMjkgdG8gSW50ZWxsaWdlbmNlDQorMjEwIHRvIEFjY3VyYWN5IFJhdGluZw0KKzgxIHRvIG1heGltdW0gTGlmZQ0K"
+        },
+        "pseudoMods": [
+          "(pseudo) +81 total maximum Life",
+          "Sum: 643"
+        ]
+      }
+    },
+    {
+      "id": "08f2e831d0504e5af82f85199b2960b4dc8572afcbf3ecb9ae73b15c4d658657",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-14T14:59:00Z",
+        "stash": {
+          "name": "~b\/o 1 alt",
+          "x": 0,
+          "y": 0
+        },
+        "whisper": "@RAIZELXX Hi, I would like to buy your Onslaught Dome Leather Cap listed for 1 alt in Metamorph (stash tab \"~b\/o 1 alt\"; position: left 1, top 1)",
+        "account": {
+          "name": "IAMCAIN",
+          "lastCharacterName": "RAIZELXX",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~b\/o",
+          "amount": 1,
+          "currency": "alt"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDex1.png?scale=1&w=2&h=2&v=657e0a19ee26b2a06f3a16028ca55104",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "S",
+            "sColour": "R"
+          },
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          }
+        ],
+        "name": "Onslaught Dome",
+        "typeLine": "Leather Cap",
+        "identified": true,
+        "ilvl": 18,
+        "properties": [
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "19",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "11",
+                0
+              ]
+            ],
+            "displayMode": 0
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "Regenerate 1.1 Life per second",
+          "+13% to Cold Resistance",
+          "+15% to Lightning Resistance",
+          "Reflects 10 Physical Damage to Melee Attackers"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 23,
+          "ev_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of the Newt",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3325883026",
+                    "min": 1,
+                    "max": 2
+                  }
+                ]
+              },
+              {
+                "name": "Spiny",
+                "tier": "P1",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3767873853",
+                    "min": 5,
+                    "max": 10
+                  }
+                ]
+              },
+              {
+                "name": "of the Seal",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_4220027924",
+                    "min": 12,
+                    "max": 17
+                  }
+                ]
+              },
+              {
+                "name": "of the Squall",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_1671376347",
+                    "min": 12,
+                    "max": 17
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_3325883026",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_4220027924",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_1671376347",
+                [
+                  4
+                ]
+              ],
+              [
+                "explicit.stat_3767873853",
+                [
+                  2
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpPbnNsYXVnaHQgRG9tZQ0KTGVhdGhlciBDYXANCi0tLS0tLS0tDQpFdmFzaW9uIFJhdGluZzogMTkNCi0tLS0tLS0tDQpSZXF1aXJlbWVudHM6DQpMZXZlbDogMTENCi0tLS0tLS0tDQpTb2NrZXRzOiBHLVItRyANCi0tLS0tLS0tDQpJdGVtIExldmVsOiAxOA0KLS0tLS0tLS0NCisxIHRvIExldmVsIG9mIFNvY2tldGVkIE1pbmlvbiBHZW1zDQpSZWdlbmVyYXRlIDEuMSBMaWZlIHBlciBzZWNvbmQNCisxMyUgdG8gQ29sZCBSZXNpc3RhbmNlDQorMTUlIHRvIExpZ2h0bmluZyBSZXNpc3RhbmNlDQpSZWZsZWN0cyAxMCBQaHlzaWNhbCBEYW1hZ2UgdG8gTWVsZWUgQXR0YWNrZXJzDQo="
+        },
+        "pseudoMods": [
+          "(pseudo) +28% total Elemental Resistance",
+          "Sum: 428"
+        ]
+      }
+    },
+    {
+      "id": "ec7166156cf17e90ecf0898fa325861ae092c22b15e52177f99998dcf11c5060",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-15T04:22:36Z",
+        "stash": {
+          "name": "G",
+          "x": 5,
+          "y": 2
+        },
+        "whisper": "@Ruonmeth Hi, I would like to buy your Corpse Glance Rusted Coif listed for 1 alt in Metamorph (stash tab \"G\"; position: left 6, top 3)",
+        "account": {
+          "name": "Sinadril",
+          "lastCharacterName": "Ruonmeth",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~b\/o",
+          "amount": 1,
+          "currency": "alt"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetStrInt1.png?scale=1&w=2&h=2&v=018258b72ff054fd117fc86fc5d6dced",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "I",
+            "sColour": "B"
+          }
+        ],
+        "name": "Corpse Glance",
+        "typeLine": "Rusted Coif",
+        "identified": true,
+        "ilvl": 15,
+        "note": "~b\/o 1 alt",
+        "properties": [
+          {
+            "name": "Armour",
+            "values": [
+              [
+                "16",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 16
+          },
+          {
+            "name": "Energy Shield",
+            "values": [
+              [
+                "4",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 18
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "11",
+                0
+              ]
+            ],
+            "displayMode": 0
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "+13 to Intelligence",
+          "+26 to maximum Life",
+          "+6% to Fire Resistance",
+          "+10% to Lightning Resistance"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ar": 19,
+          "ar_aug": true,
+          "es": 5,
+          "es_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of the Cloud",
+                "tier": "S8",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_1671376347",
+                    "min": 6,
+                    "max": 11
+                  }
+                ]
+              },
+              {
+                "name": "of the Student",
+                "tier": "S9",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_328541901",
+                    "min": 13,
+                    "max": 17
+                  }
+                ]
+              },
+              {
+                "name": "of the Whelpling",
+                "tier": "S8",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3372524247",
+                    "min": 6,
+                    "max": 11
+                  }
+                ]
+              },
+              {
+                "name": "Sanguine",
+                "tier": "P8",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3299347043",
+                    "min": 20,
+                    "max": 29
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_328541901",
+                [
+                  2
+                ]
+              ],
+              [
+                "explicit.stat_3299347043",
+                [
+                  4
+                ]
+              ],
+              [
+                "explicit.stat_3372524247",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_1671376347",
+                [
+                  1
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "pseudo.pseudo_total_life",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpDb3Jwc2UgR2xhbmNlDQpSdXN0ZWQgQ29pZg0KLS0tLS0tLS0NCkFybW91cjogMTYNCkVuZXJneSBTaGllbGQ6IDQNCi0tLS0tLS0tDQpSZXF1aXJlbWVudHM6DQpMZXZlbDogMTENCi0tLS0tLS0tDQpTb2NrZXRzOiBHLUIgDQotLS0tLS0tLQ0KSXRlbSBMZXZlbDogMTUNCi0tLS0tLS0tDQorMSB0byBMZXZlbCBvZiBTb2NrZXRlZCBNaW5pb24gR2Vtcw0KKzEzIHRvIEludGVsbGlnZW5jZQ0KKzI2IHRvIG1heGltdW0gTGlmZQ0KKzYlIHRvIEZpcmUgUmVzaXN0YW5jZQ0KKzEwJSB0byBMaWdodG5pbmcgUmVzaXN0YW5jZQ0KLS0tLS0tLS0NCk5vdGU6IH5iL28gMSBhbHQNCg=="
+        },
+        "pseudoMods": [
+          "(pseudo) +16% total Elemental Resistance",
+          "(pseudo) +26 total maximum Life",
+          "Sum: 494"
+        ]
+      }
+    },
+    {
+      "id": "5ac767b9be5e82acf7457fed6ed4b4f995886d6915ab51e06f934476a43c167d",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-14T05:51:04Z",
+        "stash": {
+          "name": "SALE",
+          "x": 4,
+          "y": 0
+        },
+        "whisper": "@PolakPeatFarmer Hi, I would like to buy your Pain Salvation Wolf Pelt listed for 1 alt in Metamorph (stash tab \"SALE\"; position: left 5, top 1)",
+        "account": {
+          "name": "PolishPissant",
+          "lastCharacterName": "PolakPeatFarmer",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "alt"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDex4.png?scale=1&w=2&h=2&v=94df453d0a2c90166ca359ed276a9d29",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          }
+        ],
+        "name": "Pain Salvation",
+        "typeLine": "Wolf Pelt",
+        "identified": true,
+        "ilvl": 38,
+        "note": "~price 1 alt",
+        "properties": [
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "180",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "30",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Dex",
+            "values": [
+              [
+                "66",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "20% increased Evasion Rating",
+          "+19% to Fire Resistance",
+          "11% increased Stun and Block Recovery"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 210,
+          "ev_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Shade's",
+                "tier": "P7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_124859000",
+                    "min": 15,
+                    "max": 26
+                  }
+                ]
+              },
+              {
+                "name": "of the Drake",
+                "tier": "S6",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3372524247",
+                    "min": 18,
+                    "max": 23
+                  }
+                ]
+              },
+              {
+                "name": "of Thick Skin",
+                "tier": "S6",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_2511217560",
+                    "min": 11,
+                    "max": 13
+                  }
+                ]
+              },
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_124859000",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_3372524247",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_2511217560",
+                [
+                  2
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpQYWluIFNhbHZhdGlvbg0KV29sZiBQZWx0DQotLS0tLS0tLQ0KRXZhc2lvbiBSYXRpbmc6IDE4MCAoYXVnbWVudGVkKQ0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiAzMA0KRGV4OiA2Ng0KLS0tLS0tLS0NClNvY2tldHM6IEctRyANCi0tLS0tLS0tDQpJdGVtIExldmVsOiAzOA0KLS0tLS0tLS0NCisxIHRvIExldmVsIG9mIFNvY2tldGVkIE1pbmlvbiBHZW1zDQoyMCUgaW5jcmVhc2VkIEV2YXNpb24gUmF0aW5nDQorMTklIHRvIEZpcmUgUmVzaXN0YW5jZQ0KMTElIGluY3JlYXNlZCBTdHVuIGFuZCBCbG9jayBSZWNvdmVyeQ0KLS0tLS0tLS0NCk5vdGU6IH5wcmljZSAxIGFsdA0K"
+        },
+        "pseudoMods": [
+          "(pseudo) +19% total Elemental Resistance",
+          "Sum: 419"
+        ]
+      }
+    },
+    {
+      "id": "6de0ef8241654197fe0557d3f9af7c0f816a7a7ab1cc422706b4bef8c31edb53",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-16T20:42:35Z",
+        "stash": {
+          "name": "Trash 4 Cash",
+          "x": 10,
+          "y": 7
+        },
+        "whisper": "@TigerSoRoXXX Hi, I would like to buy your Skull Keep Leather Hood listed for 1 alt in Metamorph (stash tab \"Trash 4 Cash\"; position: left 11, top 8)",
+        "account": {
+          "name": "BoshoyMaliy",
+          "lastCharacterName": "TigerSoRoXXX",
+          "online": null,
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "alt"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDex3.png?scale=1&w=2&h=2&v=b83b879cfbb83a2f3fc0a7a47d51d082",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          }
+        ],
+        "name": "Skull Keep",
+        "typeLine": "Leather Hood",
+        "identified": true,
+        "ilvl": 26,
+        "note": "~price 1 alt",
+        "properties": [
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "101",
+                0
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "20",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Dex",
+            "values": [
+              [
+                "46",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "+9 to Intelligence",
+          "+12% to Lightning Resistance",
+          "16% increased Stun and Block Recovery"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 121,
+          "ev_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of the Pupil",
+                "tier": "S10",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_328541901",
+                    "min": 8,
+                    "max": 12
+                  }
+                ]
+              },
+              {
+                "name": "of the Squall",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_1671376347",
+                    "min": 12,
+                    "max": 17
+                  }
+                ]
+              },
+              {
+                "name": "of Stone Skin",
+                "tier": "S5",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_2511217560",
+                    "min": 14,
+                    "max": 16
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_328541901",
+                [
+                  1
+                ]
+              ],
+              [
+                "explicit.stat_1671376347",
+                [
+                  2
+                ]
+              ],
+              [
+                "explicit.stat_2511217560",
+                [
+                  3
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpTa3VsbCBLZWVwDQpMZWF0aGVyIEhvb2QNCi0tLS0tLS0tDQpFdmFzaW9uIFJhdGluZzogMTAxDQotLS0tLS0tLQ0KUmVxdWlyZW1lbnRzOg0KTGV2ZWw6IDIwDQpEZXg6IDQ2DQotLS0tLS0tLQ0KU29ja2V0czogRy1HIA0KLS0tLS0tLS0NCkl0ZW0gTGV2ZWw6IDI2DQotLS0tLS0tLQ0KKzEgdG8gTGV2ZWwgb2YgU29ja2V0ZWQgTWluaW9uIEdlbXMNCis5IHRvIEludGVsbGlnZW5jZQ0KKzEyJSB0byBMaWdodG5pbmcgUmVzaXN0YW5jZQ0KMTYlIGluY3JlYXNlZCBTdHVuIGFuZCBCbG9jayBSZWNvdmVyeQ0KLS0tLS0tLS0NCk5vdGU6IH5wcmljZSAxIGFsdA0K"
+        },
+        "pseudoMods": [
+          "(pseudo) +12% total Elemental Resistance",
+          "Sum: 412"
+        ]
+      }
+    },
+    {
+      "id": "9e664efb8b6f2a1041c1228ebfcf778e318f69c51fb0ed28dd298dc09dfca72f",
+      "listing": {
+        "method": "psapi",
+        "indexed": "2019-12-20T05:25:03Z",
+        "stash": {
+          "name": "~price 1 alt (9)",
+          "x": 2,
+          "y": 3
+        },
+        "whisper": "@MinorDiety Hi, I would like to buy your Woe Ward Secutor Helm listed for 1 alt in Metamorph (stash tab \"~price 1 alt (9)\"; position: left 3, top 4)",
+        "account": {
+          "name": "Barstinia",
+          "lastCharacterName": "MinorDiety",
+          "online": {
+            "league": "Metamorph"
+          },
+          "language": "en_US"
+        },
+        "price": {
+          "type": "~price",
+          "amount": 1,
+          "currency": "alt"
+        }
+      },
+      "item": {
+        "verified": true,
+        "w": 2,
+        "h": 2,
+        "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetStrDex5.png?scale=1&w=2&h=2&v=e3200470bc1107e823e1272cede22a7b",
+        "league": "Metamorph",
+        "sockets": [
+          {
+            "group": 0,
+            "attr": "S",
+            "sColour": "R"
+          },
+          {
+            "group": 0,
+            "attr": "D",
+            "sColour": "G"
+          },
+          {
+            "group": 1,
+            "attr": "S",
+            "sColour": "R"
+          }
+        ],
+        "name": "Woe Ward",
+        "typeLine": "Secutor Helm",
+        "identified": true,
+        "ilvl": 37,
+        "properties": [
+          {
+            "name": "Armour",
+            "values": [
+              [
+                "114",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 16
+          },
+          {
+            "name": "Evasion Rating",
+            "values": [
+              [
+                "123",
+                1
+              ]
+            ],
+            "displayMode": 0,
+            "type": 17
+          }
+        ],
+        "requirements": [
+          {
+            "name": "Level",
+            "values": [
+              [
+                "36",
+                0
+              ]
+            ],
+            "displayMode": 0
+          },
+          {
+            "name": "Str",
+            "values": [
+              [
+                "42",
+                0
+              ]
+            ],
+            "displayMode": 1
+          },
+          {
+            "name": "Dex",
+            "values": [
+              [
+                "42",
+                0
+              ]
+            ],
+            "displayMode": 1
+          }
+        ],
+        "explicitMods": [
+          "+1 to Level of Socketed Minion Gems",
+          "+24 to Intelligence",
+          "+16 to Armour",
+          "+25 to Evasion Rating",
+          "+23% to Lightning Resistance"
+        ],
+        "frameType": 2,
+        "extended": {
+          "ev": 148,
+          "ev_aug": true,
+          "ar": 137,
+          "ar_aug": true,
+          "mods": {
+            "explicit": [
+              {
+                "name": "Pliant",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3484657501",
+                    "min": 9,
+                    "max": 25
+                  },
+                  {
+                    "hash": "explicit.stat_53045048",
+                    "min": 9,
+                    "max": 25
+                  }
+                ]
+              },
+              {
+                "name": "of the Storm",
+                "tier": "S6",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_1671376347",
+                    "min": 18,
+                    "max": 23
+                  }
+                ]
+              },
+              {
+                "name": "Reanimator's",
+                "tier": "P3",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_3604946673",
+                    "min": 1,
+                    "max": 1
+                  }
+                ]
+              },
+              {
+                "name": "of the Augur",
+                "tier": "S7",
+                "magnitudes": [
+                  {
+                    "hash": "explicit.stat_328541901",
+                    "min": 23,
+                    "max": 27
+                  }
+                ]
+              }
+            ]
+          },
+          "hashes": {
+            "explicit": [
+              [
+                "explicit.stat_3604946673",
+                [
+                  2
+                ]
+              ],
+              [
+                "explicit.stat_328541901",
+                [
+                  3
+                ]
+              ],
+              [
+                "explicit.stat_3484657501",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_53045048",
+                [
+                  0
+                ]
+              ],
+              [
+                "explicit.stat_1671376347",
+                [
+                  1
+                ]
+              ]
+            ],
+            "pseudo": [
+              [
+                "pseudo.pseudo_total_elemental_resistance",
+                null
+              ],
+              [
+                "statgroup.0",
+                null
+              ]
+            ]
+          },
+          "text": "UmFyaXR5OiBSYXJlDQpXb2UgV2FyZA0KU2VjdXRvciBIZWxtDQotLS0tLS0tLQ0KQXJtb3VyOiAxMTQgKGF1Z21lbnRlZCkNCkV2YXNpb24gUmF0aW5nOiAxMjMgKGF1Z21lbnRlZCkNCi0tLS0tLS0tDQpSZXF1aXJlbWVudHM6DQpMZXZlbDogMzYNClN0cjogNDINCkRleDogNDINCi0tLS0tLS0tDQpTb2NrZXRzOiBSLUcgUiANCi0tLS0tLS0tDQpJdGVtIExldmVsOiAzNw0KLS0tLS0tLS0NCisxIHRvIExldmVsIG9mIFNvY2tldGVkIE1pbmlvbiBHZW1zDQorMjQgdG8gSW50ZWxsaWdlbmNlDQorMTYgdG8gQXJtb3VyDQorMjUgdG8gRXZhc2lvbiBSYXRpbmcNCisyMyUgdG8gTGlnaHRuaW5nIFJlc2lzdGFuY2UNCg=="
+        },
+        "pseudoMods": [
+          "(pseudo) +23% total Elemental Resistance",
+          "Sum: 423"
+        ]
+      }
+    }
+  ]
+}

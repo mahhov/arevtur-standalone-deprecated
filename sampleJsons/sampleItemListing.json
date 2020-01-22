@@ -1,0 +1,229 @@
+{
+  "id": "1281b51a36bf1201038db70b20d0ad8b04a16dddf7e6848819f7720698a02294",
+  "listing": {
+    "method": "psapi",
+    "indexed": "2019-12-14T15:48:18Z",
+    "stash": {
+      "name": "~price 1 chance",
+      "x": 10,
+      "y": 8
+    },
+    "whisper": "@Arthemist_Morph_Necro Hi, I would like to buy your Brimstone Guardian Iron Mask listed for 1 chance in Metamorph (stash tab \"~price 1 chance\"; position: left 11, top 9)",
+    "account": {
+      "name": "Arthemist_Sapphire",
+      "lastCharacterName": "Arthemist_Morph_Necro",
+      "online": null,
+      "language": "en_US"
+    },
+    "price": {
+      "type": "~price",
+      "amount": 1,
+      "currency": "chance"
+    }
+  },
+  "item": {
+    "verified": true,
+    "w": 2,
+    "h": 2,
+    "icon": "https:\/\/web.poecdn.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDexInt3.png?scale=1&w=2&h=2&v=a7a448b300c687ae9917532efce52223",
+    "league": "Metamorph",
+    "sockets": [
+      {
+        "group": 0,
+        "attr": "D",
+        "sColour": "G"
+      },
+      {
+        "group": 0,
+        "attr": "I",
+        "sColour": "B"
+      },
+      {
+        "group": 1,
+        "attr": "I",
+        "sColour": "B"
+      }
+    ],
+    "name": "Brimstone Guardian",
+    "typeLine": "Iron Mask",
+    "identified": true,
+    "ilvl": 24,
+    "properties": [
+      {
+        "name": "Evasion Rating",
+        "values": [
+          [
+            "48",
+            0
+          ]
+        ],
+        "displayMode": 0,
+        "type": 17
+      },
+      {
+        "name": "Energy Shield",
+        "values": [
+          [
+            "10",
+            0
+          ]
+        ],
+        "displayMode": 0,
+        "type": 18
+      }
+    ],
+    "requirements": [
+      {
+        "name": "Level",
+        "values": [
+          [
+            "17",
+            0
+          ]
+        ],
+        "displayMode": 0
+      },
+      {
+        "name": "Dex",
+        "values": [
+          [
+            "21",
+            0
+          ]
+        ],
+        "displayMode": 1
+      },
+      {
+        "name": "Int",
+        "values": [
+          [
+            "21",
+            0
+          ]
+        ],
+        "displayMode": 1
+      }
+    ],
+    "explicitMods": [
+      "+1 to Level of Socketed Minion Gems",
+      "10% increased Global Accuracy Rating",
+      "+36 to maximum Life",
+      "+17% to Cold Resistance",
+      "5% increased Light Radius"
+    ],
+    "frameType": 2,
+    "extended": {
+      "ev": 58,
+      "ev_aug": true,
+      "es": 12,
+      "es_aug": true,
+      "mods": {
+        "explicit": [
+          {
+            "name": "Reanimator's",
+            "tier": "P3",
+            "magnitudes": [
+              {
+                "hash": "explicit.stat_3604946673",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          },
+          {
+            "name": "of Shining",
+            "tier": "S3",
+            "magnitudes": [
+              {
+                "hash": "explicit.stat_624954515",
+                "min": 9,
+                "max": 11
+              },
+              {
+                "hash": "explicit.stat_1263695895",
+                "min": 5,
+                "max": 5
+              }
+            ]
+          },
+          {
+            "name": "Stalwart",
+            "tier": "P7",
+            "magnitudes": [
+              {
+                "hash": "explicit.stat_3299347043",
+                "min": 30,
+                "max": 39
+              }
+            ]
+          },
+          {
+            "name": "of the Seal",
+            "tier": "S7",
+            "magnitudes": [
+              {
+                "hash": "explicit.stat_4220027924",
+                "min": 12,
+                "max": 17
+              }
+            ]
+          }
+        ]
+      },
+      "hashes": {
+        "explicit": [
+          [
+            "explicit.stat_3604946673",
+            [
+              0
+            ]
+          ],
+          [
+            "explicit.stat_624954515",
+            [
+              1
+            ]
+          ],
+          [
+            "explicit.stat_3299347043",
+            [
+              2
+            ]
+          ],
+          [
+            "explicit.stat_4220027924",
+            [
+              3
+            ]
+          ],
+          [
+            "explicit.stat_1263695895",
+            [
+              1
+            ]
+          ]
+        ],
+        "pseudo": [
+          [
+            "pseudo.pseudo_total_elemental_resistance",
+            null
+          ],
+          [
+            "pseudo.pseudo_total_life",
+            null
+          ],
+          [
+            "statgroup.0",
+            null
+          ]
+        ]
+      },
+      "text": "UmFyaXR5OiBSYXJlDQpCcmltc3RvbmUgR3VhcmRpYW4NCklyb24gTWFzaw0KLS0tLS0tLS0NCkV2YXNpb24gUmF0aW5nOiA0OA0KRW5lcmd5IFNoaWVsZDogMTANCi0tLS0tLS0tDQpSZXF1aXJlbWVudHM6DQpMZXZlbDogMTcNCkRleDogMjENCkludDogMjENCi0tLS0tLS0tDQpTb2NrZXRzOiBHLUIgQiANCi0tLS0tLS0tDQpJdGVtIExldmVsOiAyNA0KLS0tLS0tLS0NCisxIHRvIExldmVsIG9mIFNvY2tldGVkIE1pbmlvbiBHZW1zDQoxMCUgaW5jcmVhc2VkIEdsb2JhbCBBY2N1cmFjeSBSYXRpbmcNCiszNiB0byBtYXhpbXVtIExpZmUNCisxNyUgdG8gQ29sZCBSZXNpc3RhbmNlDQo1JSBpbmNyZWFzZWQgTGlnaHQgUmFkaXVzDQo="
+    },
+    "pseudoMods": [
+      "(pseudo) +17% total Elemental Resistance",
+      "(pseudo) +36 total maximum Life",
+      "Sum: 525"
+    ]
+  }
+}
