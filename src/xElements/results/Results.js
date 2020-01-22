@@ -3204,16 +3204,16 @@ customElements.define(name, class Inputs extends XElement {
 		this.$('#results-count').textContent = this.itemsData.length;
 
 		XElement.clearChildren(this.$('#results-list'));
-		this.itemsData.items.forEach(itemData => {
+		this.itemsData.items.forEach((itemData, i) => {
 			let itemListing = document.createElement('x-item-listing');
 			this.$('#results-list').appendChild(itemListing);
 			itemListing.addEventListener('select', () => {
-				this.itemsData.selectItem(itemData);
+				this.itemsData.selectItem(i);
 				itemListing.selected = itemData.selected;
 				this.renderItemsDataChart();
 			});
 			itemListing.addEventListener('hover', e => {
-				this.itemsData.hoverItem(e.detail && itemData);
+				this.itemsData.hoverItem(e.detail && i);
 				this.renderItemsData(true);
 			});
 			itemListing.itemData = itemData;
