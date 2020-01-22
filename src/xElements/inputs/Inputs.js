@@ -14,6 +14,7 @@ customElements.define(name, class Inputs extends XElement {
 	connectedCallback() {
 		this.inputSetIndex = parseInt(localStorage.getItem('input-set-index')) || 0;
 		this.inputSets = JSON.parse(localStorage.getItem('input-sets')) || [{}];
+		this.sharedWeightEntries = JSON.parse(localStorage.getItem('shared-weight-entries')) || [];
 
 		this.$('#input-set-list').addEventListener('arrange', e => {
 			let [removed] = this.inputSets.splice(e.detail.from, 1);
@@ -28,6 +29,7 @@ customElements.define(name, class Inputs extends XElement {
 		});
 		this.$('#input-params').addEventListener('change', () => {
 			this.inputSets[this.inputSetIndex].queryParams = this.$('#input-params').queryParams;
+			this.sharedWeightEntries = this.$('#input-params').sharedWeightEntries;
 			this.store();
 		});
 		this.$('#submit-button').addEventListener('click', e => this.emit('submit', {add: e.ctrlKey}));
@@ -53,7 +55,7 @@ customElements.define(name, class Inputs extends XElement {
 		this.inputSets[this.inputSetIndex].active = true;
 		// todo propagating to both elements and js objects is cumbersome
 		indexSetEls[this.inputSetIndex].selected = true;
-		this.$('#input-params').loadQueryParams(this.inputSets[this.inputSetIndex].queryParams);
+		this.$('#input-params').loadQueryParams(this.inputSets[this.inputSetIndex].queryParams, this.sharedWeightEntries);
 	}
 
 	inputSetIndexFromEl(inputSetEl) {
@@ -96,6 +98,7 @@ customElements.define(name, class Inputs extends XElement {
 	store() {
 		localStorage.setItem('input-set-index', this.inputSetIndex);
 		localStorage.setItem('input-sets', JSON.stringify(this.inputSets));
+		localStorage.setItem('shared-weight-entries', JSON.stringify(this.sharedWeightEntries));
 	}
 
 	getQueries(overridePrice = null) {
@@ -104,7 +107,7 @@ customElements.define(name, class Inputs extends XElement {
 			.map(inputSet => {
 				let {type, maxPrice, weightEntries, andEntries, notEntries} = inputSet.queryParams;
 				maxPrice = overridePrice !== null ? overridePrice : maxPrice;
-				let weights = Object.fromEntries(weightEntries);
+				let weights = Object.fromEntries([...weightEntries, ...inputSet.sharedWeightEntries]);
 				let ands = Object.fromEntries(andEntries);
 				let nots = Object.fromEntries(notEntries);
 				return DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice);

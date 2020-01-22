@@ -28,7 +28,7 @@ customElements.define(name, class extends XElement {
 			this.updateQueryParams();
 		});
 		this.$('#query-properties-list').addEventListener('arrange', () => {
-			this.checkLocksAndEmptyQueryProperty();
+			this.checkProperties();
 			this.updateQueryParams();
 		});
 		this.$('#add-property-button').addEventListener('click', () => this.addQueryProperty());
@@ -47,13 +47,22 @@ customElements.define(name, class extends XElement {
 		this.$('#price-input').value = value;
 	}
 
-	loadQueryParams(queryParams = {weightEntries: [], andEntries: [], notEntries: []}) {
+	loadQueryParams(queryParams = {minValue: 0, maxPrice: 0, weightEntries: [], andEntries: [], notEntries: []}, sharedWeightEntries) {
 		this.type = ApiConstants.TYPES_ID_TO_TEXT[queryParams.type] || '';
-		this.minValue = queryParams.minValue || 0;
-		this.price = queryParams.maxPrice || 0;
+		this.minValue = queryParams.minValue;
+		this.price = queryParams.maxPrice;
 		XElement.clearChildren(this.$('#query-properties-list'));
+		sharedWeightEntries
+			.forEach(([property, weight, locked]) => {
+				let queryProperty = this.addQueryProperty();
+				queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
+				queryProperty.weight = weight;
+				queryProperty.filter = 'weight';
+				queryProperty.locked = locked;
+				queryProperty.shared = true;
+			});
 		queryParams.weightEntries
-			.forEach(([property, weight, locked], i) => {
+			.forEach(([property, weight, locked]) => {
 				let queryProperty = this.addQueryProperty();
 				queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
 				queryProperty.weight = weight;
@@ -78,13 +87,21 @@ customElements.define(name, class extends XElement {
 		this.updateQueryParams();
 	}
 
-	checkLocksAndEmptyQueryProperty() {
+	checkProperties() {
 		let queryProperties = this.$$('#query-properties-list x-query-property');
+
+		// check locked checkboxes
 		queryProperties.forEach(queryProperty =>
 			queryProperty.locked = queryProperty.locked && queryProperty.previousSibling &&
 				queryProperty.weight === queryProperty.previousSibling.weight &&
 				queryProperty.filter === queryProperty.previousSibling.filter &&
 				queryProperty.filter !== 'not');
+
+		// check shared checkboxes
+		queryProperties.forEach(queryProperty =>
+			queryProperty.shared = queryProperty.shared && queryProperty.filter === 'weight');
+
+		// check if last input is empty
 		if (this.$('#query-properties-list').lastChild.property)
 			this.addQueryProperty();
 	}
@@ -104,7 +121,7 @@ customElements.define(name, class extends XElement {
 		this.$('#query-properties-list').appendChild(queryProperty);
 		queryProperty.addEventListener('change', () => {
 			this.propagateLockedWeights(queryProperty);
-			this.checkLocksAndEmptyQueryProperty();
+			this.checkProperties();
 			this.updateQueryParams();
 		});
 		queryProperty.addEventListener('lock-change', () => {
@@ -114,7 +131,11 @@ customElements.define(name, class extends XElement {
 				return queryProperty.locked = false;
 			queryProperty.weight = queryProperty.previousSibling.weight;
 			this.propagateLockedWeights(queryProperty);
-			this.checkLocksAndEmptyQueryProperty();
+			this.checkProperties();
+			this.updateQueryParams();
+		});
+		queryProperty.addEventListener('share-change', () => {
+			this.checkProperties();
 			this.updateQueryParams();
 		});
 		queryProperty.addEventListener('remove', () => {
@@ -133,10 +154,14 @@ customElements.define(name, class extends XElement {
 				weight: queryProperty.weight,
 				filter: queryProperty.filter,
 				locked: queryProperty.locked,
+				shared: queryProperty.shared,
 			})).filter(({propertyId}) => propertyId);
 
+		let sharedWeightEntries = propertyEntries
+			.filter(entry => entry.filter === 'weight' && entry.weight && entry.shared)
+			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
 		let weightEntries = propertyEntries
-			.filter(entry => entry.filter === 'weight' && entry.weight)
+			.filter(entry => entry.filter === 'weight' && entry.weight && !entry.shared)
 			.map(entry => [entry.propertyId, entry.weight, entry.locked]);
 		let andEntries = propertyEntries
 			.filter(entry => entry.filter === 'and' && entry.weight)
@@ -153,6 +178,7 @@ customElements.define(name, class extends XElement {
 			andEntries,
 			notEntries
 		};
+		this.sharedWeightEntries = sharedWeightEntries;
 
 		this.emit('change');
 	}

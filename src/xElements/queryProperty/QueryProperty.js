@@ -3,7 +3,7 @@ const {template, name} = importUtil(__filename);
 
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
-		return {property: {}, weight: {}, filter: {}, locked: {boolean: true}};
+		return {property: {}, weight: {}, filter: {}, locked: {boolean: true}, shared: {boolean: true}};
 	}
 
 	static get htmlTemplate() {
@@ -24,9 +24,13 @@ customElements.define(name, class extends XElement {
 			this.filter = this.$('#filter').value;
 			this.emit('change');
 		});
-		this.$('#lock-above').addEventListener('input', () => {
-			this.locked = this.$('#lock-above').checked;
+		this.$('#locked').addEventListener('input', () => {
+			this.locked = this.$('#locked').checked;
 			this.emit('lock-change');
+		});
+		this.$('#shared').addEventListener('input', () => {
+			this.shared = this.$('#shared').checked;
+			this.emit('share-change');
 		});
 		this.$('#remove').addEventListener('click', () => this.emit('remove'));
 		this.weight = this.weight || 0;
@@ -50,6 +54,10 @@ customElements.define(name, class extends XElement {
 	}
 
 	set locked(value) {
-		this.$('#lock-above').checked = value;
+		this.$('#locked').checked = value;
+	}
+
+	set shared(value) {
+		this.$('#shared').checked = value;
 	}
 });
