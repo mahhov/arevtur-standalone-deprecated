@@ -51,7 +51,7 @@ let post = (endpoint, data) =>
 // param ands {property: min, ...}
 // param nots {property: undefined, ...}
 let formQuery = (type, weights, ands = {}, nots = {},
-                 minValue = 0, maxPrice = 100,
+                 minValue = 0, maxPrice = 100, linked = false,
                  sort = ApiConstants.SORT.value, online = true) => {
 	let weightFilters = Object.entries(weights).map(([property, weight]) => ({
 		id: property,
@@ -92,6 +92,12 @@ let formQuery = (type, weights, ands = {}, nots = {},
 					filters: {
 						price: {max: maxPrice}
 					}
+				},
+				socket_filters: {
+					filters: {
+						links: {min: 6}
+					},
+					disabled: !linked
 				}
 			}
 		},

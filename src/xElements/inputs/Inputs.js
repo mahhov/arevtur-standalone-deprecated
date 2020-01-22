@@ -104,13 +104,13 @@ customElements.define(name, class Inputs extends XElement {
 	getQueries(overridePrice = null) {
 		return this.inputSets
 			.filter(inputSet => inputSet.active)
-			.map(inputSet => {
-				let {type, maxPrice, weightEntries, andEntries, notEntries} = inputSet.queryParams;
+			.flatMap(inputSet => {
+				let {type, maxPrice, linked, weightEntries, andEntries, notEntries} = inputSet.queryParams;
 				maxPrice = overridePrice !== null ? overridePrice : maxPrice;
 				let weights = Object.fromEntries([...weightEntries, ...this.sharedWeightEntries]);
 				let ands = Object.fromEntries(andEntries);
 				let nots = Object.fromEntries(notEntries);
-				return DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice);
+				return DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice, linked);
 			});
 	}
 });
