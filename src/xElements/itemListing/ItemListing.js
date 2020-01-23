@@ -26,7 +26,7 @@ customElements.define(name, class extends XElement {
 	set itemData(value) {
 		this.itemData_ = value;
 
-		// todo display armour/evasion/es, implicits, open affixes, craftedMods, corrupted
+		// todo open affixes, craftedMods, corrupted
 		// enchantMods, implicitMods, fracturedMods, explicitMods, craftedMods, pseudoMods, rproperties
 
 		this.$('#name-row').textContent = value.name;
@@ -38,11 +38,27 @@ customElements.define(name, class extends XElement {
 			this.$('#sockets-list').appendChild(socketDiv);
 		});
 
-		XElement.clearChildren(this.$('#details-list'));
+		// todo extract duplicated code
+
+		XElement.clearChildren(this.$('#property-list'));
+		value.properties.forEach(mod => {
+			let modDiv = document.createElement('div');
+			modDiv.textContent = mod;
+			this.$('#property-list').appendChild(modDiv);
+		});
+
+		XElement.clearChildren(this.$('#implicit-list'));
+		value.implicitMods.forEach(mod => {
+			let modDiv = document.createElement('div');
+			modDiv.textContent = mod;
+			this.$('#implicit-list').appendChild(modDiv);
+		});
+
+		XElement.clearChildren(this.$('#explicit-list'));
 		value.explicitMods.forEach(mod => {
 			let modDiv = document.createElement('div');
 			modDiv.textContent = mod;
-			this.$('#details-list').appendChild(modDiv);
+			this.$('#explicit-list').appendChild(modDiv);
 		});
 
 		this.$('#value-text').textContent = value.evalValue;

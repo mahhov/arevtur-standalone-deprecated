@@ -106,19 +106,28 @@ customElements.define(name, class Inputs extends XElement {
 		return this.inputSets
 			.filter(inputSet => inputSet.active)
 			.flatMap(inputSet => {
-				let {type, maxPrice, linked, weightEntries, andEntries, notEntries} = inputSet.queryParams;
+				let {type, maxPrice, evasion, linked, weightEntries, andEntries, notEntries} = inputSet.queryParams;
 				maxPrice = overridePrice !== null ? overridePrice : maxPrice;
 				let weights = Object.fromEntries([...weightEntries, ...this.sharedWeightEntries]);
 				let ands = Object.fromEntries(andEntries);
 				let nots = Object.fromEntries(notEntries);
+
 				let queries = [];
-				queries.push({query: DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice, linked)});
-				if (linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos) {
+				queries.push({
+					query: DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice, linked),
+					parsingOptions: {
+						evasionWeight: evasion
+					}
+				});
+				if (linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos)
 					queries.push({
 						query: DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice - ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos, false),
-						parsingOptions: {priceShift: ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos}
+						parsingOptions: {
+							priceShift: ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos,
+							evasionWeight: evasion
+						}
 					});
-				}
+
 				return queries;
 			});
 	}

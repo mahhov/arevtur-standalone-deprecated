@@ -120,7 +120,7 @@ let formQuery = (type, weights, ands = {}, nots = {},
 	}
 };
 
-let getItems = async (query, parsingOptions = {priceShift: 0}, progressCallback = () => 0) => {
+let getItems = async (query, parsingOptions = {}, progressCallback = () => 0) => {
 	try {
 		let api = 'https://www.pathofexile.com/api/trade';
 		progressCallback('Initial query.', 0);
@@ -158,23 +158,40 @@ let parseItem = (itemData, parsingOptions) => {
 		a[v.group].push(v.sColour);
 		return a;
 	}, []);
+	let properties = itemData.item.properties.map(({name, values: [[value]]}) => `${name} ${value}`);
 	let pseudoMods = itemData.item.pseudoMods || [];
+	let priceShift = parsingOptions.priceShift || 0;
+
 	return {
 		id: itemData.id,
 		name: itemData.item.name,
 		sockets,
 		itemLevel: itemData.item.ilvl,
+		properties,
 		implicitMods: itemData.item.implicitMods || [],
 		explicitMods: itemData.item.explicitMods || [],
 		pseudoMods: pseudoMods,
 		accountText: `${itemData.listing.account.name} > ${itemData.listing.account.lastCharacterName}`,
 		whisper: itemData.listing.whisper,
 		note: itemData.item.note,
-		priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${parsingOptions.priceShift ? ` + ${parsingOptions.priceShift}` : ''}`,
-		evalValue: evalValue(pseudoMods),
-		evalPrice: evalPrice(itemData.listing.price) + parsingOptions.priceShift,
+		// todo change text to: 3 fus + fated links (#c)
+		priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${priceShift ? ` + ${priceShift}` : ''}`,
+		evalValue: evalValue(pseudoMods) + evalPropertyValues(itemData.item.properties, parsingOptions),
+		evalPrice: evalPrice(itemData.listing.price) + priceShift,
+		debug: itemData,
 	};
 };
+
+evalPropertyValues = (properties, parsingOptions) =>
+	[
+		['Evasion Rating', 'evasion'],
+		['Energy Shield', 'energyShield'],
+		['Armour', 'armour'],
+	].map(([propertyName, parseName]) => {
+		let weight = parsingOptions[parseName + 'Weight'] || 0;
+		let property = properties.find(({name}) => name === propertyName);
+		return property ? property.values[0][0] * weight : 0;
+	}).reduce((sum, v) => sum + v);
 
 let evalValue = pseudoMods => {
 	let pseudoSum = pseudoMods.find(mod => mod.startsWith('Sum: '));
