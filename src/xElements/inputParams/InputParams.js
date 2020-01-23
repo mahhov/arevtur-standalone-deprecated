@@ -4,9 +4,23 @@ const ApiConstants = require('../../ApiConstants');
 
 const QUERY_PROPERTY_TEXTS = ApiConstants.PROPERTIES_FLAT.map(property => property.text);
 
+const propertyTuples = [
+	['evasionWeight', '#evasion-input'],
+	['armourWeight', '#armour-input'],
+	['energyShieldWeight', '#energy-shield-input'],
+];
+
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
-		return {type: {}, minValue: {}, price: {}, evasion: {}, linked: {boolean: true}};
+		return {
+			type: {},
+			minValue: {},
+			price: {},
+			evasionWeight: {},
+			armourWeight: {},
+			energyShieldWeight: {},
+			linked: {boolean: true}
+		};
 	}
 
 	static get htmlTemplate() {
@@ -27,9 +41,11 @@ customElements.define(name, class extends XElement {
 			this.price = this.$('#price-input').value;
 			this.updateQueryParams();
 		});
-		this.$('#evasion-input').addEventListener('change', () => {
-			this.evasion = this.$('#evasion-input').value;
-			this.updateQueryParams();
+		propertyTuples.forEach(([property, query]) => {
+			this.$(query).addEventListener('change', () => {
+				this[property] = this.$(query).value;
+				this.updateQueryParams();
+			});
 		});
 		this.$('#linked-check').addEventListener('change', () => {
 			this.linked = this.$('#linked-check').checked;
@@ -55,19 +71,27 @@ customElements.define(name, class extends XElement {
 		this.$('#price-input').value = value;
 	}
 
-	set evasion(value) {
+	set evasionWeight(value) {
 		this.$('#evasion-input').value = value;
+	}
+
+	set armourWeight(value) {
+		this.$('#armour-input').value = value;
+	}
+
+	set energyShieldWeight(value) {
+		this.$('#energy-shield-input').value = value;
 	}
 
 	set linked(value) {
 		this.$('#linked-check').checked = value;
 	}
 
-	loadQueryParams(queryParams = {minValue: 0, maxPrice: 0, evasion: 0, linked: false, weightEntries: [], andEntries: [], notEntries: []}, sharedWeightEntries) {
+	loadQueryParams(queryParams = {minValue: 0, maxPrice: 0, propertyWeights: {}, linked: false, weightEntries: [], andEntries: [], notEntries: []}, sharedWeightEntries) {
 		this.type = ApiConstants.TYPES_ID_TO_TEXT[queryParams.type] || '';
 		this.minValue = queryParams.minValue;
 		this.price = queryParams.maxPrice;
-		this.evasion = queryParams.evasion;
+		propertyTuples.forEach(([property]) => this[property] = queryParams.propertyWeights[property]);
 		this.linked = queryParams.linked;
 		XElement.clearChildren(this.$('#query-properties-list'));
 		sharedWeightEntries
@@ -166,6 +190,9 @@ customElements.define(name, class extends XElement {
 	updateQueryParams() {
 		let type = ApiConstants.TYPES_TEXT_TO_ID[this.type];
 
+		let propertyWeights = Object.fromEntries(propertyTuples
+			.map(([property]) => [property, this[property]]));
+
 		let propertyEntries = [...this.$$('#query-properties-list x-query-property')]
 			.map(queryProperty => ({
 				propertyId: ApiConstants.PROPERTIES_TEXT_TO_ID[queryProperty.property],
@@ -192,7 +219,7 @@ customElements.define(name, class extends XElement {
 			type,
 			minValue: this.minValue,
 			maxPrice: this.price,
-			evasion: this.evasion,
+			propertyWeights,
 			linked: this.linked,
 			weightEntries,
 			andEntries,

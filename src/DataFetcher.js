@@ -176,19 +176,19 @@ let parseItem = (itemData, parsingOptions) => {
 		note: itemData.item.note,
 		// todo change text to: 3 fus + fated links (#c)
 		priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${priceShift ? ` + ${priceShift}` : ''}`,
-		evalValue: evalValue(pseudoMods) + evalPropertyValues(itemData.item.properties, parsingOptions),
+		evalValue: evalValue(pseudoMods) + evalPropertyValues(itemData.item.properties, parsingOptions.propertyWeights),
 		evalPrice: evalPrice(itemData.listing.price) + priceShift,
 		debug: itemData,
 	};
 };
 
-evalPropertyValues = (properties, parsingOptions) =>
+let evalPropertyValues = (properties, propertyWeights) =>
 	[
-		['Evasion Rating', 'evasion'],
-		['Energy Shield', 'energyShield'],
-		['Armour', 'armour'],
+		['Evasion Rating', 'evasionWeight'],
+		['Energy Shield', 'energyShieldWeight'],
+		['Armour', 'armourWeight'],
 	].map(([propertyName, parseName]) => {
-		let weight = parsingOptions[parseName + 'Weight'] || 0;
+		let weight = propertyWeights[parseName] || 0;
 		let property = properties.find(({name}) => name === propertyName);
 		return property ? property.values[0][0] * weight : 0;
 	}).reduce((sum, v) => sum + v);
