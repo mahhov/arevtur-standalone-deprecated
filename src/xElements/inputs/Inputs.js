@@ -1,5 +1,6 @@
 const {XElement, importUtil} = require('xx-element');
 const {template, name} = importUtil(__filename);
+const ApiConstants = require('../../ApiConstants');
 const DataFetcher = require('../../DataFetcher');
 
 customElements.define(name, class Inputs extends XElement {
@@ -110,7 +111,15 @@ customElements.define(name, class Inputs extends XElement {
 				let weights = Object.fromEntries([...weightEntries, ...this.sharedWeightEntries]);
 				let ands = Object.fromEntries(andEntries);
 				let nots = Object.fromEntries(notEntries);
-				return DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice, linked);
+				let queries = [];
+				queries.push({query: DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice, linked)});
+				if (linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos) {
+					queries.push({
+						query: DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice - ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos, false),
+						parsingOptions: {priceShift: ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos}
+					});
+				}
+				return queries;
 			});
 	}
 });

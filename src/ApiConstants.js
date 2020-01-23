@@ -29644,6 +29644,7 @@ const CURRENCIES = {
 	alteration: {id: 'alt', chaos: 1 / 8},
 	chance: {id: 'chance', chaos: 1 / 8},
 	perandus: {id: 'p', chaos: 1 / 100},
+	fatedConnectionsProphecy: {chaos: 475},
 };
 
 module.exports = {

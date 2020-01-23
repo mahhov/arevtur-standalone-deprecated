@@ -12,7 +12,14 @@ class ItemsData {
 	join(items) {
 		// update items
 		this.items = this.items.concat(items)
-			.filter((v, i, a) => a.findIndex(vv => vv.id === v.id) === i)
+			.filter((v, i, a) => {
+				let copies = a.filter((vv, i) => vv.id === v.id);
+				if (copies[0] !== v)
+					return false;
+				v.evalValue = Math.max(...copies.map(vv => vv.evalValue));
+				v.evalPrice = Math.min(...copies.map(vv => vv.evalPrice));
+				return true;
+			})
 			// high to low values, low to high prices
 			.sort((a, b) => b.evalValue - a.evalValue || a.evalPrice - b.evalPrice);
 
@@ -85,6 +92,8 @@ class ItemsData {
 	get searchBoundPath() {
 		let path = this.searchBoundItems.flatMap(({evalValue, evalPrice}, i, a) =>
 			[{evalValue, evalPrice: i ? a[i - 1].evalPrice : 0}, {evalValue, evalPrice}]);
+		if (!path.length)
+			return path;
 		let last = path[path.length - 1];
 		path.push({evalValue: Infinity, evalPrice: last.evalPrice});
 		path.push({evalValue: Infinity, evalPrice: 0});

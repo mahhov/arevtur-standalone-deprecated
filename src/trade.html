@@ -23,8 +23,8 @@
 		return el;
 	};
 
-	let submitQuery = async query => {
-		let items = await DataFetcher.getItems(query, (text, ratio) =>
+	let submitQuery = async ({query, parsingOptions}) => {
+		let items = await DataFetcher.getItems(query, parsingOptions, (text, ratio) =>
 			$('x-results').updateItemsProgress(text, ratio));
 		$('x-results').joinItems(items);
 	};
@@ -47,6 +47,7 @@
 
 	// todo
 	// 6 link, non-6link with price shift, and corrupted non-6-link with larger price shift
+	// progress bar for multi-queries
 	// style results (scroll bar and progress bar)
 	// convert armor and socket requirements to fuzzy query
 	// assume quality 0%

@@ -120,7 +120,7 @@ let formQuery = (type, weights, ands = {}, nots = {},
 	}
 };
 
-let getItems = async (query, progressCallback) => {
+let getItems = async (query, parsingOptions = {priceShift: 0}, progressCallback = () => 0) => {
 	try {
 		let api = 'https://www.pathofexile.com/api/trade';
 		progressCallback('Initial query.', 0);
@@ -141,7 +141,7 @@ let getItems = async (query, progressCallback) => {
 			let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
 			let data2 = await retryGet(endpoint2, queryParams);
 			progressCallback(`Received grouped item query # ${i}.`, (1 + ++receivedCount) / (requestGroups.length + 1));
-			return data2.result.map(parseItem);
+			return data2.result.map(itemData => parseItem(itemData, parsingOptions));
 		});
 		let items = (await Promise.all(promises)).flat();
 		progressCallback('All grouped item queries completed.', 1);
@@ -152,7 +152,7 @@ let getItems = async (query, progressCallback) => {
 	}
 };
 
-let parseItem = itemData => {
+let parseItem = (itemData, parsingOptions) => {
 	let sockets = (itemData.item.sockets || []).reduce((a, v) => {
 		a[v.group] = a[v.group] || [];
 		a[v.group].push(v.sColour);
@@ -170,9 +170,9 @@ let parseItem = itemData => {
 		accountText: `${itemData.listing.account.name} > ${itemData.listing.account.lastCharacterName}`,
 		whisper: itemData.listing.whisper,
 		note: itemData.item.note,
-		priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}`,
+		priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${parsingOptions.priceShift ? ` + ${parsingOptions.priceShift}` : ''}`,
 		evalValue: evalValue(pseudoMods),
-		evalPrice: evalPrice(itemData.listing.price),
+		evalPrice: evalPrice(itemData.listing.price) + parsingOptions.priceShift,
 	};
 };
 
