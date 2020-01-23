@@ -26,15 +26,19 @@ customElements.define(name, class extends XElement {
 	set itemData(value) {
 		this.itemData_ = value;
 
-		// todo display whisper, account, socket, armour/evasion/es, implicits, open affixes, craftedMods
+		// todo display armour/evasion/es, implicits, open affixes, craftedMods, corrupted
 		// enchantMods, implicitMods, fracturedMods, explicitMods, craftedMods, pseudoMods, rproperties
 
+		this.$('#name-row').textContent = value.name;
+
+		XElement.clearChildren(this.$('#sockets-list'));
+		value.sockets.forEach(socketGroup => {
+			let socketDiv = document.createElement('div');
+			socketDiv.textContent = socketGroup.join(' ');
+			this.$('#sockets-list').appendChild(socketDiv);
+		});
+
 		XElement.clearChildren(this.$('#details-list'));
-
-		let name = document.createElement('div');
-		name.textContent = value.name;
-		this.$('#details-list').appendChild(name);
-
 		value.explicitMods.forEach(mod => {
 			let modDiv = document.createElement('div');
 			modDiv.textContent = mod;

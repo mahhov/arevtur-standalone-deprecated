@@ -13,7 +13,7 @@
 		background: #fff0d3;
 	}
 
-	#bottom-row {
+	:host > div:not(:first-child) {
 		margin-top: 10px;
 	}
 
@@ -22,6 +22,8 @@
 	}
 </style>
 
+<div id="name-row"></div>
+<div id="sockets-list"></div>
 <div id="details-list"></div>
 <div id="bottom-row">
 	Value: <span id="value-text"></span>
