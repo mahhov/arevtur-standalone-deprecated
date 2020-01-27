@@ -10,7 +10,6 @@
 
 <script>
 	const {XElement} = require('xx-element');
-	const DataFetcher = require('./DataFetcher');
 
 	const $ = document.querySelector.bind(document);
 	const $$ = document.querySelectorAll.bind(document);
@@ -23,8 +22,8 @@
 		return el;
 	};
 
-	let submitQuery = async ({query, parsingOptions}) => {
-		let items = await DataFetcher.getItems(query, parsingOptions, (text, ratio) =>
+	let submitQuery = async queryParam => {
+		let items = await queryParam.getItems((text, ratio) =>
 			$('x-results').updateItemsProgress(text, ratio));
 		$('x-results').joinItems(items);
 	};

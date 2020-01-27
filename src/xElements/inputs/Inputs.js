@@ -1,7 +1,7 @@
 const {XElement, importUtil} = require('xx-element');
 const {template, name} = importUtil(__filename);
 const ApiConstants = require('../../ApiConstants');
-const DataFetcher = require('../../DataFetcher');
+const {QueryParams} = require('../../DataFetcher');
 
 customElements.define(name, class Inputs extends XElement {
 	static get attributeTypes() {
@@ -113,18 +113,25 @@ customElements.define(name, class Inputs extends XElement {
 				let nots = Object.fromEntries(notEntries);
 
 				let queries = [];
-				queries.push({
-					query: DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice, linked),
-					parsingOptions: {propertyWeights}
-				});
-				if (linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos)
-					queries.push({
-						query: DataFetcher.formQuery(type, weights, ands, nots, 0, maxPrice - ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos, false),
-						parsingOptions: {
-							priceShift: ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos,
-							propertyWeights,
-						}
-					});
+
+				let query = new QueryParams();
+				query.type = type;
+				query.weights = weights;
+				query.ands = ands;
+				query.nots = nots;
+				query.maxPrice = maxPrice;
+				query.linked = linked;
+				query.propertyWeights = propertyWeights;
+
+				queries.push(query);
+
+				// todo move this logic to QueryParams
+				if (linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos) {
+					query = new QueryParams(query);
+					query.maxPrice = maxPrice - ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos;
+					query.priceShift = ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos;
+					queries.push(query);
+				}
 
 				return queries;
 			});
