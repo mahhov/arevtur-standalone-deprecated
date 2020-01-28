@@ -65,18 +65,22 @@ let post = (endpoint, data) =>
 class QueryParams {
 	constructor(clone = {}) {
 		this.type = '';
+		this.minValue = clone.minValue || 0;
+		this.maxPrice = clone.maxPrice || 0;
+		this.defenseProperties = clone.defenseProperties || {
+			armour: {min: 0, weight: 0},
+			evasion: {min: 0, weight: 0},
+			energyShield: {min: 0, weight: 0},
+		};
+		this.linked = clone.linked || false;
 		// {property: weight, ...}
 		this.weights = clone.weights || {};
 		// {property: min, ...}
 		this.ands = clone.ands || {};
 		// {property: undefined, ...}
 		this.nots = clone.nots || {};
-		this.minValue = clone.minValue || 0;
-		this.maxPrice = clone.maxPrice || 0;
-		this.linked = clone.linked || false;
 		this.sort = clone.sort || ApiConstants.SORT.value;
 		this.online = clone.online || false;
-		this.propertyWeights = clone.propertyWeights || {};
 		this.priceShift = clone.priceShift || 0;
 	}
 
@@ -125,7 +129,14 @@ class QueryParams {
 							links: {min: 6}
 						},
 						disabled: !this.linked
-					}
+					},
+					armour_filters: {
+						filters: {
+							ar: {min: this.defenseProperties.armour.min},
+							es: {min: this.defenseProperties.evasion.min},
+							ev: {min: this.defenseProperties.energyShield.min},
+						}
+					},
 				}
 			},
 			sort,
@@ -133,9 +144,28 @@ class QueryParams {
 	}
 
 	async getItems(progressCallback) {
+		let items = await this.getItemsHelper(progressCallback);
+
+		let property = Object.entries(this.defenseProperties).find(([_, property]) => property.weight);
+		if (property) {
+			let maxValue = Math.max(...items.map(({evalValue}) => evalValue));
+			let minValueExcludingProperties = Math.min(...items.map(({valueExcludingProperties}) => valueExcludingProperties));
+			let minPropertyValue = (maxValue - minValueExcludingProperties) / property[1].weight;
+
+			console.log('maValue', maxValue, 'minValue excluding proeprties', minValueExcludingProperties, 'required min property value', property, minPropertyValue)
+
+			// let nextQuery = formQuery();
+			// items.concat(await getItems(nextQuery, this.parsingOptions, progressCallback));
+		}
+
+		return items;
+	}
+
+	async getItemsHelper(progressCallback) {
 		try {
 			const api = 'https://www.pathofexile.com/api/trade';
 			progressCallback('Initial query.', 0);
+			console.log('get', JSON.stringify(this.query, '', 2))
 			let data = await post(`${api}/search/Metamorph`, this.query);
 			progressCallback(`Received ${data.result.length} items.`, 0);
 
@@ -190,20 +220,20 @@ class QueryParams {
 			// todo change text to: 3 fus + fated links (#c)
 			priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${priceShift ? ` + ${priceShift}` : ''}`,
 			valueExcludingProperties: valueExcludingProperties,
-			evalValue: valueExcludingProperties + evalPropertyValues(itemData.item.properties, this.propertyWeights),
+			evalValue: valueExcludingProperties + evalPropertyValues(itemData.item.properties, this.defenseProperties),
 			evalPrice: evalPrice(itemData.listing.price) + priceShift,
 			debug: itemData,
 		};
 	};
 }
 
-let evalPropertyValues = (properties, propertyWeights) =>
+let evalPropertyValues = (properties, defenseProperties) =>
 	[
-		['Evasion Rating', 'evasionWeight'],
-		['Energy Shield', 'energyShieldWeight'],
-		['Armour', 'armourWeight'],
+		['Evasion Rating', 'evasion'],
+		['Energy Shield', 'energyShield'],
+		['Armour', 'armour'],
 	].map(([propertyName, parseName]) => {
-		let weight = propertyWeights[parseName] || 0;
+		let weight = defenseProperties[parseName].weight;
 		let property = properties.find(({name}) => name === propertyName);
 		return property ? property.values[0][0] * weight : 0;
 	}).reduce((sum, v) => sum + v);

@@ -106,7 +106,7 @@ customElements.define(name, class Inputs extends XElement {
 		return this.inputSets
 			.filter(inputSet => inputSet.active)
 			.flatMap(inputSet => {
-				let {type, maxPrice, propertyWeights, linked, weightEntries, andEntries, notEntries} = inputSet.queryParams;
+				let {type, maxPrice, defenseProperties, linked, weightEntries, andEntries, notEntries} = inputSet.queryParams;
 				maxPrice = overridePrice !== null ? overridePrice : maxPrice;
 				let weights = Object.fromEntries([...weightEntries, ...this.sharedWeightEntries]);
 				let ands = Object.fromEntries(andEntries);
@@ -116,12 +116,12 @@ customElements.define(name, class Inputs extends XElement {
 
 				let query = new QueryParams();
 				query.type = type;
+				query.maxPrice = maxPrice;
+				query.defenseProperties = defenseProperties;
+				query.linked = linked;
 				query.weights = weights;
 				query.ands = ands;
 				query.nots = nots;
-				query.maxPrice = maxPrice;
-				query.linked = linked;
-				query.propertyWeights = propertyWeights;
 
 				queries.push(query);
 
