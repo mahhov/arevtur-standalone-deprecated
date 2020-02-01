@@ -40,11 +40,11 @@ customElements.define(name, class extends XElement {
 
 		// todo extract duplicated code
 
-		XElement.clearChildren(this.$('#property-list'));
-		value.properties.forEach(mod => {
+		XElement.clearChildren(this.$('#defense-property-list'));
+		value.defenseProperties.forEach(mod => {
 			let modDiv = document.createElement('div');
 			modDiv.textContent = mod;
-			this.$('#property-list').appendChild(modDiv);
+			this.$('#defense-property-list').appendChild(modDiv);
 		});
 
 		XElement.clearChildren(this.$('#implicit-list'));

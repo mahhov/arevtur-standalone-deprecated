@@ -5,8 +5,8 @@ const ApiConstants = require('../../ApiConstants');
 const QUERY_PROPERTY_TEXTS = ApiConstants.PROPERTIES_FLAT.map(property => property.text);
 
 const defensePropertyTuples = [
-	['evasion', '#evasion-input'],
 	['armour', '#armour-input'],
+	['evasion', '#evasion-input'],
 	['energyShield', '#energy-shield-input'],
 ];
 
@@ -16,8 +16,8 @@ customElements.define(name, class extends XElement {
 			type: {},
 			minValue: {},
 			price: {},
-			evasion: {},
 			armour: {},
+			evasion: {},
 			energyShield: {},
 			linked: {boolean: true}
 		};
@@ -71,12 +71,12 @@ customElements.define(name, class extends XElement {
 		this.$('#price-input').value = value;
 	}
 
-	set evasion(value) {
-		this.$('#evasion-input').value = value;
-	}
-
 	set armour(value) {
 		this.$('#armour-input').value = value;
+	}
+
+	set evasion(value) {
+		this.$('#evasion-input').value = value;
 	}
 
 	set energyShield(value) {
@@ -194,7 +194,7 @@ customElements.define(name, class extends XElement {
 		let type = ApiConstants.TYPES_TEXT_TO_ID[this.type];
 
 		let defenseProperties = Object.fromEntries(defensePropertyTuples
-			.map(([property]) => [property, {weight: parseInt(this[property]), min: 0}]));
+			.map(([property]) => [property, {weight: parseFloat(this[property]), min: 0}]));
 
 		let propertyEntries = [...this.$$('#query-properties-list x-query-property')]
 			.map(queryProperty => ({
