@@ -1,6 +1,7 @@
 const https = require('https');
 const querystring = require('querystring');
 const ApiConstants = require('./ApiConstants');
+const Stream = require('./Stream');
 
 let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -156,16 +157,22 @@ class QueryParams {
 		}
 	}
 
-	async getItems(progressCallback, partialResultsCallback) {
+	getItemsStream(progressCallback) {
+		let stream = new Stream();
+		this.writeItemsToStream(stream, progressCallback)
+			.then(() => stream.done());
+		return stream;
+	}
+
+	async writeItemsToStream(stream, progressCallback) {
 		let items = await this.queryAndParseItems(this.getQuery(), progressCallback);
+		stream.write(items);
 
 		let defenseProperty = Object.entries(this.defenseProperties).find(([_, {weight}]) => weight);
 		if (defenseProperty) {
 			let newItems = items;
 			let lastMinDefensePropertyValue = 0;
 			do {
-				partialResultsCallback(items);
-
 				let newItemsMinValue = Math.min(...newItems.map(({evalValue}) => evalValue));
 				let maxValue = Math.max(...items.map(({evalValue}) => evalValue));
 				let minValueExcludingDefenseProperties = Math.min(...items.map(({valueExcludingProperties}) => valueExcludingProperties));
@@ -178,6 +185,7 @@ class QueryParams {
 				let query = this.getQuery(overrides);
 				newItems = await this.queryAndParseItems(query, progressCallback);
 				items = items.concat(newItems);
+				stream.write(items);
 			} while (newItems.length > 0);
 		}
 
