@@ -22,9 +22,13 @@
 		return el;
 	};
 
-	let submitQuery = async queryParam => {
-		let items = await queryParam.getItems((text, ratio) =>
-			$('x-results').updateItemsProgress(text, ratio));
+	let submitQuery = async (queryParam, partialResultsCallback) => {
+		let items = await queryParam.getItems(
+			(text, ratio) => $('x-results').updateItemsProgress(text, ratio),
+			items => {
+				$('x-results').joinItems(items);
+				partialResultsCallback();
+			});
 		$('x-results').joinItems(items);
 	};
 
@@ -33,14 +37,16 @@
 			$('x-results').clearItems();
 		await Promise.all($('x-inputs')
 			.getQueries()
-			.map(submitQuery));
-		$('x-results').renderItemsData(false, true);
+			.map(queryParam => submitQuery(queryParam,
+				() => $('x-results').renderItemsData())));
+		$('x-results').renderItemsData();
 	});
 
 	$('x-results').addEventListener('submit', async e => {
 		await Promise.all($('x-inputs')
 			.getQueries(e.detail.overridePrice)
-			.map(submitQuery));
+			.map(queryParam => submitQuery(queryParam,
+				() => $('x-results').renderItemsData())));
 		$('x-results').renderItemsData();
 	});
 
