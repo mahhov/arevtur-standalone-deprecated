@@ -1,8 +1,14 @@
 <style>
-	#results-container {
+	:host {
 		display: flex;
-		align-items: flex-start;
-		margin-top: 30px;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	#center {
+		display: flex;
+		overflow: hidden;
+		margin-top: 15px;
 	}
 
 	progress[value="1"] {
@@ -11,17 +17,26 @@
 
 	#results-list {
 		flex: 1;
+		overflow: auto;
+		padding-right: 5px;
 	}
 
-	#results-list .item {
-		margin: 10px;
+	#results-list *:not(:first-child) {
+		margin-top: 15px;
+	}
+
+	#results-chart {
+		margin-left: 15px;
 	}
 </style>
 
-<div id="results-container">
-	<div>Count: <span id="results-count"></span></div>
+
+<div>
+	<span>Count: <span id="results-count"></span></span>
 	<progress id="results-progress-bar" max="1" value="1"></progress>
 	<div id="results-progress-text"></div>
+</div>
+<div id="center">
 	<div id="results-list"></div>
 	<x-chart id="results-chart" width="600" height="600"></x-chart>
 </div>

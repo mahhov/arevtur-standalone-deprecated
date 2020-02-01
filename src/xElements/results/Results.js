@@ -26047,7 +26047,7 @@ customElements.define(name, class Inputs extends XElement {
 		this.itemsData.join(items)
 	}
 
-	updateItemsProgress(text, ratio) {
+	updateItemsProgitemress(text, ratio) {
 		this.$('#results-progress-bar').value = ratio;
 		let textEl = document.createElement('div');
 		textEl.textContent = text;
