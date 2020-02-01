@@ -219,7 +219,7 @@ class QueryParams {
 			progressCallback('All grouped item queries completed.', 1);
 			return items;
 		} catch (e) {
-			console.warning('ERROR', e);
+			console.warn('ERROR', e);
 			return [];
 		}
 	}
@@ -277,7 +277,7 @@ let evalPrice = ({currency: currencyId, amount}) => {
 	let currency = Object.values(ApiConstants.CURRENCIES).find(({id}) => id === currencyId);
 	if (currency)
 		return currency.chaos * amount;
-	console.warning('Missing currency', currencyId);
+	console.warn('Missing currency', currencyId);
 	return -1;
 };
 
