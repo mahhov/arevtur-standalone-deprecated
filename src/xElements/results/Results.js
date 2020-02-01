@@ -3984,6 +3984,8 @@ customElements.define(name, class Inputs extends XElement {
 
 	renderItemsDataListBackgroundsOnly() {
 		[...this.$('#results-list').children].forEach((el, i) => {
+			if (i >= this.itemsData.items.length)
+				return;
 			el.selected = this.itemsData.items[i].selected;
 			el.hovered = this.itemsData.items[i].hovered;
 		});
