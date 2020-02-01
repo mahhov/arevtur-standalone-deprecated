@@ -7,24 +7,44 @@
 		width: 300px;
 	}
 
-	#min-value-input, #price-input {
+	.short-input {
 		width: 60px;
 	}
 
 	#query-properties-list x-query-property.dragging {
 		outline: 1px solid black;
 	}
+
+	label:not(:first-child) {
+		margin-left: 15px;
+	}
 </style>
 
 <div>
 	<x-autocomplete-input id="type-input" placeholder="type"></x-autocomplete-input>
-	<input id="min-value-input" type="number" placeholder="value"> <!--todo trim leading 0's from number inputs-->
-	<input id="price-input" type="number" placeholder="price">
+	<label>
+		value
+		<input id="min-value-input" class="short-input" type="number" placeholder="value">
+		<!--todo trim leading 0's from number inputs-->
+	</label>
+	<label>
+		price
+		<input id="price-input" class="short-input" type="number" placeholder="price">
+	</label>
 </div>
 <div>
-	<input id="armour-input" type="number" placeholder="armour weight">
-	<input id="evasion-input" type="number" placeholder="evasion weight">
-	<input id="energy-shield-input" type="number" placeholder="energy shield weight">
+	<label>
+		armour
+		<input id="armour-input" class="short-input" type="number" placeholder="armour">
+	</label>
+	<label>
+		evasion
+		<input id="evasion-input" class="short-input" type="number" placeholder="evasion">
+	</label>
+	<label>
+		energy shield
+		<input id="energy-shield-input" class="short-input" type="number" placeholder="energy shield">
+	</label>
 	<label>6-link<input type="checkbox" id="linked-check"></label>
 </div>
 <x-arrangable-list id="query-properties-list"></x-arrangable-list>
