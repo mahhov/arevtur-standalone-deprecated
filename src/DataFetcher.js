@@ -1,9 +1,8 @@
 const https = require('https');
 const querystring = require('querystring');
+const RateLimitedRetryQueue = require('./RateLimitedRetryQueue');
 const ApiConstants = require('./ApiConstants');
 const Stream = require('./Stream');
-
-let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 let get = (endpoint, queryParams = {}) =>
 	new Promise((resolve, reject) => {
@@ -23,18 +22,8 @@ let get = (endpoint, queryParams = {}) =>
 		}).on('error', reject);
 	});
 
-let retryGet = async (endpoint, queryParams = {}, retries = [100, 200, 400]) => {
-	let tryI = 0;
-	while (true) {
-		await sleep(retries[tryI]);
-		try {
-			return await get(endpoint, queryParams);
-		} catch (e) {
-			if (++tryI >= retries.length)
-				throw e;
-		}
-	}
-};
+let getQueue = new RateLimitedRetryQueue();
+let rlrGet = (endpoint, queryParams = {}) => getQueue.add(() => get(endpoint, queryParams));
 
 let post = (endpoint, data) =>
 	new Promise((resolve, reject) => {
@@ -113,7 +102,7 @@ class QueryParams {
 					}, {
 						type: 'not',
 						filters: notFilters,
-					}
+					},
 				],
 				filters: {
 					type_filters: {
@@ -211,7 +200,7 @@ class QueryParams {
 					'pseudos[]': [ApiConstants.SHORT_PROPERTIES.totalEleRes, ApiConstants.SHORT_PROPERTIES.flatLife],
 				};
 				let endpoint2 = `${api}/fetch/${requestGroup.join()}`;
-				let data2 = await retryGet(endpoint2, queryParams);
+				let data2 = await rlrGet(endpoint2, queryParams);
 				progressCallback(`Received grouped item query # ${i}.`, (1 + ++receivedCount) / (requestGroups.length + 1));
 				return data2.result.map(itemData => this.parseItem(itemData));
 			});
