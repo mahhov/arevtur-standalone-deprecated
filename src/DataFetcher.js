@@ -62,6 +62,10 @@ class QueryParams {
 			evasion: {min: 0, weight: 0},
 			energyShield: {min: 0, weight: 0},
 		};
+		this.affixProperties = clone.affixProperties || {
+			prefix: false,
+			suffix: false,
+		};
 		this.linked = clone.linked || false;
 		// {property: weight, ...}
 		this.weights = clone.weights || {};
@@ -71,6 +75,7 @@ class QueryParams {
 		this.nots = clone.nots || {};
 		this.sort = clone.sort || ApiConstants.SORT.value;
 		this.online = clone.online || false;
+		this.valueShift = clone.valueShift || 0;
 		this.priceShift = clone.priceShift || 0;
 	}
 
@@ -87,6 +92,10 @@ class QueryParams {
 		let notFilters = Object.entries(overridden.nots).map(([property]) => ({
 			id: property,
 		}));
+		if (this.affixProperties.prefix)
+			andFilters.push({id: 'pseudo.pseudo_number_of_empty_prefix_mods'});
+		if (this.affixProperties.suffix)
+			andFilters.push({id: 'pseudo.pseudo_number_of_empty_suffix_mods'});
 		let sort = weightFilters.length ? overridden.sort : ApiConstants.SORT.price;
 		return {
 			query: {
@@ -164,8 +173,8 @@ class QueryParams {
 			do {
 				let newItemsMinValue = Math.min(...newItems.map(({evalValue}) => evalValue));
 				let maxValue = Math.max(...items.map(({evalValue}) => evalValue));
-				let minValueExcludingDefenseProperties = Math.min(...items.map(({valueExcludingProperties}) => valueExcludingProperties));
-				let minDefensePropertyValue = ((maxValue + newItemsMinValue) / 2 - minValueExcludingDefenseProperties) / defenseProperty[1].weight;
+				let minWeightValue = Math.min(...items.map(({weightValue}) => weightValue));
+				let minDefensePropertyValue = ((maxValue + newItemsMinValue) / 2 - minWeightValue) / defenseProperty[1].weight;
 
 				minDefensePropertyValue = Math.max(minDefensePropertyValue, lastMinDefensePropertyValue + 1);
 				lastMinDefensePropertyValue = minDefensePropertyValue;
@@ -227,8 +236,8 @@ class QueryParams {
 			].map(([responseName, fullName]) => [fullName, itemData.item.extended[responseName] || 0])
 				.filter(([_, value]) => value);
 		let pseudoMods = itemData.item.pseudoMods || [];
-		let priceShift = this.priceShift || 0;
-		let valueExcludingProperties = evalValue(pseudoMods);
+		let weightValue = evalValue(pseudoMods);
+		let defensePropertiesValue = evalDefensePropertiesValue(defenseProperties, this.defenseProperties);
 
 		return {
 			id: itemData.id,
@@ -242,24 +251,26 @@ class QueryParams {
 			accountText: `${itemData.listing.account.name} > ${itemData.listing.account.lastCharacterName}`,
 			whisper: itemData.listing.whisper,
 			note: itemData.item.note,
+			weightValue,
+			// todo change text to: include suffix/prefix instead of value shift
+			valueText: `${weightValue} + defense value ${defensePropertiesValue} + value shift ${this.valueShift}`,
+			evalValue: weightValue + defensePropertiesValue + this.valueShift,
 			// todo change text to: 3 fus + fated links (#c)
-			priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${priceShift ? ` + ${priceShift}` : ''}`,
-			valueExcludingProperties: valueExcludingProperties,
-			evalValue: valueExcludingProperties + evalPropertyValues(defenseProperties, this.defenseProperties),
-			evalPrice: evalPrice(itemData.listing.price) + priceShift,
+			priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${this.priceShift ? ` + price shift ${this.priceShift}` : ''}`,
+			evalPrice: evalPrice(itemData.listing.price) + this.priceShift,
 			debug: itemData,
 		};
 	};
 }
 
-let evalPropertyValues = (itemDefenseProperties, queryDefenseProperties) =>
+let evalDefensePropertiesValue = (itemDefenseProperties, queryDefenseProperties) =>
 	itemDefenseProperties
 		.map(([name, value]) => value * queryDefenseProperties[name].weight)
 		.reduce((sum, v) => sum + v);
 
 let evalValue = pseudoMods => {
 	let pseudoSum = pseudoMods.find(mod => mod.startsWith('Sum: '));
-	return pseudoSum ? parseFloat(pseudoSum.substring(5)) : 0;
+	return pseudoSum ? Number(pseudoSum.substring(5)) : 0;
 };
 
 let evalPrice = ({currency: currencyId, amount}) => {

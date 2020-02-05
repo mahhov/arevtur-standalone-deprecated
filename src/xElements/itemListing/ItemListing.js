@@ -62,7 +62,9 @@ customElements.define(name, class extends XElement {
 		});
 
 		this.$('#value-text').textContent = value.evalValue;
-		this.$('#price-text').textContent = value.priceText;
+		this.$('#value-expanded-text').textContent = value.valueText;
+		this.$('#price-text').textContent = value.evalPrice;
+		this.$('#price-expanded-text').textContent = value.priceText;
 		this.$('#whisper-button').textContent = value.accountText;
 
 		this.selected = value.selected;

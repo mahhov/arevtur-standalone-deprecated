@@ -62,7 +62,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@RS_W_Rzyci_Mam_Wszystko Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 10 chaos in Metamorph (stash tab \"For Sale\"; position: left 1, top 1)",
 				"note": "~price 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 360,
+				"weightValue": 360,
 				"evalValue": 360.255,
 				"evalPrice": 10,
 				"debug": {
@@ -320,7 +320,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@mademm 안녕하세요, 변형(보관함 탭 \"5\", 위치: 왼쪽 11, 상단 1)에 5 chaos(으)로 올려놓은 카옴의 근본(Kaom's Roots) 거신 각반을(를) 구매하고 싶습니다",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 346,
+				"weightValue": 346,
 				"evalValue": 346.289,
 				"evalPrice": 5,
 				"debug": {
@@ -543,7 +543,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@DontAskMeForShit Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 2 chaos in Metamorph (stash tab \"Trade\"; position: left 8, top 6)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 336,
+				"weightValue": 336,
 				"evalValue": 336.289,
 				"evalPrice": 2,
 				"debug": {
@@ -777,7 +777,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@ChewedSoftcore Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 4 chaos in Metamorph (stash tab \"$$$$\"; position: left 9, top 4)",
 				"note": "~price 4 chaos",
 				"priceText": "4 chaos",
-				"valueExcludingProperties": 326,
+				"weightValue": 326,
 				"evalValue": 326.289,
 				"evalPrice": 4,
 				"debug": {
@@ -999,7 +999,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "peskyz > BabyBrainZane",
 				"whisper": "@BabyBrainZane Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 3 chaos in Metamorph (stash tab \"~price 3 chaos\"; position: left 2, top 2)",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 320,
+				"weightValue": 320,
 				"evalValue": 320.289,
 				"evalPrice": 3,
 				"debug": {
@@ -1220,7 +1220,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "SoScrub > HotChicksDontPoop",
 				"whisper": "@HotChicksDontPoop Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 2, top 21)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 318,
+				"weightValue": 318,
 				"evalValue": 318.289,
 				"evalPrice": 5,
 				"debug": {
@@ -1442,7 +1442,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Shockz_M Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 2 chaos in Metamorph (stash tab \"Sales\"; position: left 3, top 4)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 316,
+				"weightValue": 316,
 				"evalValue": 316.289,
 				"evalPrice": 2,
 				"debug": {
@@ -1664,7 +1664,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Ramberg > NoHonorAnxity",
 				"whisper": "@NoHonorAnxity Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 5 chaos in Metamorph (stash tab \"~b/o 5 chaos\"; position: left 3, top 11)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 316,
+				"weightValue": 316,
 				"evalValue": 316.289,
 				"evalPrice": 5,
 				"debug": {
@@ -1893,7 +1893,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@wastedtimeanyway Hi, I would like to buy your Foe Road Crusader Boots listed for 2 chaos in Metamorph (stash tab \"Sell\"; position: left 6, top 3)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 315,
+				"weightValue": 315,
 				"evalValue": 315.222,
 				"evalPrice": 2,
 				"debug": {
@@ -2171,7 +2171,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@ToxicPewPew Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 2 chaos in Metamorph (stash tab \"$$$\"; position: left 1, top 1)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 304,
+				"weightValue": 304,
 				"evalValue": 304.289,
 				"evalPrice": 2,
 				"debug": {
@@ -2394,7 +2394,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@ZenMeta Hi, I would like to buy your Kaom's Roots Titan Greaves listed for 5 chaos in Metamorph (stash tab \"$\"; position: left 11, top 1)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 300,
+				"weightValue": 300,
 				"evalValue": 300.289,
 				"evalPrice": 5,
 				"debug": {
@@ -2623,7 +2623,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@BEEGBALLISTABOI Hi, I would like to buy your Brood Road Crusader Boots listed for 10 chaos in Metamorph (stash tab \"$$$\"; position: left 3, top 1)",
 				"note": "~price 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 297,
+				"weightValue": 297,
 				"evalValue": 297.145,
 				"evalPrice": 10,
 				"debug": {
@@ -2913,7 +2913,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Endalay > MORPHALAY",
 				"whisper": "@MORPHALAY Hi, I would like to buy your Rift Slippers Goliath Greaves listed for 6 chaos in Metamorph (stash tab \"~price 6 chaos\"; position: left 1, top 2)",
 				"priceText": "6 chaos",
-				"valueExcludingProperties": 286,
+				"weightValue": 286,
 				"evalValue": 286.332,
 				"evalPrice": 6,
 				"debug": {
@@ -3187,7 +3187,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@HeatstruckEmoGirl Hi, I would like to buy your Beast Urge Goliath Greaves listed for 5 chaos in Metamorph (stash tab \"sell1\"; position: left 1, top 3)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 282,
+				"weightValue": 282,
 				"evalValue": 282.383,
 				"evalPrice": 5,
 				"debug": {
@@ -3438,7 +3438,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@MetaMinionzZZ Hi, I would like to buy your Dire League Sorcerer Boots listed for 3 chaos in Metamorph (stash tab \"ind\"; position: left 7, top 11)",
 				"note": "~price 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 281,
+				"weightValue": 281,
 				"evalValue": 281,
 				"evalPrice": 3,
 				"debug": {
@@ -3710,7 +3710,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Konstruktor89L > Konstruktor_mk_I",
 				"whisper": "@Konstruktor_mk_I Hi, I would like to buy your Blight Urge Slink Boots listed for 3 chaos in Metamorph (stash tab \"~price 3 chaos\"; position: left 1, top 2)",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 277,
+				"weightValue": 277,
 				"evalValue": 277,
 				"evalPrice": 3,
 				"debug": {
@@ -3981,7 +3981,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "c0nspiracy > ConspiracyRanger",
 				"whisper": "@ConspiracyRanger Hi, I would like to buy your Apocalypse Goad Wyrmscale Boots listed for 5 chaos in Metamorph (stash tab \"~b/o 5 chaos\"; position: left 1, top 7)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 277,
+				"weightValue": 277,
 				"evalValue": 277.137,
 				"evalPrice": 5,
 				"debug": {
@@ -4302,7 +4302,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Nightmilkz > HG_Najtmilks",
 				"whisper": "@HG_Najtmilks Hi, I would like to buy your Blood Track Titan Greaves listed for 1 chaos in Metamorph (stash tab \"~price 1 chaos\"; position: left 5, top 8)",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 275,
+				"weightValue": 275,
 				"evalValue": 275.319,
 				"evalPrice": 1,
 				"debug": {
@@ -4525,7 +4525,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@nnundo_nugiBEEEF Hi, I would like to buy your Corruption Span Shagreen Boots listed for 7 chaos in Metamorph (stash tab \"16\"; position: left 10, top 6)",
 				"note": "~price 7 chaos",
 				"priceText": "7 chaos",
-				"valueExcludingProperties": 275,
+				"weightValue": 275,
 				"evalValue": 275,
 				"evalPrice": 7,
 				"debug": {
@@ -4754,7 +4754,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Foraylolz > Forayoe",
 				"whisper": "@Forayoe Hi, I would like to buy your Havoc Spark Shagreen Boots listed for 3 chaos in Metamorph (stash tab \"~price 3 chaos\"; position: left 3, top 11)",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 273,
+				"weightValue": 273,
 				"evalValue": 273,
 				"evalPrice": 3,
 				"debug": {
@@ -5028,7 +5028,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@elmolol Hi, I would like to buy your Carrion Hoof Shagreen Boots listed for 8 chaos in Metamorph (stash tab \"$$$$$\"; position: left 7, top 11)",
 				"note": "~price 8 chaos",
 				"priceText": "8 chaos",
-				"valueExcludingProperties": 272,
+				"weightValue": 272,
 				"evalValue": 272,
 				"evalPrice": 8,
 				"debug": {
@@ -5281,7 +5281,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "ColeWayneJones > TheThirteenthJones",
 				"whisper": "@TheThirteenthJones Hi, I would like to buy your Rage Stride Shagreen Boots listed for 2 chaos in Metamorph (stash tab \"~b/o 2 chaos\"; position: left 4, top 1)",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 271,
+				"weightValue": 271,
 				"evalValue": 271,
 				"evalPrice": 2,
 				"debug": {
@@ -5573,7 +5573,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@DEFEKT_FinalForm Hi, I would like to buy your Phoenix March Ancient Greaves listed for 5 chaos in Metamorph (stash tab \"Nice\"; position: left 5, top 11)",
 				"note": "~b/o 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 271,
+				"weightValue": 271,
 				"evalValue": 271.266,
 				"evalPrice": 5,
 				"debug": {
@@ -5845,7 +5845,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Loppuu_Huumori Hi, I would like to buy your Demon Trail Vaal Greaves listed for 5 chaos in Metamorph (stash tab \"Sell\"; position: left 1, top 9)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 271,
+				"weightValue": 271,
 				"evalValue": 271.361,
 				"evalPrice": 5,
 				"debug": {
@@ -6129,7 +6129,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@AI_Q Hi, I would like to buy your Invasion Spur Slink Boots listed for 5 chaos in Metamorph (stash tab \"duoduo\"; position: left 3, top 10)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 271,
+				"weightValue": 271,
 				"evalValue": 271,
 				"evalPrice": 5,
 				"debug": {
@@ -6365,7 +6365,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@XX_Hs_xX Hi, I would like to buy your Nemesis Dash Hydrascale Boots listed for 7 chaos in Metamorph (stash tab \"$\"; position: left 7, top 3)",
 				"note": "~b/o 7 chaos",
 				"priceText": "7 chaos",
-				"valueExcludingProperties": 271,
+				"weightValue": 271,
 				"evalValue": 271.127,
 				"evalPrice": 7,
 				"debug": {
@@ -6625,7 +6625,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "imarunk > YEEIET",
 				"whisper": "@YEEIET Hi, I would like to buy your Eagle Hoof Goliath Greaves listed for 10 chaos in Metamorph (stash tab \"~price 10 chaos\"; position: left 7, top 11)",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 271,
+				"weightValue": 271,
 				"evalValue": 271.267,
 				"evalPrice": 10,
 				"debug": {
@@ -6872,7 +6872,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "garius123123 > EhaltORB",
 				"whisper": "@EhaltORB Hi, I would like to buy your Sorrow Sole Reinforced Greaves listed for 7 chaos in Metamorph (stash tab \"~b/o 7 chaos\"; position: left 3, top 11)",
 				"priceText": "7 chaos",
-				"valueExcludingProperties": 270,
+				"weightValue": 270,
 				"evalValue": 270.152,
 				"evalPrice": 7,
 				"debug": {
@@ -7142,7 +7142,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Hathar > Hathar",
 				"whisper": "@Hathar Hi, I would like to buy your Havoc Urge Dragonscale Boots listed for 3 chaos in Metamorph (stash tab \"~b/o 3 chaos\"; position: left 1, top 3)",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 269,
+				"weightValue": 269,
 				"evalValue": 269.173,
 				"evalPrice": 3,
 				"debug": {
@@ -7418,7 +7418,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "CTL > EGGS_LONG_LEG",
 				"whisper": "@EGGS_LONG_LEG Hi, I would like to buy your Honour Dash Goliath Greaves listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 1, top 11)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 267,
+				"weightValue": 267,
 				"evalValue": 267.309,
 				"evalPrice": 5,
 				"debug": {
@@ -7690,7 +7690,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@ZecaPaGordim Hi, I would like to buy your Spirit Slippers Goliath Greaves listed for 3 chaos in Metamorph (stash tab \"4\"; position: left 8, top 1)",
 				"note": "~b/o 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 266,
+				"weightValue": 266,
 				"evalValue": 266.26,
 				"evalPrice": 3,
 				"debug": {
@@ -7950,7 +7950,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Nameless_Marodeur Hi, ich möchte 'Entrückungs-Tempo Vaal-Beinschienen' zum angebotenen Preis von 5 chaos in der Metamorph-Liga kaufen (Truhenfach \"Sell\"; Position: 1 von links, 1 von oben)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 266,
+				"weightValue": 266,
 				"evalValue": 266.295,
 				"evalPrice": 5,
 				"debug": {
@@ -8204,7 +8204,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "winterreise1988 > ReginaIp",
 				"whisper": "@ReginaIp Hi, I would like to buy your Phoenix Urge Titan Greaves listed for 5 chaos in Metamorph (stash tab \"~b/o 5 chaos\"; position: left 5, top 11)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 266,
+				"weightValue": 266,
 				"evalValue": 266.328,
 				"evalPrice": 5,
 				"debug": {
@@ -8460,7 +8460,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@redoog Hi, I would like to buy your Cataclysm Trail Goliath Greaves listed for 7 chaos in Metamorph (stash tab \"Shop\"; position: left 1, top 1)",
 				"note": "~price 7 chaos",
 				"priceText": "7 chaos",
-				"valueExcludingProperties": 266,
+				"weightValue": 266,
 				"evalValue": 266.365,
 				"evalPrice": 7,
 				"debug": {
@@ -8710,7 +8710,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@RektifiedSoul Hi, I would like to buy your Spirit Goad Hydrascale Boots listed for 4 chaos in Metamorph (stash tab \"sale\"; position: left 1, top 6)",
 				"note": "~b/o 4 chaos",
 				"priceText": "4 chaos",
-				"valueExcludingProperties": 265,
+				"weightValue": 265,
 				"evalValue": 265.139,
 				"evalPrice": 4,
 				"debug": {
@@ -8988,7 +8988,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "aragenn > FwarlyHooker",
 				"whisper": "@FwarlyHooker Hi, I would like to buy your Rune Road Titan Greaves listed for 1 chaos in Metamorph (stash tab \"~price 1 chaos\"; position: left 2, top 10)",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 264,
+				"weightValue": 264,
 				"evalValue": 264.43,
 				"evalPrice": 1,
 				"debug": {
@@ -9254,7 +9254,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@FrameMaiden Hi, I would like to buy your Storm Dash Shagreen Boots listed for 5 chaos in Metamorph (stash tab \"5\"; position: left 5, top 8)",
 				"note": "~b/o 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 264,
+				"weightValue": 264,
 				"evalValue": 264,
 				"evalPrice": 5,
 				"debug": {
@@ -9513,7 +9513,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Tcan_Tcapan Hi, I would like to buy your Torment Sole Serpentscale Boots listed for 10 chaos in Metamorph (stash tab \"32\"; position: left 9, top 11)",
 				"note": "~b/o 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 264,
+				"weightValue": 264,
 				"evalValue": 264.133,
 				"evalPrice": 10,
 				"debug": {
@@ -9796,7 +9796,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Grifca > whatismetanow",
 				"whisper": "@whatismetanow Hi, I would like to buy your Nemesis Slippers Samite Slippers listed for 2 chaos in Metamorph (stash tab \"~b/o 2 chaos\"; position: left 1, top 11)",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 263,
+				"weightValue": 263,
 				"evalValue": 263,
 				"evalPrice": 2,
 				"debug": {
@@ -10103,7 +10103,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@dugehenfannao Hi, I would like to buy your Vengeance Trail Wyrmscale Boots listed for 3 chaos in Metamorph (stash tab \"11\"; position: left 1, top 7)",
 				"note": "~b/o 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 263,
+				"weightValue": 263,
 				"evalValue": 263.211,
 				"evalPrice": 3,
 				"debug": {
@@ -10388,7 +10388,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@SomeSortOfMiner Hi, I would like to buy your Torment Dash Ancient Greaves listed for 4 chaos in Metamorph (stash tab \"$\"; position: left 3, top 10)",
 				"note": "~price 4 chaos",
 				"priceText": "4 chaos",
-				"valueExcludingProperties": 263,
+				"weightValue": 263,
 				"evalValue": 263.265,
 				"evalPrice": 4,
 				"debug": {
@@ -10672,7 +10672,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Ares117 > BoneMolo",
 				"whisper": "@BoneMolo Hi, I would like to buy your Torment Pace Goliath Greaves listed for 10 chaos in Metamorph (stash tab \"~price 10 chaos\"; position: left 1, top 7)",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 263,
+				"weightValue": 263,
 				"evalValue": 263.238,
 				"evalPrice": 10,
 				"debug": {
@@ -10905,7 +10905,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@WOWImHorny Hi, I would like to buy your Horror Slippers Deerskin Boots listed for 3 chaos in Metamorph (stash tab \"$$$\"; position: left 1, top 1)",
 				"note": "~price 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 262,
+				"weightValue": 262,
 				"evalValue": 262,
 				"evalPrice": 3,
 				"debug": {
@@ -11180,7 +11180,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@PSKEX Hi, I would like to buy your Fate Hoof Ancient Greaves listed for 3 chaos in Metamorph (stash tab \"sell\"; position: left 1, top 6)",
 				"note": "~price 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 261,
+				"weightValue": 261,
 				"evalValue": 261.181,
 				"evalPrice": 3,
 				"debug": {
@@ -11409,7 +11409,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Nauze > Nauze_BVenomous",
 				"whisper": "@Nauze_BVenomous Hi, I would like to buy your Golem Slippers Antique Greaves listed for 5 chaos in Metamorph (stash tab \"~b/o 5 chaos\"; position: left 1, top 1)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 261,
+				"weightValue": 261,
 				"evalValue": 261.146,
 				"evalPrice": 5,
 				"debug": {
@@ -11634,7 +11634,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@BigOlDumpsterFire Hi, I would like to buy your Honour Tread Shagreen Boots listed for 5 chaos in Metamorph (stash tab \"$$\"; position: left 11, top 4)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 261,
+				"weightValue": 261,
 				"evalValue": 261,
 				"evalPrice": 5,
 				"debug": {
@@ -11888,7 +11888,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "sergeant27 > AssasinateMe",
 				"whisper": "@AssasinateMe Hi, I would like to buy your Dire Road Shagreen Boots listed for 20 alch in Metamorph (stash tab \"~price 20 alch\"; position: left 3, top 13)",
 				"priceText": "20 alch",
-				"valueExcludingProperties": 261,
+				"weightValue": 261,
 				"evalValue": 261,
 				"evalPrice": 10,
 				"debug": {
@@ -12128,7 +12128,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Amphrite > iAmMattyDaddy",
 				"whisper": "@iAmMattyDaddy Hi, I would like to buy your Dread Trail Hydrascale Boots listed for 2 chaos in Metamorph (stash tab \"~b/o 2 chaos\"; position: left 1, top 3)",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 260,
+				"weightValue": 260,
 				"evalValue": 260.127,
 				"evalPrice": 2,
 				"debug": {
@@ -12398,7 +12398,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Mazgill > RS_BlenderKurwaJegoMac",
 				"whisper": "@RS_BlenderKurwaJegoMac Hi, I would like to buy your Viper Road Hydrascale Boots listed for 1 chaos in Metamorph (stash tab \"~b/o 1 chaos\"; position: left 6, top 1)",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 259,
+				"weightValue": 259,
 				"evalValue": 259.166,
 				"evalPrice": 1,
 				"debug": {
@@ -12668,7 +12668,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@wortex_beater Hi, I would like to buy your Eagle Spark Carnal Boots listed for 1 chaos in Metamorph (stash tab \"$sell$\"; position: left 11, top 1)",
 				"note": "~price 1 chaos",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 259,
+				"weightValue": 259,
 				"evalValue": 259,
 				"evalPrice": 1,
 				"debug": {
@@ -12956,7 +12956,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@MightyMorphinMetaShadow Hi, I would like to buy your Rage Tread Slink Boots listed for 3 chaos in Metamorph (stash tab \"Sale\"; position: left 1, top 9)",
 				"note": "~price 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 259,
+				"weightValue": 259,
 				"evalValue": 259,
 				"evalPrice": 3,
 				"debug": {
@@ -13202,7 +13202,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@LearningWhilePlaying Hi, I would like to buy your Brood Trail Vaal Greaves listed for 7 chaos in Metamorph (stash tab \"SELL41\"; position: left 11, top 11)",
 				"note": "~b/o 7 chaos",
 				"priceText": "7 chaos",
-				"valueExcludingProperties": 259,
+				"weightValue": 259,
 				"evalValue": 259.416,
 				"evalPrice": 7,
 				"debug": {
@@ -13471,7 +13471,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "MouDevyshkyBomjiYbili > xSuicideIsPainless",
 				"whisper": "@xSuicideIsPainless Hi, I would like to buy your Vengeance Goad Vaal Greaves listed for 10 chaos in Metamorph (stash tab \"~price 10 chaos\"; position: left 1, top 2)",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 259,
+				"weightValue": 259,
 				"evalValue": 259.264,
 				"evalPrice": 10,
 				"debug": {
@@ -13719,7 +13719,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "SirGlenn > NotBarovero",
 				"whisper": "@NotBarovero Hi, I would like to buy your Rage Spark Two-Toned Boots listed for 1 chaos in Metamorph (stash tab \"~price 1 chaos\"; position: left 1, top 4)",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 258,
+				"weightValue": 258,
 				"evalValue": 258.202,
 				"evalPrice": 1,
 				"debug": {
@@ -14021,7 +14021,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Ebolastor Hi, I would like to buy your Pandemonium League Deerskin Boots listed for 5 chaos in Metamorph (stash tab \"4\"; position: left 1, top 1)",
 				"note": "~b/o 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 258,
+				"weightValue": 258,
 				"evalValue": 258,
 				"evalPrice": 5,
 				"debug": {
@@ -14322,7 +14322,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@DeadFarmer Hi, I would like to buy your Blood Trail Samite Slippers listed for 5 chaos in Metamorph (stash tab \"Loot-1\"; position: left 1, top 3)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 258,
+				"weightValue": 258,
 				"evalValue": 258,
 				"evalPrice": 5,
 				"debug": {
@@ -14589,7 +14589,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@CharacterLimitTest Hi, I would like to buy your Ambush Track Shagreen Boots listed for 5 chaos in Metamorph (stash tab \"Sale\"; position: left 1, top 1)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 258,
+				"weightValue": 258,
 				"evalValue": 258,
 				"evalPrice": 5,
 				"debug": {
@@ -14842,7 +14842,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@DPS_MEETS_FLAMEBLAST Hi, I would like to buy your Apocalypse Trail Two-Toned Boots listed for 8 chaos in Metamorph (stash tab \"~price 1 chaos\"; position: left 11, top 8)",
 				"note": "~price 8 chaos",
 				"priceText": "8 chaos",
-				"valueExcludingProperties": 258,
+				"weightValue": 258,
 				"evalValue": 258,
 				"evalPrice": 8,
 				"debug": {
@@ -15140,7 +15140,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "CrosshairLunchbox > CrossSnowyBoiss",
 				"whisper": "@CrossSnowyBoiss Hi, I would like to buy your Behemoth Trail Shagreen Boots listed for 10 chaos in Metamorph (stash tab \"~price 10 chaos\"; position: left 2, top 9)",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 258,
+				"weightValue": 258,
 				"evalValue": 258,
 				"evalPrice": 10,
 				"debug": {
@@ -15405,7 +15405,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@TripppelSpinnner Hi, I would like to buy your Cataclysm League Goliath Greaves listed for 10 chaos in Metamorph (stash tab \"7\"; position: left 3, top 1)",
 				"note": "~price 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 258,
+				"weightValue": 258,
 				"evalValue": 258.328,
 				"evalPrice": 10,
 				"debug": {
@@ -15687,7 +15687,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Senia > SeniaIceCold",
 				"whisper": "@SeniaIceCold Hi, I would like to buy your Invasion Pace Carnal Boots listed for 2 alch in Metamorph (stash tab \"~price 2 alch\"; position: left 15, top 11)",
 				"priceText": "2 alch",
-				"valueExcludingProperties": 257,
+				"weightValue": 257,
 				"evalValue": 257,
 				"evalPrice": 1,
 				"debug": {
@@ -15934,7 +15934,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@ChocoBuscuit Hi, I would like to buy your Armageddon Spur Shagreen Boots listed for 2 chaos in Metamorph (stash tab \"7\"; position: left 3, top 9)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 257,
+				"weightValue": 257,
 				"evalValue": 257,
 				"evalPrice": 2,
 				"debug": {
@@ -16188,7 +16188,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "petsh0p > HelloWorldCurseYou",
 				"whisper": "@HelloWorldCurseYou Hi, I would like to buy your Rift Slippers Carnal Boots listed for 3 chaos in Metamorph (stash tab \"~price 3 chaos\"; position: left 1, top 8)",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 257,
+				"weightValue": 257,
 				"evalValue": 257,
 				"evalPrice": 3,
 				"debug": {
@@ -16434,7 +16434,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@maoyikai Hi, I would like to buy your Havoc Trail Goliath Greaves listed for 5 chaos in Metamorph (stash tab \"5\"; position: left 5, top 1)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 257,
+				"weightValue": 257,
 				"evalValue": 257.248,
 				"evalPrice": 5,
 				"debug": {
@@ -16702,7 +16702,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Lendenpein > Bratgeraet",
 				"whisper": "@Bratgeraet Hi, I would like to buy your Armageddon Spark Titan Greaves listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 1, top 3)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 257,
+				"weightValue": 257,
 				"evalValue": 257.337,
 				"evalPrice": 5,
 				"debug": {
@@ -16982,7 +16982,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Molgor > кеьаь",
 				"whisper": "@кеьаь Hi, I would like to buy your Spirit Spark Dragonscale Boots listed for 8 chaos in Metamorph (stash tab \"~price 8 chaos\"; position: left 22, top 23)",
 				"priceText": "8 chaos",
-				"valueExcludingProperties": 257,
+				"weightValue": 257,
 				"evalValue": 257.145,
 				"evalPrice": 8,
 				"debug": {
@@ -17252,7 +17252,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "ghaleonlt > Sephis",
 				"whisper": "@Sephis Hi, I would like to buy your Nemesis Hoof Steelscale Boots listed for 1 chaos in Metamorph (stash tab \"~price 1 chaos\"; position: left 10, top 3)",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256.133,
 				"evalPrice": 1,
 				"debug": {
@@ -17536,7 +17536,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@DobrzeJestGBS Hi, I would like to buy your Horror Track Sharkskin Boots listed for 3 chaos in Metamorph (stash tab \"$$$\"; position: left 6, top 1)",
 				"note": "~price 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256,
 				"evalPrice": 3,
 				"debug": {
@@ -17795,7 +17795,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "isdoggu > qwertythirteenMETAMORPH",
 				"whisper": "@qwertythirteenMETAMORPH Hi, I would like to buy your Hypnotic Spark Ancient Greaves listed for 5 chaos in Metamorph (stash tab \"~b/o 5 chaos\"; position: left 3, top 11)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256.204,
 				"evalPrice": 5,
 				"debug": {
@@ -18020,7 +18020,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "PR1ME86 > hatar_melee",
 				"whisper": "@hatar_melee Hi, I would like to buy your Agony Spark Conjurer Boots listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 3, top 7)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256,
 				"evalPrice": 5,
 				"debug": {
@@ -18290,7 +18290,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "rjchaves93 > SlowMowGrowJow",
 				"whisper": "@SlowMowGrowJow Hi, I would like to buy your Rapture Road Sharkskin Boots listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 1, top 11)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256,
 				"evalPrice": 5,
 				"debug": {
@@ -18578,7 +18578,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Кряков Здравствуйте, хочу купить у вас Символический курс Шелковые сапоги за 5 chaos в лиге Метаморф (секция \"5\"; позиция: 5 столбец, 7 ряд)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256,
 				"evalPrice": 5,
 				"debug": {
@@ -18844,7 +18844,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@cafesuada_metamorph Hi, I would like to buy your Doom Span Conjurer Boots listed for 10 chaos in Metamorph (stash tab \"5\"; position: left 7, top 11)",
 				"note": "~price 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256,
 				"evalPrice": 10,
 				"debug": {
@@ -19114,7 +19114,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@VendirTR Hi, I would like to buy your Viper Dash Goliath Greaves listed for 10 chaos in Metamorph (stash tab \"6\"; position: left 7, top 11)",
 				"note": "~price 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 256,
+				"weightValue": 256,
 				"evalValue": 256.212,
 				"evalPrice": 10,
 				"debug": {
@@ -19366,7 +19366,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@LimpDickRick Hi, I would like to buy your Maelström League Goliath Greaves listed for 1 chaos in Metamorph (stash tab \"fs\"; position: left 1, top 1)",
 				"note": "~b/o 1 chaos",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 255,
+				"weightValue": 255,
 				"evalValue": 255.246,
 				"evalPrice": 1,
 				"debug": {
@@ -19605,7 +19605,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@MetremorphSummoner Hi, I would like to buy your Armageddon Dash Slink Boots listed for 2 chaos in Metamorph (stash tab \"$\"; position: left 1, top 11)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 255,
+				"weightValue": 255,
 				"evalValue": 255,
 				"evalPrice": 2,
 				"debug": {
@@ -19874,7 +19874,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@TRONCHU Hi, I would like to buy your Beast Goad Wyrmscale Boots listed for 10 alch in Metamorph (stash tab \"Normal 1\"; position: left 7, top 3)",
 				"note": "~price 10 alch",
 				"priceText": "10 alch",
-				"valueExcludingProperties": 255,
+				"weightValue": 255,
 				"evalValue": 255.14,
 				"evalPrice": 5,
 				"debug": {
@@ -20165,7 +20165,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@necrovodekmeta Hi, I would like to buy your Grim Spur Murder Boots listed for 5 chaos in Metamorph (stash tab \"sk\"; position: left 8, top 4)",
 				"note": "~price 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 255,
+				"weightValue": 255,
 				"evalValue": 255,
 				"evalPrice": 5,
 				"debug": {
@@ -20438,7 +20438,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Athennna > ImpaleSomeAthena",
 				"whisper": "@ImpaleSomeAthena Hi, I would like to buy your Gloom Dash Shagreen Boots listed for 10 chaos in Metamorph (stash tab \"~price 10 chaos\"; position: left 2, top 11)",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 255,
+				"weightValue": 255,
 				"evalValue": 255,
 				"evalPrice": 10,
 				"debug": {
@@ -20679,7 +20679,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Betamorphs Hi, I would like to buy your Ghoul Span Titan Greaves listed for 10 chaos in Metamorph (stash tab \"sell\"; position: left 10, top 9)",
 				"note": "~b/o 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 255,
+				"weightValue": 255,
 				"evalValue": 255.289,
 				"evalPrice": 10,
 				"debug": {
@@ -20907,7 +20907,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@BBDotMetamorphSpecAgain Hi, I would like to buy your Grim Hoof Two-Toned Boots listed for 10 chaos in Metamorph (stash tab \"sell\"; position: left 11, top 3)",
 				"note": "~price 10 chaos",
 				"priceText": "10 chaos",
-				"valueExcludingProperties": 255,
+				"weightValue": 255,
 				"evalValue": 255.18,
 				"evalPrice": 10,
 				"debug": {
@@ -21207,7 +21207,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Oniry Hi, I would like to buy your Vengeance Dash Goliath Greaves listed for 2 chaos in Metamorph (stash tab \"$\"; position: left 1, top 1)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254.296,
 				"evalPrice": 2,
 				"debug": {
@@ -21487,7 +21487,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "littleruk > somethingblahh",
 				"whisper": "@somethingblahh Hi, I would like to buy your Tempest League Hydrascale Boots listed for 2 chaos in Metamorph (stash tab \"~price 2 chaos\"; position: left 5, top 4)",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254.138,
 				"evalPrice": 2,
 				"debug": {
@@ -21780,7 +21780,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@MxShift Hi, I would like to buy your Pain Slippers Titan Greaves listed for 3 chaos in Metamorph (stash tab \"S\"; position: left 17, top 1)",
 				"note": "~price 3 chaos",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254.289,
 				"evalPrice": 3,
 				"debug": {
@@ -22024,7 +22024,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Than2014 > KingBold",
 				"whisper": "@KingBold Hi, I would like to buy your Rune Goad Nubuck Boots listed for 4 chaos in Metamorph (stash tab \"~price 4 chaos\"; position: left 1, top 9)",
 				"priceText": "4 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254,
 				"evalPrice": 4,
 				"debug": {
@@ -22286,7 +22286,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@IceShoTeClou Hi, I would like to buy your Corpse Dash Crusader Boots listed for 4 chaos in Metamorph (stash tab \"Quad\"; position: left 3, top 5)",
 				"note": "~price 4 chaos",
 				"priceText": "4 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254.224,
 				"evalPrice": 4,
 				"debug": {
@@ -22561,7 +22561,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "skyHellkite > Hellclast",
 				"whisper": "@Hellclast Hi, I would like to buy your Dire Tread Two-Toned Boots listed for 5 chaos in Metamorph (stash tab \"~b/o 5 chaos\"; position: left 2, top 1)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254,
 				"evalPrice": 5,
 				"debug": {
@@ -22872,7 +22872,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "2x21 > xXxBloodxandxBonesxXx",
 				"whisper": "@xXxBloodxandxBonesxXx Hi, I would like to buy your Fate Track Ancient Greaves listed for 5 chaos in Metamorph (stash tab \"~b/o 5 chaos\"; position: left 22, top 2)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254.276,
 				"evalPrice": 5,
 				"debug": {
@@ -23112,7 +23112,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "SeriousLee > VolatileCoCDestroyer",
 				"whisper": "@VolatileCoCDestroyer Hi, I would like to buy your Ambush Spur Goliath Greaves listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 1, top 1)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 254,
+				"weightValue": 254,
 				"evalValue": 254.252,
 				"evalPrice": 5,
 				"debug": {
@@ -23341,7 +23341,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Wastoldtoplayarc Hi, I would like to buy your Viper March Samite Slippers listed for 2 chaos in Metamorph (stash tab \"Sale Tab\"; position: left 4, top 5)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 253,
+				"weightValue": 253,
 				"evalValue": 253,
 				"evalPrice": 2,
 				"debug": {
@@ -23634,7 +23634,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Tukker Hi, I would like to buy your Blight League Goliath Greaves listed for 2 chaos in Metamorph (stash tab \"Trade\"; position: left 11, top 5)",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 253,
+				"weightValue": 253,
 				"evalValue": 253.271,
 				"evalPrice": 2,
 				"debug": {
@@ -23899,7 +23899,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "ICOS_Lich > AbortexVortex",
 				"whisper": "@AbortexVortex Hi, I would like to buy your Anarchy Urge Goliath Greaves listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 1, top 6)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 253,
+				"weightValue": 253,
 				"evalValue": 253.234,
 				"evalPrice": 5,
 				"debug": {
@@ -24127,7 +24127,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "xxazndragon01 > Toxic_spinner",
 				"whisper": "@Toxic_spinner Hi, I would like to buy your Rune Trail Goliath Greaves listed for 5 chaos in Metamorph (stash tab \"~price 5 chaos\"; position: left 3, top 5)",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 253,
+				"weightValue": 253,
 				"evalValue": 253.265,
 				"evalPrice": 5,
 				"debug": {
@@ -24383,7 +24383,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Chooyaya Hi, I would like to buy your Brimstone March Soldier Boots listed for 5 chaos in Metamorph (stash tab \"misc\"; position: left 5, top 9)",
 				"note": "~b/o 5 chaos",
 				"priceText": "5 chaos",
-				"valueExcludingProperties": 253,
+				"weightValue": 253,
 				"evalValue": 253.106,
 				"evalPrice": 5,
 				"debug": {
@@ -24647,7 +24647,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@라임맛덮밥 안녕하세요, 변형(보관함 탭 \"판매\", 위치: 왼쪽 1, 상단 9)에 1 chaos(으)로 올려놓은 크라켄의 몰이 막대 거친 생가죽 장화을(를) 구매하고 싶습니다",
 				"note": "~price 1 chaos",
 				"priceText": "1 chaos",
-				"valueExcludingProperties": 252,
+				"weightValue": 252,
 				"evalValue": 252,
 				"evalPrice": 1,
 				"debug": {
@@ -24874,7 +24874,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "PassingBy > IlNino_Metamorph",
 				"whisper": "@IlNino_Metamorph Hi, I would like to buy your Viper Spark Shagreen Boots listed for 2 chaos in Metamorph (stash tab \"~b/o 2 chaos\"; position: left 3, top 11)",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 252,
+				"weightValue": 252,
 				"evalValue": 252,
 				"evalPrice": 2,
 				"debug": {
@@ -25108,7 +25108,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@Arc_yk 안녕하세요, 변형(보관함 탭 \"ss\", 위치: 왼쪽 3, 상단 10)에 2 chaos(으)로 올려놓은 대재앙 질주 강철 비늘 장화을(를) 구매하고 싶습니다",
 				"note": "~price 2 chaos",
 				"priceText": "2 chaos",
-				"valueExcludingProperties": 252,
+				"weightValue": 252,
 				"evalValue": 252.078,
 				"evalPrice": 2,
 				"debug": {
@@ -25354,7 +25354,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "Urchins > Ultranooben",
 				"whisper": "@Ultranooben Hi, I would like to buy your Bramble Track Ancient Greaves listed for 3 chaos in Metamorph (stash tab \"~b/o 3 chaos baba\"; position: left 5, top 5)",
 				"priceText": "3 chaos",
-				"valueExcludingProperties": 252,
+				"weightValue": 252,
 				"evalValue": 252.181,
 				"evalPrice": 3,
 				"debug": {
@@ -25571,7 +25571,7 @@ customElements.define(name, class Inputs extends XElement {
 				"whisper": "@iNSTaJiBiNQUiSiToR Hi, I would like to buy your Wrath Dash Goliath Greaves listed for 4 chaos in Metamorph (stash tab \"Trade 2\"; position: left 5, top 5)",
 				"note": "~b/o 4 chaos",
 				"priceText": "4 chaos",
-				"valueExcludingProperties": 252,
+				"weightValue": 252,
 				"evalValue": 252.252,
 				"evalPrice": 4,
 				"debug": {
@@ -25801,7 +25801,7 @@ customElements.define(name, class Inputs extends XElement {
 				"accountText": "jpigg > PantslessPatrician",
 				"whisper": "@PantslessPatrician Hi, I would like to buy your Oblivion Urge Goliath Greaves listed for 4 chaos in Metamorph (stash tab \"~price 4 chaos\"; position: left 6, top 8)",
 				"priceText": "4 chaos",
-				"valueExcludingProperties": 252,
+				"weightValue": 252,
 				"evalValue": 252.227,
 				"evalPrice": 4,
 				"debug": {
@@ -26047,7 +26047,7 @@ customElements.define(name, class Inputs extends XElement {
 		this.itemsData.join(items)
 	}
 
-	updateItemsProgitemress(text, ratio) {
+	updateItemsProgress(text, ratio) {
 		this.$('#results-progress-bar').value = ratio;
 		let textEl = document.createElement('div');
 		textEl.textContent = text;

@@ -13,7 +13,7 @@ customElements.define(name, class Inputs extends XElement {
 	}
 
 	connectedCallback() {
-		this.inputSetIndex = parseInt(localStorage.getItem('input-set-index')) || 0;
+		this.inputSetIndex = Number(localStorage.getItem('input-set-index')) || 0;
 		this.inputSets = JSON.parse(localStorage.getItem('input-sets')) || [{}];
 		this.sharedWeightEntries = JSON.parse(localStorage.getItem('shared-weight-entries')) || [];
 
@@ -106,7 +106,11 @@ customElements.define(name, class Inputs extends XElement {
 		return this.inputSets
 			.filter(inputSet => inputSet.active)
 			.flatMap(inputSet => {
-				let {type, maxPrice, defenseProperties, linked, weightEntries, andEntries, notEntries} = inputSet.queryParams;
+				let {
+					type, maxPrice,
+					defenseProperties, affixProperties, linked,
+					weightEntries, andEntries, notEntries
+				} = inputSet.queryParams;
 				maxPrice = overridePrice !== null ? overridePrice : maxPrice;
 				let weights = Object.fromEntries([...weightEntries, ...this.sharedWeightEntries]);
 				let ands = Object.fromEntries(andEntries);
@@ -123,15 +127,30 @@ customElements.define(name, class Inputs extends XElement {
 				query.ands = ands;
 				query.nots = nots;
 
-				queries.push(query);
+				let linkedOptions = [false, linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos ? true : null];
+				let affixOptions = [false, affixProperties.prefix ? 'prefix' : null, affixProperties.suffix ? 'suffix' : null];
 
-				// todo move this logic to QueryParams
-				if (linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos) {
-					query = new QueryParams(query);
-					query.maxPrice = maxPrice - ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos;
-					query.priceShift = ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos;
-					queries.push(query);
-				}
+				linkedOptions
+					.filter(lo => lo !== null)
+					.forEach(lo =>
+						affixOptions
+							.filter(ao => ao !== null)
+							.forEach(ao => {
+								let queryO = new QueryParams(query);
+								if (lo) {
+									queryO.linked = true;
+									queryO.maxPrice -= ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos;
+									queryO.priceShift += ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos;
+								}
+								if (ao === 'prefix') {
+									queryO.affixProperties.prefix = true;
+									queryO.valueShift += affixProperties.prefix;
+								} else if (ao === 'suffix') {
+									queryO.affixProperties.suffix = true;
+									queryO.valueShift += affixProperties.suffix;
+								}
+								queries.push(queryO);
+							}));
 
 				return queries;
 			});

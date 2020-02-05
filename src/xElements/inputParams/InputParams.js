@@ -10,6 +10,11 @@ const defensePropertyTuples = [
 	['energyShield', '#energy-shield-input'],
 ];
 
+const affixPropertyTuples = [
+	['prefix', '#prefix-input'],
+	['suffix', '#suffix-input'],
+];
+
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
 		return {
@@ -19,7 +24,9 @@ customElements.define(name, class extends XElement {
 			armour: {},
 			evasion: {},
 			energyShield: {},
-			linked: {boolean: true}
+			prefix: {},
+			suffix: {},
+			linked: {boolean: true},
 		};
 	}
 
@@ -41,12 +48,13 @@ customElements.define(name, class extends XElement {
 			this.price = this.$('#price-input').value;
 			this.updateQueryParams();
 		});
-		defensePropertyTuples.forEach(([property, query]) => {
-			this.$(query).addEventListener('change', () => {
-				this[property] = this.$(query).value;
-				this.updateQueryParams();
+		[...defensePropertyTuples, ...affixPropertyTuples]
+			.forEach(([property, query]) => {
+				this.$(query).addEventListener('change', () => {
+					this[property] = this.$(query).value;
+					this.updateQueryParams();
+				});
 			});
-		});
 		this.$('#linked-check').addEventListener('change', () => {
 			this.linked = this.$('#linked-check').checked;
 			this.updateQueryParams();
@@ -87,15 +95,27 @@ customElements.define(name, class extends XElement {
 		this.$('#linked-check').checked = value;
 	}
 
-	loadQueryParams(queryParams = {minValue: 0, maxPrice: 0, defenseProperties: {}, linked: false, weightEntries: [], andEntries: [], notEntries: []}, sharedWeightEntries) {
+	set prefix(value) {
+		this.$('#prefix-input').value = value;
+	}
+
+	set suffix(value) {
+		this.$('#suffix-input').value = value;
+	}
+
+	loadQueryParams(queryParams = {}, sharedWeightEntries) {
 		this.type = ApiConstants.TYPES_ID_TO_TEXT[queryParams.type] || '';
-		this.minValue = queryParams.minValue;
-		this.price = queryParams.maxPrice;
+		this.minValue = queryParams.minValue || 0;
+		this.price = queryParams.maxPrice || 0;
+		let defenseProperties = queryParams.defenseProperties || {};
 		defensePropertyTuples.forEach(([property]) => {
-			let defenseProperty = queryParams.defenseProperties[property];
+			let defenseProperty = defenseProperties[property];
 			this[property] = defenseProperty ? defenseProperty.weight : 0;
 		});
-		this.linked = queryParams.linked;
+		let affixProperties = queryParams.affixProperties || {};
+		affixPropertyTuples.forEach(([property]) =>
+			this[property] = affixProperties[property] || 0);
+		this.linked = queryParams.linked || false;
 		XElement.clearChildren(this.$('#query-properties-list'));
 		sharedWeightEntries
 			.forEach(([property, weight, locked]) => {
@@ -106,28 +126,31 @@ customElements.define(name, class extends XElement {
 				queryProperty.locked = locked;
 				queryProperty.shared = true;
 			});
-		queryParams.weightEntries
-			.forEach(([property, weight, locked]) => {
-				let queryProperty = this.addQueryProperty();
-				queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
-				queryProperty.weight = weight;
-				queryProperty.filter = 'weight';
-				queryProperty.locked = locked;
-			});
-		queryParams.andEntries
-			.forEach(([property, weight, locked]) => {
-				let queryProperty = this.addQueryProperty();
-				queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
-				queryProperty.weight = weight;
-				queryProperty.filter = 'and';
-				queryProperty.locked = locked;
-			});
-		queryParams.notEntries
-			.forEach(([property]) => {
-				let queryProperty = this.addQueryProperty();
-				queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
-				queryProperty.filter = 'not';
-			});
+		if (queryParams.weightEntries)
+			queryParams.weightEntries
+				.forEach(([property, weight, locked]) => {
+					let queryProperty = this.addQueryProperty();
+					queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
+					queryProperty.weight = weight;
+					queryProperty.filter = 'weight';
+					queryProperty.locked = locked;
+				});
+		if (queryParams.andEntries)
+			queryParams.andEntries
+				.forEach(([property, weight, locked]) => {
+					let queryProperty = this.addQueryProperty();
+					queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
+					queryProperty.weight = weight;
+					queryProperty.filter = 'and';
+					queryProperty.locked = locked;
+				});
+		if (queryParams.notEntries)
+			queryParams.notEntries
+				.forEach(([property]) => {
+					let queryProperty = this.addQueryProperty();
+					queryProperty.property = ApiConstants.PROPERTIES_ID_TO_TEXT[property];
+					queryProperty.filter = 'not';
+				});
 		this.addQueryProperty();
 		this.updateQueryParams();
 	}
@@ -194,7 +217,10 @@ customElements.define(name, class extends XElement {
 		let type = ApiConstants.TYPES_TEXT_TO_ID[this.type];
 
 		let defenseProperties = Object.fromEntries(defensePropertyTuples
-			.map(([property]) => [property, {weight: parseFloat(this[property]), min: 0}]));
+			.map(([property]) => [property, {weight: Number(this[property]), min: 0}]));
+
+		let affixProperties = Object.fromEntries(affixPropertyTuples
+			.map(([property]) => [property, Number(this[property])]));
 
 		let propertyEntries = [...this.$$('#query-properties-list x-query-property')]
 			.map(queryProperty => ({
@@ -223,6 +249,7 @@ customElements.define(name, class extends XElement {
 			minValue: this.minValue,
 			maxPrice: this.price,
 			defenseProperties,
+			affixProperties,
 			linked: this.linked,
 			weightEntries,
 			andEntries,

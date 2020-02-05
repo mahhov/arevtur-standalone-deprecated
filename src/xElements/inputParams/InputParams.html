@@ -4,7 +4,7 @@
 	}
 
 	#type-input {
-		width: 300px;
+		width: 200px;
 	}
 
 	.short-input {
@@ -24,26 +24,36 @@
 	<x-autocomplete-input id="type-input" placeholder="type"></x-autocomplete-input>
 	<label>
 		value
-		<input id="min-value-input" class="short-input" type="number" placeholder="value">
+		<input id="min-value-input" class="short-input" type="number">
 		<!--todo trim leading 0's from number inputs-->
 	</label>
 	<label>
 		price
-		<input id="price-input" class="short-input" type="number" placeholder="price">
+		<input id="price-input" class="short-input" type="number">
 	</label>
 </div>
 <div>
 	<label>
 		armour
-		<input id="armour-input" class="short-input" type="number" placeholder="armour">
+		<input id="armour-input" class="short-input" type="number">
 	</label>
 	<label>
 		evasion
-		<input id="evasion-input" class="short-input" type="number" placeholder="evasion">
+		<input id="evasion-input" class="short-input" type="number">
 	</label>
 	<label>
 		energy shield
-		<input id="energy-shield-input" class="short-input" type="number" placeholder="energy shield">
+		<input id="energy-shield-input" class="short-input" type="number">
+	</label>
+</div>
+<div>
+	<label>
+		prefix
+		<input id="prefix-input" class="short-input" type="number">
+	</label>
+	<label>
+		suffix
+		<input id="suffix-input" class="short-input" type="number">
 	</label>
 	<label>6-link<input type="checkbox" id="linked-check"></label>
 </div>
