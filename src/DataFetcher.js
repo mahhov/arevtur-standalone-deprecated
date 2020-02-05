@@ -267,7 +267,7 @@ class QueryParams {
 let evalDefensePropertiesValue = (itemDefenseProperties, queryDefenseProperties) =>
 	itemDefenseProperties
 		.map(([name, value]) => value * queryDefenseProperties[name].weight)
-		.reduce((sum, v) => sum + v);
+		.reduce((sum, v) => sum + v, 0);
 
 let evalValue = pseudoMods => {
 	let pseudoSum = pseudoMods.find(mod => mod.startsWith('Sum: '));
