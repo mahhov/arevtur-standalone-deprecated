@@ -26,10 +26,10 @@ customElements.define(name, class extends XElement {
 	set itemData(value) {
 		this.itemData_ = value;
 
-		// todo open affixes, craftedMods, corrupted
-		// enchantMods, implicitMods, fracturedMods, explicitMods, craftedMods, pseudoMods, rproperties
+		// todo open affixes, fracturedMods
 
-		this.$('#name-row').textContent = value.name;
+		this.$('#name-text').textContent = value.name;
+		this.$('#type-text').textContent = value.type;
 
 		XElement.clearChildren(this.$('#sockets-list'));
 		value.sockets.forEach(socketGroup => {
@@ -38,16 +38,23 @@ customElements.define(name, class extends XElement {
 			this.$('#sockets-list').appendChild(socketDiv);
 		});
 
+		this.$('#corrupted-text').classList.toggle('hidden', !value.corrupted);
+
 		// todo extract duplicated code
 
-		XElement.clearChildren(this.$('#defense-property-list'));
+		XElement.clearChildren(this.$('#defense-list'));
 		value.defenseProperties.forEach(mod => {
 			let modDiv = document.createElement('div');
 			modDiv.textContent = mod;
-			this.$('#defense-property-list').appendChild(modDiv);
+			this.$('#defense-list').appendChild(modDiv);
 		});
 
-		this.$('#corrupted-text').classList.toggle('hidden', !value.corrupted);
+		XElement.clearChildren(this.$('#enchant-list'));
+		value.enchantMods.forEach(mod => {
+			let modDiv = document.createElement('div');
+			modDiv.textContent = mod;
+			this.$('#enchant-list').appendChild(modDiv);
+		});
 
 		XElement.clearChildren(this.$('#implicit-list'));
 		value.implicitMods.forEach(mod => {
@@ -61,6 +68,20 @@ customElements.define(name, class extends XElement {
 			let modDiv = document.createElement('div');
 			modDiv.textContent = mod;
 			this.$('#explicit-list').appendChild(modDiv);
+		});
+
+		XElement.clearChildren(this.$('#crafted-list'));
+		value.craftedMods.forEach(mod => {
+			let modDiv = document.createElement('div');
+			modDiv.textContent = mod;
+			this.$('#crafted-list').appendChild(modDiv);
+		});
+
+		XElement.clearChildren(this.$('#pseudo-list'));
+		value.pseudoMods.forEach(mod => {
+			let modDiv = document.createElement('div');
+			modDiv.textContent = mod;
+			this.$('#pseudo-list').appendChild(modDiv);
 		});
 
 		this.$('#value-text').textContent = value.evalValue;
