@@ -245,6 +245,7 @@ class QueryParams {
 			sockets,
 			itemLevel: itemData.item.ilvl,
 			defenseProperties: defenseProperties.map(nameValue => nameValue.join(' ')),
+			corrupted: itemData.item.corrupted,
 			implicitMods: itemData.item.implicitMods || [],
 			explicitMods: itemData.item.explicitMods || [],
 			pseudoMods: pseudoMods,

@@ -47,6 +47,8 @@ customElements.define(name, class extends XElement {
 			this.$('#defense-property-list').appendChild(modDiv);
 		});
 
+		this.$('#corrupted-text').classList.toggle('hidden', !value.corrupted);
+
 		XElement.clearChildren(this.$('#implicit-list'));
 		value.implicitMods.forEach(mod => {
 			let modDiv = document.createElement('div');
