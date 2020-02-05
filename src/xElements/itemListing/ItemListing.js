@@ -31,58 +31,24 @@ customElements.define(name, class extends XElement {
 		this.$('#name-text').textContent = value.name;
 		this.$('#type-text').textContent = value.type;
 
-		XElement.clearChildren(this.$('#sockets-list'));
-		value.sockets.forEach(socketGroup => {
-			let socketDiv = document.createElement('div');
-			socketDiv.textContent = socketGroup.join(' ');
-			this.$('#sockets-list').appendChild(socketDiv);
+		[
+			['#sockets-list', 'sockets'],
+			['#defense-list', 'defenseProperties'],
+			['#enchant-list', 'enchantMods'],
+			['#implicit-list', 'implicitMods'],
+			['#explicit-list', 'explicitMods'],
+			['#crafted-list', 'craftedMods'],
+			['#pseudo-list', 'pseudoMods'],
+		].forEach(([containerQuery, propertyName]) => {
+			XElement.clearChildren(this.$(containerQuery));
+			value[propertyName].forEach(mod => {
+				let modDiv = document.createElement('div');
+				modDiv.textContent = mod;
+				this.$(containerQuery).appendChild(modDiv);
+			});
 		});
 
 		this.$('#corrupted-text').classList.toggle('hidden', !value.corrupted);
-
-		// todo extract duplicated code
-
-		XElement.clearChildren(this.$('#defense-list'));
-		value.defenseProperties.forEach(mod => {
-			let modDiv = document.createElement('div');
-			modDiv.textContent = mod;
-			this.$('#defense-list').appendChild(modDiv);
-		});
-
-		XElement.clearChildren(this.$('#enchant-list'));
-		value.enchantMods.forEach(mod => {
-			let modDiv = document.createElement('div');
-			modDiv.textContent = mod;
-			this.$('#enchant-list').appendChild(modDiv);
-		});
-
-		XElement.clearChildren(this.$('#implicit-list'));
-		value.implicitMods.forEach(mod => {
-			let modDiv = document.createElement('div');
-			modDiv.textContent = mod;
-			this.$('#implicit-list').appendChild(modDiv);
-		});
-
-		XElement.clearChildren(this.$('#explicit-list'));
-		value.explicitMods.forEach(mod => {
-			let modDiv = document.createElement('div');
-			modDiv.textContent = mod;
-			this.$('#explicit-list').appendChild(modDiv);
-		});
-
-		XElement.clearChildren(this.$('#crafted-list'));
-		value.craftedMods.forEach(mod => {
-			let modDiv = document.createElement('div');
-			modDiv.textContent = mod;
-			this.$('#crafted-list').appendChild(modDiv);
-		});
-
-		XElement.clearChildren(this.$('#pseudo-list'));
-		value.pseudoMods.forEach(mod => {
-			let modDiv = document.createElement('div');
-			modDiv.textContent = mod;
-			this.$('#pseudo-list').appendChild(modDiv);
-		});
 
 		this.$('#value-text').textContent = value.evalValue;
 		this.$('#value-expanded-text').textContent = value.valueText;

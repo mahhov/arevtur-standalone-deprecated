@@ -130,6 +130,9 @@ customElements.define(name, class Inputs extends XElement {
 				let linkedOptions = [false, linked && maxPrice > ApiConstants.CURRENCIES.fatedConnectionsProphecy.chaos ? true : null];
 				let affixOptions = [false, affixProperties.prefix ? 'prefix' : null, affixProperties.suffix ? 'suffix' : null];
 
+				// todo check non-corrupted when looking to 6 link or open affix
+				// todo check for non crafted when looking for open affix
+
 				linkedOptions
 					.filter(lo => lo !== null)
 					.forEach(lo =>
