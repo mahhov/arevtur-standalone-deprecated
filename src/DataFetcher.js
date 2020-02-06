@@ -67,6 +67,8 @@ class QueryParams {
 			suffix: false,
 		};
 		this.linked = clone.linked || false;
+		this.uncorrupted = clone.uncorrupted || false;
+		this.uncrafted = clone.uncrafted || false;
 		// {property: weight, ...}
 		this.weights = clone.weights || {};
 		// {property: min, ...}
@@ -96,6 +98,11 @@ class QueryParams {
 			andFilters.push({id: 'pseudo.pseudo_number_of_empty_prefix_mods'});
 		if (this.affixProperties.suffix)
 			andFilters.push({id: 'pseudo.pseudo_number_of_empty_suffix_mods'});
+		let miscFilters = {};
+		if (this.uncorrupted)
+			miscFilters.corrupted = {option: false};
+		if (this.uncrafted)
+			miscFilters.crafted = {option: false};
 		let sort = weightFilters.length ? overridden.sort : ApiConstants.SORT.price;
 		return {
 			query: {
@@ -137,6 +144,7 @@ class QueryParams {
 							es: {min: overridden.defenseProperties.energyShield.min},
 						}
 					},
+					misc_filters: {filters: miscFilters},
 				}
 			},
 			sort,
