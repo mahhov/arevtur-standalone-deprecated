@@ -246,6 +246,9 @@ class QueryParams {
 			a[v.group].push(v.sColour);
 			return a;
 		}, []);
+		let extendedExplicitMods = itemData.item.extended.mods.explicit;
+		let affixes = Object.fromEntries([['prefix', 'P'], ['suffix', 'S']].map(([prop, tier]) =>
+			[prop, extendedExplicitMods.filter(mod => mod.tier[0] === tier).length]));
 		let defenseProperties =
 			[
 				['ar', 'armour'],
@@ -264,6 +267,7 @@ class QueryParams {
 			itemLevel: itemData.item.ilvl,
 			sockets,
 			corrupted: itemData.item.corrupted,
+			affixes,
 			defenseProperties: defenseProperties.map(nameValue => nameValue.join(' ')),
 			enchantMods: itemData.item.enchantMods || [],
 			implicitMods: itemData.item.implicitMods || [],

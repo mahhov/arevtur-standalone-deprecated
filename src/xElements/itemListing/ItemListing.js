@@ -50,6 +50,9 @@ customElements.define(name, class extends XElement {
 
 		this.$('#corrupted-text').classList.toggle('hidden', !value.corrupted);
 
+		this.$('#prefixes-text').textContent = value.affixes.prefix;
+		this.$('#suffixes-text').textContent = value.affixes.suffix;
+
 		this.$('#value-text').textContent = value.evalValue;
 		this.$('#value-expanded-text').textContent = value.valueText;
 		this.$('#price-text').textContent = value.evalPrice;
