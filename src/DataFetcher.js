@@ -52,8 +52,18 @@ let post = (endpoint, data) =>
 		req.end();
 	});
 
+let deepCopy = obj => {
+	if (typeof obj !== 'object' || obj === null)
+		return obj;
+	if (Array.isArray(obj))
+		return obj.map(v => deepCopy(v));
+	return Object.fromEntries(Object.entries(obj)
+		.map(([k, v]) => [k, deepCopy(v)]));
+};
+
 class QueryParams {
 	constructor(clone = {}) {
+		clone = deepCopy(clone);
 		this.type = '';
 		this.minValue = clone.minValue || 0;
 		this.maxPrice = clone.maxPrice || 0;
