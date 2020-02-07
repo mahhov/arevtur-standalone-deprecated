@@ -1,6 +1,16 @@
 const {XElement, importUtil} = require('xx-element');
 const {template, name} = importUtil(__filename);
 
+const listTuples = [
+	['#sockets-list', 'sockets'],
+	['#defense-list', 'defenseProperties'],
+	['#enchant-list', 'enchantMods'],
+	['#implicit-list', 'implicitMods'],
+	['#explicit-list', 'explicitMods'],
+	['#crafted-list', 'craftedMods'],
+	['#pseudo-list', 'pseudoMods'],
+];
+
 customElements.define(name, class extends XElement {
 	static get attributeTypes() {
 		return {selected: {boolean: true}, hovered: {boolean: true}};
@@ -31,15 +41,7 @@ customElements.define(name, class extends XElement {
 		this.$('#name-text').textContent = value.name;
 		this.$('#type-text').textContent = value.type;
 
-		[
-			['#sockets-list', 'sockets'],
-			['#defense-list', 'defenseProperties'],
-			['#enchant-list', 'enchantMods'],
-			['#implicit-list', 'implicitMods'],
-			['#explicit-list', 'explicitMods'],
-			['#crafted-list', 'craftedMods'],
-			['#pseudo-list', 'pseudoMods'],
-		].forEach(([containerQuery, propertyName]) => {
+		listTuples.forEach(([containerQuery, propertyName]) => {
 			XElement.clearChildren(this.$(containerQuery));
 			value[propertyName].forEach(mod => {
 				let modDiv = document.createElement('div');
@@ -69,5 +71,24 @@ customElements.define(name, class extends XElement {
 
 	set hovered(value) {
 		this.classList.toggle('hovered', value);
+	}
+
+	get searchText() {
+		return [
+			this.itemData_.name,
+			this.itemData_.type,
+			listTuples.flatMap(([_, propertyName]) => this.itemData_[propertyName]),
+			this.itemData_.corrupted ? 'corrupted' : '',
+			this.itemData_.affixes.prefix,
+			this.itemData_.affixes.suffix,
+			'value',
+			this.itemData_.evalValue,
+			this.itemData_.valueText,
+			'price',
+			this.itemData_.evalPrice,
+			this.itemData_.priceText,
+			this.itemData_.accountText,
+
+		].join(' ');
 	}
 });

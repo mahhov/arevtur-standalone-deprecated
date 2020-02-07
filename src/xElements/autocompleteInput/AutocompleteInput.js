@@ -1,5 +1,6 @@
 const {XElement, importUtil} = require('xx-element');
 const {template, name} = importUtil(__filename);
+const Searcher = require('../../Searcher');
 
 customElements.define(name, class AutocompleteInput extends XElement {
 	static get attributeTypes() {
@@ -94,17 +95,13 @@ customElements.define(name, class AutocompleteInput extends XElement {
 	}
 
 	static smartFilter(input, array, maxSize = Infinity) {
+		let searcher = new Searcher(input);
+
 		if (!input)
 			return array.slice(0, maxSize);
 
-		const regexSpecial = '.*+?^${}()|[]\\';
-		let inputRegexString = [...input.replace(/\s/g, '')]
-			.map(c => regexSpecial.includes(c) ? '\\' + c : c)
-			.join('(.* )?');
-		let inputRegex = new RegExp(inputRegexString, 'i');
-
 		let size = 0;
 		return array.filter(v =>
-			size < maxSize && inputRegex.test(v.match(/[a-z]+|[A-Z][a-z]*|\d+|./g).join(' ')) && ++size);
+			size < maxSize && searcher.test(v.match(/[a-z]+|[A-Z][a-z]*|\d+|./g).join(' ')) && ++size);
 	};
 });

@@ -5,6 +5,15 @@
 		overflow: hidden;
 	}
 
+	#top-row {
+		display: flex;
+	}
+
+	#search-input {
+		flex: 1;
+		margin-left: 15px;
+	}
+
 	#center {
 		display: flex;
 		overflow: hidden;
@@ -21,8 +30,12 @@
 		padding-right: 5px;
 	}
 
-	#results-list *:not(:first-child) {
+	#results-list x-item-listing:not(:first-child) {
 		margin-top: 15px;
+	}
+
+	#results-list x-item-listing.search-hidden {
+		display: none;
 	}
 
 	#results-chart {
@@ -32,7 +45,10 @@
 
 
 <div>
-	<span>Count: <span id="results-count"></span></span>
+	<div id="top-row">
+		Count: <span id="results-count"></span>
+		<input id="search-input" placeholder="search">
+	</div>
 	<progress id="results-progress-bar" max="1" value="1"></progress>
 	<div id="results-progress-text"></div>
 </div>

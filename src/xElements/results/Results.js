@@ -1,6 +1,7 @@
 const {XElement, importUtil} = require('xx-element');
 const {template, name} = importUtil(__filename);
 const ItemsData = require('../../ItemsData');
+const Searcher = require('../../Searcher');
 const testItems = require('./testItems');
 
 customElements.define(name, class Inputs extends XElement {
@@ -14,6 +15,13 @@ customElements.define(name, class Inputs extends XElement {
 
 	connectedCallback() {
 		this.itemsData = new ItemsData();
+
+		// todo consider only change background
+		// todo ctrl f shortcut
+		// todo next search on enter press
+		// todo scroll to
+		this.$('#search-input').addEventListener('input', () => this.applySearch());
+
 		this.$('#results-chart').background = 'rgb(245,245,245)';
 
 		this.$('#results-chart').addEventListener('action', e =>
@@ -83,6 +91,8 @@ customElements.define(name, class Inputs extends XElement {
 			});
 			itemListing.itemData = itemData;
 		});
+
+		this.applySearch();
 	}
 
 	renderItemsDataListBackgroundsOnly() {
@@ -128,5 +138,12 @@ customElements.define(name, class Inputs extends XElement {
 		];
 		if (resetChartRange)
 			this.$('#results-chart').resetRange();
+	}
+
+	applySearch() {
+		let searcher = new Searcher(this.$('#search-input').value);
+
+		[...this.$('#results-list').children].forEach(itemListing =>
+			itemListing.classList.toggle('search-hidden', !searcher.test(itemListing.searchText)));
 	}
 });
