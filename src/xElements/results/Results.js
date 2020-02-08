@@ -16,10 +16,10 @@ customElements.define(name, class Inputs extends XElement {
 	connectedCallback() {
 		this.itemsData = new ItemsData();
 
-		// todo consider only change background
-		// todo ctrl f shortcut
-		// todo next search on enter press
-		// todo scroll to
+		document.addEventListener('keydown', e => {
+			if (e.key === 'f' && e.ctrlKey)
+				this.$('#search-input').focus();
+		});
 		this.$('#search-input').addEventListener('input', () => this.applySearch());
 
 		this.$('#results-chart').background = 'rgb(245,245,245)';
