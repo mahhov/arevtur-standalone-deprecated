@@ -87,7 +87,7 @@ class QueryParams {
 		this.nots = clone.nots || {};
 		this.sort = clone.sort || ApiConstants.SORT.value;
 		this.online = clone.online || false;
-		this.valueShift = clone.valueShift || 0;
+		this.affixValueShift = clone.affixValueShift || 0;
 		this.priceShift = clone.priceShift || 0;
 	}
 
@@ -191,7 +191,7 @@ class QueryParams {
 			do {
 				let newItemsMinValue = Math.min(...newItems.map(({evalValue}) => evalValue));
 				let maxValue = Math.max(...items.map(({evalValue}) => evalValue));
-				let minWeightValue = Math.min(...items.map(({weightValue}) => weightValue));
+				let minWeightValue = Math.min(...items.map(item => item.valueDetails.weightValue));
 				let minDefensePropertyValue = ((maxValue + newItemsMinValue) / 2 - minWeightValue) / defenseProperty[1].weight;
 
 				minDefensePropertyValue = Math.max(minDefensePropertyValue, lastMinDefensePropertyValue + 1);
@@ -257,8 +257,11 @@ class QueryParams {
 			].map(([responseName, fullName]) => [fullName, itemData.item.extended[responseName] || 0])
 				.filter(([_, value]) => value);
 		let pseudoMods = itemData.item.pseudoMods || [];
-		let weightValue = evalValue(pseudoMods);
-		let defensePropertiesValue = evalDefensePropertiesValue(defenseProperties, this.defenseProperties);
+		let valueDetails = {
+			affixValueShift: Math.round(this.affixValueShift * 100) / 100,
+			defensePropertiesValue: Math.round(evalDefensePropertiesValue(defenseProperties, this.defenseProperties) * 100) / 100,
+			weightValue: Math.round(evalValue(pseudoMods) * 100) / 100,
+		};
 
 		return {
 			id: itemData.id,
@@ -277,10 +280,8 @@ class QueryParams {
 			accountText: `${itemData.listing.account.name} > ${itemData.listing.account.lastCharacterName}`,
 			whisper: itemData.listing.whisper,
 			note: itemData.item.note,
-			weightValue,
-			// todo change text to: include suffix/prefix instead of value shift
-			valueText: `${weightValue} + defense value ${defensePropertiesValue} + value shift ${this.valueShift}`,
-			evalValue: weightValue + defensePropertiesValue + this.valueShift,
+			evalValue: Object.values(valueDetails).reduce((sum, v) => sum + v),
+			valueDetails,
 			// todo change text to: 3 fus + fated links (#c)
 			priceText: `${itemData.listing.price.amount} ${itemData.listing.price.currency}${this.priceShift ? ` + price shift ${this.priceShift}` : ''}`,
 			evalPrice: evalPrice(itemData.listing.price) + this.priceShift,
@@ -295,8 +296,11 @@ let evalDefensePropertiesValue = (itemDefenseProperties, queryDefenseProperties)
 		.reduce((sum, v) => sum + v, 0);
 
 let evalValue = pseudoMods => {
-	let pseudoSum = pseudoMods.find(mod => mod.startsWith('Sum: '));
-	return pseudoSum ? Number(pseudoSum.substring(5)) : 0;
+	let pseudoSumI = pseudoMods.findIndex(mod => mod.startsWith('Sum: '));
+	if (pseudoSumI === -1)
+		return 0;
+	let pseudoSum = pseudoMods.splice(pseudoSumI, 1);
+	return Number(pseudoSum.substring(5));
 };
 
 let evalPrice = ({currency: currencyId, amount}) => {

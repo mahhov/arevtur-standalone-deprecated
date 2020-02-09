@@ -36,10 +36,10 @@ customElements.define(name, class extends XElement {
 	set itemData(value) {
 		this.itemData_ = value;
 
-		// todo open affixes, fracturedMods
-
 		this.$('#name-text').textContent = value.name;
 		this.$('#type-text').textContent = value.type;
+
+		this.$('#corrupted-text').classList.toggle('hidden', !value.corrupted);
 
 		listTuples.forEach(([containerQuery, propertyName]) => {
 			XElement.clearChildren(this.$(containerQuery));
@@ -50,13 +50,16 @@ customElements.define(name, class extends XElement {
 			});
 		});
 
-		this.$('#corrupted-text').classList.toggle('hidden', !value.corrupted);
 
 		this.$('#prefixes-text').textContent = value.affixes.prefix;
 		this.$('#suffixes-text').textContent = value.affixes.suffix;
+		this.$('#affix-value-text').textContent = value.valueDetails.affixValueShift;
+
+		this.$('#defense-value-text').textContent = value.valueDetails.defensePropertiesValue;
+
+		this.$('#weight-value-text').textContent = value.valueDetails.weightValue;
 
 		this.$('#value-text').textContent = value.evalValue;
-		this.$('#value-expanded-text').textContent = value.valueText;
 		this.$('#price-text').textContent = value.evalPrice;
 		this.$('#price-expanded-text').textContent = value.priceText;
 		this.$('#whisper-button').textContent = value.accountText;
@@ -74,21 +77,8 @@ customElements.define(name, class extends XElement {
 	}
 
 	get searchText() {
-		return [
-			this.itemData_.name,
-			this.itemData_.type,
-			listTuples.flatMap(([_, propertyName]) => this.itemData_[propertyName]),
-			this.itemData_.corrupted ? 'corrupted' : '',
-			this.itemData_.affixes.prefix,
-			this.itemData_.affixes.suffix,
-			'value',
-			this.itemData_.evalValue,
-			this.itemData_.valueText,
-			'price',
-			this.itemData_.evalPrice,
-			this.itemData_.priceText,
-			this.itemData_.accountText,
-
-		].join(' ');
+		return [...this.$$(':host > div:not(.hidden)')]
+			.map(el => el.textContent)
+			.join(' ');
 	}
 });

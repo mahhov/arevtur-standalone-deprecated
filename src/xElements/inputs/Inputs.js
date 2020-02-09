@@ -147,12 +147,12 @@ customElements.define(name, class Inputs extends XElement {
 									queryO.affixProperties.prefix = true;
 									queryO.uncorrupted = true;
 									queryO.uncrafted = true;
-									queryO.valueShift += affixProperties.prefix;
+									queryO.affixValueShift += affixProperties.prefix;
 								} else if (ao === 'suffix') {
 									queryO.affixProperties.suffix = true;
 							queryO.uncorrupted = true;
 									queryO.uncrafted = true;
-									queryO.valueShift += affixProperties.suffix;
+									queryO.affixValueShift += affixProperties.suffix;
 								}
 								queries.push(queryO);
 							}));
