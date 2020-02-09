@@ -22,12 +22,24 @@
 		font-weight: bold;
 	}
 
+	#defense-container {
+		color: #a86d00;
+	}
+
+	#implicit-list {
+		color: #5a0;
+	}
+
 	#crafted-list {
 		color: #05a;
 	}
 
-	#price-text, #whisper-button {
-		margin-left: 10px;
+	#pseudo-container {
+		color: #a60071;
+	}
+
+	.value, .price {
+		font-weight: bold;
 	}
 
 	.hidden {
@@ -44,23 +56,23 @@
 <div>
 	<div>P <span id="prefixes-text"></span></div>
 	<div>S <span id="suffixes-text"></span></div>
-	<div>Affix value: <span id="affix-value-text"></span></div>
+	<div class="value">Affix value: <span id="affix-value-text"></span></div>
 </div>
-<div>
+<div id="defense-container">
 	<div id="defense-list"></div>
-	<div>Defense value: <span id="defense-value-text"></span></div>
+	<div class="value">Defense value: <span id="defense-value-text"></span></div>
 </div>
 <div id="enchant-list"></div>
 <div id="implicit-list"></div>
 <div id="explicit-list"></div>
 <div id="crafted-list"></div>
-<div>
+<div id="pseudo-container">
 	<div id="pseudo-list"></div>
-	<div>Weight value: <span id="weight-value-text"></span></div>
+	<div class="value">Weight value: <span id="weight-value-text"></span></div>
 </div>
 <div>
-	<div>Value: <span id="value-text"></span></div>
-	<div>
+	<div class="value">Value: <span id="value-text"></span></div>
+	<div class="price">
 		Price:
 		<span id="price-text"></span> =
 		<span id="price-expanded-text"></span>
