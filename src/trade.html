@@ -32,28 +32,27 @@
 		return el;
 	};
 
-	let submitQuery = async queryParam => {
-		queryParam.getItemsStream((text, ratio) => $('x-results').updateItemsProgress(text, ratio))
-			.forEach(items => {
+	let submitQueries = async queryParams => {
+		let progressRatios = queryParams.map(_ => 0);
+		queryParams.forEach((queryParam, i) =>
+			queryParam.getItemsStream((text, ratio) => {
+				progressRatios[i] = ratio;
+				let avgProgressRatio = progressRatios.reduce((sum, v) => sum + v) / progressRatios.length;
+				$('x-results').updateItemsProgress(avgProgressRatio);
+			}).forEach(items => {
 				$('x-results').joinItems(items);
 				$('x-results').renderItemsData();
-			});
-
+			}));
 	};
 
 	$('x-inputs').addEventListener('submit', async e => {
 		if (!e.detail.add)
 			$('x-results').clearItems();
-		await Promise.all($('x-inputs')
-			.getQueries()
-			.map(submitQuery));
+		submitQueries(await Promise.all($('x-inputs').getQueries()));
 	});
 
-	$('x-results').addEventListener('submit', async e => {
-		await Promise.all($('x-inputs')
-			.getQueries(e.detail.overridePrice)
-			.map(submitQuery));
-	});
+	$('x-results').addEventListener('submit', async e =>
+		submitQueries(await Promise.all($('x-inputs').getQueries(e.detail.overridePrice))));
 
 	// todo
 	// progress bar for multi-queries

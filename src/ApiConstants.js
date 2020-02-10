@@ -29626,6 +29626,7 @@ const SORT = {
 
 // todo update per poe.ninja
 const CURRENCIES = {
+	mirror: {id: 'mir', chaos: 10000},
 	exalted: {id: 'exa', chaos: 130},
 	divine: {id: 'divine', chaos: 12},
 	vaal: {id: 'vaal', chaos: 2},

@@ -56,11 +56,8 @@ customElements.define(name, class Inputs extends XElement {
 		this.itemsData.join(items)
 	}
 
-	updateItemsProgress(text, ratio) {
+	updateItemsProgress(ratio) {
 		this.$('#results-progress-bar').value = ratio;
-		let textEl = document.createElement('div');
-		textEl.textContent = text;
-		this.$('#results-progress-text').appendChild(textEl);
 	}
 
 	renderItemsData(listBackgroundsOnly = false, resetChartRange = false) {
@@ -72,8 +69,6 @@ customElements.define(name, class Inputs extends XElement {
 	}
 
 	renderItemsDataList() {
-		XElement.clearChildren(this.$('#results-progress-text'));
-
 		this.$('#results-count').textContent = this.itemsData.length;
 
 		XElement.clearChildren(this.$('#results-list'));
