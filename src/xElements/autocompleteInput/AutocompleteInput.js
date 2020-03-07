@@ -103,5 +103,5 @@ customElements.define(name, class AutocompleteInput extends XElement {
 		let size = 0;
 		return array.filter(v =>
 			size < maxSize && searcher.test(v.match(/[a-z]+|[A-Z][a-z]*|\d+|./g).join(' ')) && ++size);
-	};
+	}
 });
