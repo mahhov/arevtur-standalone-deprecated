@@ -13,9 +13,12 @@ customElements.define(name, class Inputs extends XElement {
 	}
 
 	connectedCallback() {
+		this.$('#league-input').value = localStorage.getItem('input-league');
 		this.inputSetIndex = Number(localStorage.getItem('input-set-index')) || 0;
 		this.inputSets = JSON.parse(localStorage.getItem('input-sets')) || [{}];
 		this.sharedWeightEntries = JSON.parse(localStorage.getItem('shared-weight-entries')) || [];
+
+		this.$('#league-input').addEventListener('input', () => this.store());
 
 		this.$('#input-set-list').addEventListener('arrange', e => {
 			let [removed] = this.inputSets.splice(e.detail.from, 1);
@@ -97,6 +100,7 @@ customElements.define(name, class Inputs extends XElement {
 	}
 
 	store() {
+		localStorage.setItem('input-league', this.$('#league-input').value);
 		localStorage.setItem('input-set-index', this.inputSetIndex);
 		localStorage.setItem('input-sets', JSON.stringify(this.inputSets));
 		localStorage.setItem('shared-weight-entries', JSON.stringify(this.sharedWeightEntries));
@@ -119,6 +123,7 @@ customElements.define(name, class Inputs extends XElement {
 				let queries = [];
 
 				let query = new QueryParams();
+				query.league = this.$('#league-input').value;
 				query.type = type;
 				query.maxPrice = maxPrice;
 				query.defenseProperties = defenseProperties;
@@ -150,7 +155,7 @@ customElements.define(name, class Inputs extends XElement {
 									queryO.affixValueShift += affixProperties.prefix;
 								} else if (ao === 'suffix') {
 									queryO.affixProperties.suffix = true;
-							queryO.uncorrupted = true;
+									queryO.uncorrupted = true;
 									queryO.uncrafted = true;
 									queryO.affixValueShift += affixProperties.suffix;
 								}

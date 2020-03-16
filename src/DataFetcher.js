@@ -64,6 +64,7 @@ let deepCopy = obj => {
 class QueryParams {
 	constructor(clone = {}) {
 		clone = deepCopy(clone);
+		this.league = clone.league || 'Standard';
 		this.type = '';
 		this.minValue = clone.minValue || 0;
 		this.maxPrice = clone.maxPrice || 0;
@@ -212,7 +213,7 @@ class QueryParams {
 		try {
 			const api = 'https://www.pathofexile.com/api/trade';
 			progressCallback('Initial query.', 0);
-			let data = await post(`${api}/search/Metamorph`, query);
+			let data = await post(`${api}/search/${this.league}`, query);
 			progressCallback(`Received ${data.result.length} items.`, 0);
 
 			let requestGroups = [];
